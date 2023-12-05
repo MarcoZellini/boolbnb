@@ -14,16 +14,16 @@ return new class extends Migration
         Schema::create('apartments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('title', 100);
+            $table->string('title', 100)->unique();
             $table->string('slug', 100);
             $table->text('description')->nullable();
             $table->unsignedTinyInteger('rooms')->default(1);
             $table->unsignedTinyInteger('beds')->default(1);
             $table->unsignedTinyInteger('bethrooms')->default(1);
             $table->unsignedSmallInteger('square_meters')->nullable();
-            $table->string('address', 255)->nullable(0);
-            $table->float('latitude', 8, 6)->nullable(0);
-            $table->float('longitude', 9, 6)->nullable(0);
+            $table->string('address', 255)->nullable();
+            $table->float('latitude', 8, 6)->nullable();
+            $table->float('longitude', 9, 6)->nullable();
             $table->boolean('is_visible')->default(0);
             $table->timestamps();
 
