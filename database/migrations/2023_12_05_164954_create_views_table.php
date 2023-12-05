@@ -13,15 +13,16 @@ return new class extends Migration
     {
         Schema::create('views', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('apartment_id');
             $table->string('ip_address', 15);
             $table->dateTime('date');
             $table->timestamps();
-        });
 
-        Schema::table('views', function ($table) {
-            $table->unsignedBigInteger('apartment_id')->nullable()->after('id');
             $table->foreign('apartment_id')->references('id')->on('apartments');
         });
+
+        /* Schema::table('views', function ($table) {
+        }); */
     }
 
     /**
@@ -29,10 +30,11 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('views');
 
         Schema::table('views', function (Blueprint $table) {
             $table->dropForeign('views_apartment_id_foreign');
         });
+
+        Schema::dropIfExists('views');
     }
 };
