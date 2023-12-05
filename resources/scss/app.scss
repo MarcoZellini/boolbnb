@@ -1,1 +1,135 @@
-@import '~bootstrap/scss/bootstrap'
+@import '~bootstrap/scss/bootstrap';
+
+/*#region VARIABLES*/
+$bnb-primary: #FF385C;
+$bnb-light: #ffff;
+$bnb-dark: black;
+$bnb-nav-btn-hover: rgba(0, 0, 0, 0.025);
+$bnb-medium: #222222;
+$bnb-accent: #E00B41;
+
+/*#endregion VARIABLES*/
+
+/*#region GLOBAL RULES*/
+body {
+    font-family: 'Mulish', sans-serif;
+}
+
+/*#endregion GLOBAL RULES*/
+
+/*#region NAVBAR*/
+.nav-link-bnb {
+    font-weight: bold !important;
+    border: 1px solid transparent;
+    display: inline-block;
+    white-space: nowrap;
+    width: auto;
+    border-radius: 100px;
+    line-height: 2;
+    margin: 0;
+    padding: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.25rem;
+    word-break: break-word;
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover {
+        background-color: $bnb-nav-btn-hover;
+    }
+}
+
+// DROPDOWN
+.dropdown-bnb {
+    border: 1px solid $bnb-primary !important;
+    color: $bnb-primary !important;
+}
+
+/*#endregion NAVBAR*/
+
+/*#region ANCHOR TAGS AND BTNS*/
+a {
+    text-decoration: none;
+    color: $bnb-dark;
+}
+
+// FOCUSABLE ANCHOR TAGS
+.focusable-bnb {
+    &:hover {
+        color: $bnb-accent;
+    }
+}
+
+.btn-bnb {
+
+    background-color: $bnb-primary;
+    color: $bnb-light;
+
+    &:hover {
+        background-color: $bnb-accent;
+        color: $bnb-light;
+        box-shadow: 0px 1px 5px grey;
+    }
+}
+
+/*#endregion ANCHOR TAGS AND BTNS*/
+
+
+/*#region FORMS*/
+// CHECKBOXES STYLE
+.form-check-input {
+    box-shadow: none !important;
+    border: 1px solid $bnb-primary !important;
+
+    &:checked {
+        border: 1px solid $bnb-dark !important;
+        background-color: $bnb-primary !important;
+    }
+}
+
+// FORM FIELDS STYLE
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    border-bottom: 1px solid #b0b0b0a4;
+    -webkit-text-fill-color: $bnb-medium;
+    transition: background-color 5000s ease-in-out 0s;
+    font-size: 1rem;
+}
+
+textarea,
+input {
+    background-color: transparent;
+    border: 1px solid transparent;
+
+    width: 100%;
+
+    font-size: 1rem;
+
+    margin: 0.25rem 0;
+
+    &:focus {
+        outline: none;
+
+    }
+}
+
+// FORM ERROR MESSAGE STYLE
+.form-error {
+    color: $bnb-accent;
+    font-weight: 300;
+    font-size: 0.75rem;
+}
+
+// DATE INPUT
+.date-bnb {
+    border-bottom: 1px solid #b0b0b0a4;
+}
+
+/*#endregion FORMS*/
