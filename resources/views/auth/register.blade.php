@@ -89,8 +89,7 @@
                                 class="col-md-4 col-form-label text-md-right">{{ __('Data di nascita') }}</label>
 
                             <div class="col-md-6">
-                                <input id="date_of_birth" type="date" class="date-bnb" name="password_confirmation"
-                                    required autocomplete="new-password">
+                                <input id="date_of_birth" type="date" class="date-bnb" name="date_of_birth" required>
                             </div>
                         </div>
                         <div class="mb-4 row mb-0">
