@@ -19,7 +19,7 @@ class Apartment extends Model
         'description',
         'rooms',
         'beds',
-        'bethrooms',
+        'bathrooms',
         'square_meters',
         'address',
         'latitude',
