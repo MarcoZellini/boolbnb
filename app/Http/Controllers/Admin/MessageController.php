@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Admin\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Message;
 use Illuminate\Http\Request;
@@ -13,23 +13,14 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $messages = Message::orderByDesc('id')->get();
+        return view('admin.messages.index', compact('messages'));
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+        /* 
+        //messages pagination
+        $messages = Message::orderByDesc('id')->paginate(10);
+        return view('admin.messages.index', ['messages' => $messages]);
+        */
     }
 
     /**
@@ -37,23 +28,7 @@ class MessageController extends Controller
      */
     public function show(Message $message)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Message $message)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Message $message)
-    {
-        //
+        return view('admin.messages.show', compact('message'));
     }
 
     /**
@@ -61,6 +36,8 @@ class MessageController extends Controller
      */
     public function destroy(Message $message)
     {
-        //
+        $message->delete();
+
+        return to_route('admin.messages.index')->with('message', 'message successfully deleted');
     }
 }
