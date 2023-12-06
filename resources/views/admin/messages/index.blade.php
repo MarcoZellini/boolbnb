@@ -23,16 +23,60 @@
                                 </p>
                             </div>
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <a href="{{ route('messages.show', $message->id) }}" class="btn btn-light me-2">
+                                <!-- MODAL DETAILS -->
+                                <button type="button" class="btn btn-light" data-bs-toggle="modal"
+                                    data-bs-target="#showModal-{{ $message->id }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
                                         <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
                                         <path
                                             d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
                                     </svg>
-                                </a>
+                                </button>
+                                <div class="modal fade" id="showModal-{{ $message->id }}" tabindex="-1"
+                                    aria-labelledby="showModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="showModalLabel">
+                                                    Messaggio n. {{ $message->id }}: {{ $message->subject }}
+                                                </h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="mt-2">
+                                                    <h5>ID appartamento: {{ $message->apartment_id }}</h5>
+                                                </div>
+                                                <div class="mt-4">
+                                                    <h5>Dettagli interessato</h5>
+                                                    <ul class="list-unstyled m-0">
+                                                        <li>
+                                                            Nome: {{ $message->name }}
+                                                        </li>
+                                                        <li>
+                                                            Cognome: {{ $message->lastname }}
+                                                        </li>
+                                                        <li>
+                                                            Email: {{ $message->email }}
+                                                        </li>
+                                                        <li>
+                                                            Telefono: {{ $message->phone }}
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="mt-4">
+                                                    <h5>Messaggio</h5>
+                                                    {{ $message->message }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- MODAL DELETE -->
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                    data-bs-target="#deleteModal">
+                                    data-bs-target="#deleteModal-{{ $message->id }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                         <path
@@ -41,12 +85,14 @@
                                             d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
                                     </svg>
                                 </button>
-                                <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
-                                    aria-hidden="true">
+                                <div class="modal fade" id="deleteModal-{{ $message->id }}" tabindex="-1"
+                                    aria-labelledby="deleteModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="deleteModalLabel">Eliminare messaggio?</h1>
+                                                <h1 class="modal-title fs-5" id="deleteModalLabel">
+                                                    Eliminare messaggio n. {{ $message->id }}?
+                                                </h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
