@@ -6,4 +6,7 @@ return [
     "Parcheggio gratuito",
     "Piscina",
     "Sauna",
+    "Palestra",
+    "Colazione inclusa",
+    "Idromassaggio"
 ];
