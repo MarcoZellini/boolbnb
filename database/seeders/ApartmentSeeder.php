@@ -28,8 +28,7 @@ class ApartmentSeeder extends Seeder
                 $NewApartment->slug = $slug;
                 $NewApartment->description = $apartment['description'];
                 $NewApartment->rooms = $apartment['rooms'];
-                // CORREGGERE TYPO NEL DB 👇
-                $NewApartment->bethrooms = $apartment['bathrooms'];
+                $NewApartment->bathrooms = $apartment['bathrooms'];
                 $NewApartment->square_meters = $apartment['size'];
                 $NewApartment->address = $apartment['address'];
                 $NewApartment->latitude = $apartment['latitude'];
