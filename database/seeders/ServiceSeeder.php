@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Service;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class ServiceSeeder extends Seeder
 {
@@ -17,11 +18,14 @@ class ServiceSeeder extends Seeder
 
         foreach ($servicesArray as $service) {
 
-            //dd($service['name']);
+            $icon_name = Str::slug($service, '-');
+            $icon_path = 'storage/icons/' . $icon_name . '.svg';
+
+            //dd($icon_path);
 
             $newservice = new Service();
-            $newservice->name = $service['name'];
-            //$newservice->icon = $service['icon'];
+            $newservice->name = $service;
+            $newservice->icon = $icon_path;
             $newservice->save();
         }
     }
