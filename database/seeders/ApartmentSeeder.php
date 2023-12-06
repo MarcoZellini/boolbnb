@@ -17,7 +17,6 @@ class ApartmentSeeder extends Seeder
     {
         $response = Http::withoutVerifying()->get("https://3bd7e14b-0b57-4476-a3ec-2878f890c41f.mock.pstmn.io/https://idealista2.p.rapidapi.com/properties/list?locationId=0-EU-IT-MI&locationName=Milano&operation=rent&country=it&locale=it&maxItems=10");
 
-        $title = '';
         if ($response->successful()) {
             $apartments = $response->json()['elementList'];
             foreach ($apartments as $apartment) {

@@ -52,7 +52,7 @@ class ApartmentController extends Controller
         ]);
 
         //dd($apartment);
-        return to_route('admin.apartment.index')->with('message', 'Apartment created successfully!');
+        return to_route('admin.apartments.index')->with('message', 'Apartment created successfully!');
     }
 
     /**
