@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Message;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class MessageController extends Controller
 {
@@ -13,7 +14,13 @@ class MessageController extends Controller
      */
     public function index()
     {
-        $messages = Message::orderByDesc('id')->paginate(10);
+        $messages = DB::table('messages')
+            ->join('apartments', 'messages.apartment_id', '=', 'apartments.id')
+            ->select('*')
+            ->where('apartments.user_id', Auth::id())
+            ->orderByDesc('messages.id')
+            ->paginate(10);
+
         return view('admin.messages.index', ['messages' => $messages]);
     }
 
@@ -22,7 +29,6 @@ class MessageController extends Controller
      */
     public function destroy(Message $message)
     {
-
         //dd('sto per eliminare');
         $message->delete();
 
