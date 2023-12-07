@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreApartmentRequest;
 use App\Http\Requests\UpdateApartmentRequest;
 use Illuminate\Support\Str;
+use App\Models\Service;
 
 class ApartmentController extends Controller
 {
@@ -25,7 +26,9 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        return view('admin.apartments.create');
+        $services = Service::all();
+
+        return view('admin.apartments.create', ['services' => $services]);
     }
 
     /**
@@ -34,8 +37,7 @@ class ApartmentController extends Controller
     public function store(StoreApartmentRequest $request)
     {
         $val_data = $request->validated();
-        //dd($val_data);
-        // ['user_id' => Auth::user()->id]
+
         $apartment = Apartment::create([
             'user_id' => Auth::user()->id,
             'title' => $val_data['title'],
@@ -51,7 +53,8 @@ class ApartmentController extends Controller
             'is_visible' => $val_data['is_visible'],
         ]);
 
-        //dd($apartment);
+        $apartment->services()->attach($request->services);
+
         return to_route('admin.apartments.index')->with('message', 'Apartment created successfully!');
     }
 
@@ -60,7 +63,7 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        //
+        return view('admin.apartments.show', ['apartment' => $apartment]);
     }
 
     /**
