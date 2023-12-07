@@ -158,6 +158,9 @@ return [
     'ulid' => 'The :attribute field must be a valid ULID.',
     'uuid' => 'The :attribute field must be a valid UUID.',
 
+    // CUSTOM verified_age MESSAGE
+    'verified_age' => 'The :attribute field requires an user with an age between :min and :max years.',
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

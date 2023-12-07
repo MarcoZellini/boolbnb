@@ -103,7 +103,8 @@ return [
         'array' => 'The :attribute field must have at least :min items.',
         'file' => 'The :attribute field must be at least :min kilobytes.',
         'numeric' => 'The :attribute field must be at least :min.',
-        'string' => 'The :attribute field must be at least :min characters.',
+        // 'string' => 'The :attribute field must be at least :min characters.',
+        'string' => 'Il campo :attribute deve essere lungo almeno :min caratteri.',
     ],
     'min_digits' => 'The :attribute field must have at least :min digits.',
     'missing' => 'The :attribute field must be missing.',
@@ -158,6 +159,9 @@ return [
     'ulid' => 'The :attribute field must be a valid ULID.',
     'uuid' => 'The :attribute field must be a valid UUID.',
 
+    // CUSTOM verified_age MESSAGE
+    'verified_age' => 'Il campo :attribute deve avere un\'età compresa tra :min e :max anni.',
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -172,6 +176,13 @@ return [
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
+        ],
+
+        'min' => [
+            'array' => 'Il campo :attribute deve contenere almeno :min valore/i.',
+            'file' => 'Il campo :attribute deve avere una dimenzione minima di :min kilobytes.',
+            'numeric' => 'Il valore minimo del campo :attribute deve essere :min.',
+            'string' => 'Il campo :attribute deve essere lungo almeno :min caratteri.',
         ],
     ],
 

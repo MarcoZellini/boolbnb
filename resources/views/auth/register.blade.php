@@ -41,7 +41,6 @@
                             </div>
                         </div>
 
-
                         <div class="mb-4 row">
                             <label for="email"
                                 class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo E-Mail') }}</label>
@@ -81,6 +80,12 @@
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="" name="password_confirmation"
                                     required autocomplete="new-password">
+
+                                @error('password-confirm')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -89,11 +94,19 @@
                                 class="col-md-4 col-form-label text-md-right">{{ __('Data di nascita') }}</label>
 
                             <div class="col-md-6">
-                                <input id="date_of_birth" type="date" class="date-bnb" name="date_of_birth" required>
+                                <input id="date_of_birth" type="date"
+                                    class="date-bnb @error('date_of_birth') is-invalid @enderror" name="date_of_birth"
+                                    required>
+
+                                @error('date_of_birth')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
-                        <div class="mb-4 row mb-0">
 
+                        <div class="mb-4 row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-bnb rounded-pill">
                                     {{ __('Register') }}
@@ -102,7 +115,6 @@
                         </div>
 
                         <div class="mb-4 row mb-0">
-
                             <div class="col">
                                 <span style="font-size: 0.75rem; line-height: 0.75rem;">
                                     Registrandoti, autorizzi il trattamento dei dati personali nel rispetto della vigente
@@ -111,10 +123,8 @@
                                     la protezione dei dati personali 2016/679, il d.lgs. 30/06/2003 n. 196 e successive
                                     modifiche e integrazioni.
                                 </span>
-
                             </div>
                         </div>
-
 
                     </form>
 

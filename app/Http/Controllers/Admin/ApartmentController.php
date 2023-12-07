@@ -11,6 +11,8 @@ use App\Http\Requests\UpdateApartmentRequest;
 use App\Models\Message;
 use Illuminate\Support\Str;
 use App\Models\Service;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Image;
 
 class ApartmentController extends Controller
 {
@@ -39,6 +41,10 @@ class ApartmentController extends Controller
     {
         $val_data = $request->validated();
 
+        $request->validate([
+            'services' => ['required', 'array', 'min:1']
+        ]);
+
         $apartment = Apartment::create([
             'user_id' => Auth::user()->id,
             'title' => $val_data['title'],
@@ -54,9 +60,20 @@ class ApartmentController extends Controller
             'is_visible' => $val_data['is_visible'],
         ]);
 
+        if ($images = $request->file('images')) {
+            foreach ($images as $image) {
+                $path = Storage::put('apartments', $image);
+                Image::create([
+                    'apartment_id' => $apartment->id,
+                    'path' => $path,
+                    'is_main' => Image::where('apartment_id', $apartment->id)->get()->count() < 1 ? 1 : 0
+                ]);
+            }
+        }
+
         $apartment->services()->attach($request->services);
 
-        return to_route('admin.apartments.index')->with('message', 'Apartment created successfully!');
+        return to_route('admin.apartments.index')->with('message', 'Appartamento creato con successo!');
     }
 
     /**
@@ -64,27 +81,48 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        $services = Service::all();
-
-        //dd($services);
-
-        return view('admin.apartments.show', ['apartment' => $apartment], ['services' => $services]);
+        if ($apartment->user_id === Auth::id()) {
+            $services = Service::all();
+            return view('admin.apartments.show', ['apartment' => $apartment, 'services' => $services]);
+        } else {
+            abort(403);
+        }
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(UpdateApartmentRequest $apartment)
+    public function edit(Apartment $apartment)
     {
-        //
+        if ($apartment->user_id === Auth::id()) {
+            return view(
+                'admin.apartments.edit',
+                [
+                    'apartment' => $apartment,
+                    'services' => Service::all()
+                ]
+            );
+        } else {
+            abort(403);
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Apartment $apartment)
+    public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {
-        //
+        $val_data = $request->validated();
+
+        $request->validate([
+            'services' => ['required', 'array', 'min:1']
+        ]);
+
+        $apartment->update($val_data);
+
+        $apartment->services()->sync($request->services);
+
+        return to_route('admin.apartments.index')->with('message', 'Aggiornamento effettuato con successo!');
     }
 
     /**
@@ -92,7 +130,8 @@ class ApartmentController extends Controller
      */
     public function destroy(Apartment $apartment)
     {
-        /* TO DO:
+        if ($apartment->user_id === Auth::id()) {
+            /* TO DO:
             - eliminazione immagini dalla tabella images che sono associate a questo appart
             - applicazione metodo detach alla tabella apartment_image
             - chiudere l'eventuale sponsorship attiva (necessario? tanto ho già pagato, si può lasciar scadere)
@@ -108,5 +147,8 @@ class ApartmentController extends Controller
         $apartment->delete();
 
         return to_route('admin.apartments.index')->with('message', 'appartamento eliminato con successo!');
+        } else {
+            abort(403);
+        }
     }
 }

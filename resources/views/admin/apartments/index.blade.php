@@ -63,7 +63,8 @@
                                                     Mostra
                                                 </a>
                                                 <a class="btn btn-warning d-flex d-inline-flex align-items-center gap-1"
-                                                    href="#" role="button">
+                                                    href="{{ route('admin.apartments.edit', $apartment->id) }}"
+                                                    role="button">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                                         <path
