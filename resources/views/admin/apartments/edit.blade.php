@@ -118,8 +118,8 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary mt-2">
-                    Aggiungi
+                <button type="submit" class="btn btn-warning mt-2">
+                    Modifica
                 </button>
             </div>
         </form>
