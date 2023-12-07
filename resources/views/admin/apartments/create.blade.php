@@ -89,7 +89,8 @@
                 <div class="col-12">
                     {{-- address form --}}
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" name="address" id="address" placeholder="" />
+                        <input type="text" class="form-control" name="address" id="address" placeholder=""
+                            value="{{ old('address') }}" />
                         <label for="address" class="text-capitalize">Indirizzo</label>
                         <small id="helpId" class="form-text text-muted">Inserisci la posizione</small>
                     </div>

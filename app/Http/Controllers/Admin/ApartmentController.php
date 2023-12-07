@@ -55,7 +55,7 @@ class ApartmentController extends Controller
 
         $apartment->services()->attach($request->services);
 
-        return to_route('admin.apartments.index')->with('message', 'Apartment created successfully!');
+        return to_route('admin.apartments.index')->with('message', 'Appartamento creato con successo!');
     }
 
     /**
@@ -69,17 +69,29 @@ class ApartmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(UpdateApartmentRequest $apartment)
+    public function edit(Apartment $apartment)
     {
-        //
+        return view(
+            'admin.apartments.edit',
+            [
+                'apartment' => $apartment,
+                'services' => Service::all()
+            ]
+        );
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Apartment $apartment)
+    public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {
-        //
+        $val_data = $request->validated();
+
+        $apartment->update($val_data);
+
+        $apartment->services()->sync($request->services);
+
+        return to_route('admin.apartments.index')->with('message', 'Aggiornamento effettuato con successo!');
     }
 
     /**
