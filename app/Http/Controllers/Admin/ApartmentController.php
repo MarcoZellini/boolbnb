@@ -130,23 +130,28 @@ class ApartmentController extends Controller
      */
     public function destroy(Apartment $apartment)
     {
-        if ($apartment->user_id === Auth::id()) {
-            /* TO DO:
-            - eliminazione immagini dalla tabella images che sono associate a questo appart
-            - applicazione metodo detach alla tabella apartment_image
-            - chiudere l'eventuale sponsorship attiva (necessario? tanto ho già pagato, si può lasciar scadere)
+        /*
             - le statistiche di questo appartamento vanno eliminate?
         */
 
-        // eliminazione messaggi associati a questo appartamento
-        $messages = Message::where('apartment_id', $apartment->id)->delete();
+        if ($apartment->user_id === Auth::id()) {
 
-        //applicazione metodo detach alla tabella apartment_service
-        $apartment->services()->detach();
 
-        $apartment->delete();
+            // eliminazione dei record dei messaggi associati a questo appartamento
+            $apartment->messages()->delete();
 
-        return to_route('admin.apartments.index')->with('message', 'appartamento eliminato con successo!');
+            //applicazione metodo detach alla tabella apartment_service
+            $apartment->services()->detach();
+
+            foreach ($apartment->images as $image) {
+                Storage::delete($image->path);
+            }
+            // eliminazione dei record delle immagini associate a questo appartamento
+            $apartment->images()->delete();
+
+            $apartment->delete();
+
+            return to_route('admin.apartments.index')->with('message', 'appartamento eliminato con successo!');
         } else {
             abort(403);
         }
