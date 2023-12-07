@@ -71,6 +71,12 @@ a {
         color: $bnb-light;
         box-shadow: 0px 1px 5px $bnb-secondary;
     }
+
+    &:active {
+        background-color: $bnb-accent!important;
+        color: $bnb-light!important;
+        box-shadow: 0px 1px 5px $bnb-secondary;
+    }
 }
 
 /*#endregion ANCHOR TAGS AND BTNS*/

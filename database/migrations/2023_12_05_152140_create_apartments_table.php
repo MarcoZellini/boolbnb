@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->unsignedTinyInteger('rooms')->default(1);
             $table->unsignedTinyInteger('beds')->default(1);
-            $table->unsignedTinyInteger('bethrooms')->default(1);
+            $table->unsignedTinyInteger('bathrooms')->default(1);
             $table->unsignedSmallInteger('square_meters')->nullable();
             $table->string('address', 255)->nullable();
             $table->float('latitude', 8, 6)->nullable();

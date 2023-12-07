@@ -1,24 +1,29 @@
 <?php
 
 return [
-    [
-        "name" => "Wi-fi",
-        "icon" => ''
-    ],
-    [
-        "name" => "Aria condizionata",
-        "icon" => ''
-    ],
-    [
-        "name" => "Parcheggio gratuito",
-        "icon" => ''
-    ],
-    [
-        "name" => "Piscina",
-        "icon" => ''
-    ],
-    [
-        "name" => "Sauna",
-        "icon" => ''
-    ],
+    "Vasca da bagno",
+    "Asciugacapelli",
+    "Shampoo",
+    "Balsamo",
+    "Sapone per il corpo",
+    "Bidet",
+    "Lavatrice",
+    "Asciugatrice",
+    "Essenziali",
+    "Grucce",
+    "Biancheria da letto",
+    "Cuscini e coperte extra",
+    "Cassaforte",
+    "TV",
+    "Aria condizionata",
+    "Riscaldamento",
+    "Estintore",
+    "Kit pronto soccorso",
+    "Wi-fi",
+    "Frigorifero",
+    "Piatti e posate",
+    "Macchina del caffè",
+    "Parcheggio gratuito",
+    "Ascensore",
+    "Colazione inclusa",
 ];
