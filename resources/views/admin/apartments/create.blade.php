@@ -17,7 +17,7 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.apartments.store') }}" method="POST">
+        <form action="{{ route('admin.apartments.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-12">
@@ -28,6 +28,10 @@
                         <label for="title" class="text-capitalize">Titolo</label>
                         <small id="helpId" class="form-text text-muted">Inserisci un titolo</small>
                     </div>
+                </div>
+                <div class="col-12 mb-3">
+                    <label for="images">Select images:</label>
+                    <input type="file" id="images" name="images[]" multiple><br><br>
                 </div>
                 <div class="col-12">
                     {{-- description form --}}

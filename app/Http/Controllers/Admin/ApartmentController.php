@@ -10,6 +10,8 @@ use App\Http\Requests\StoreApartmentRequest;
 use App\Http\Requests\UpdateApartmentRequest;
 use Illuminate\Support\Str;
 use App\Models\Service;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Image;
 
 class ApartmentController extends Controller
 {
@@ -57,6 +59,16 @@ class ApartmentController extends Controller
             'is_visible' => $val_data['is_visible'],
         ]);
 
+        if ($images = $request->file('images')) {
+            foreach ($images as $image) {
+                $path = Storage::put('apartments', $image);
+                Image::create([
+                    'apartment_id' => $apartment->id,
+                    'path' => $path,
+                    'is_main' => Image::where('apartment_id', $apartment->id)->get()->count() < 1 ? 1 : 0
+                ]);
+            }
+        }
 
         $apartment->services()->attach($request->services);
 
@@ -68,7 +80,11 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        return view('admin.apartments.show', ['apartment' => $apartment]);
+        if ($apartment->user_id === Auth::id()) {
+            return view('admin.apartments.show', ['apartment' => $apartment]);
+        } else {
+            abort(403);
+        }
     }
 
     /**
@@ -76,13 +92,17 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        return view(
-            'admin.apartments.edit',
-            [
-                'apartment' => $apartment,
-                'services' => Service::all()
-            ]
-        );
+        if ($apartment->user_id === Auth::id()) {
+            return view(
+                'admin.apartments.edit',
+                [
+                    'apartment' => $apartment,
+                    'services' => Service::all()
+                ]
+            );
+        } else {
+            abort(403);
+        }
     }
 
     /**
@@ -108,6 +128,10 @@ class ApartmentController extends Controller
      */
     public function destroy(Apartment $apartment)
     {
-        //
+        if ($apartment->user_id === Auth::id()) {
+            //code
+        } else {
+            abort(403);
+        }
     }
 }
