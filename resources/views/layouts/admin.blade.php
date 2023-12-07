@@ -68,6 +68,10 @@
                             <a class="nav-link nav-link-bnb"
                                 href="{{ route('admin.apartments.index') }}">{{ __('Apartments') }}</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-bnb"
+                                href="{{ route('admin.messages.index') }}">{{ __('Messages') }}</a>
+                        </li>
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">

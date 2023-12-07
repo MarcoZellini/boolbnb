@@ -26,6 +26,6 @@ class MessageController extends Controller
         //dd('sto per eliminare');
         $message->delete();
 
-        return to_route('messages.index')->with('message', 'message successfully deleted');
+        return to_route('admin.messages.index')->with('message', 'messaggio eliminato con successo!');
     }
 }

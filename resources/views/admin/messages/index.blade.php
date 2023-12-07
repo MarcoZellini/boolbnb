@@ -1,13 +1,20 @@
-@extends('admin.layouts.admin')
+@extends('layouts.admin')
 
 @section('content')
     <div class="container py-4">
 
-        <h1>View all messages</h1>
+        <h1>Tutti i messaggi</h1>
 
         <div class="pt-2">
             {{ $messages->links('pagination::bootstrap-5') }}
         </div>
+
+        @if (session('message'))
+            <div class="alert alert-success alert-dismissible fade show my-4" role="alert">
+                <strong>Congratulazioni:</strong> {{ session('message') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
 
         <div class="row row-cols-1 pt-2 gy-1">
             @foreach ($messages as $message)
@@ -116,7 +123,8 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-bs-dismiss="modal">Close</button>
-                                                <form action="{{ route('messages.delete', $message->id) }}" method="POST">
+                                                <form action="{{ route('admin.messages.delete', $message->id) }}"
+                                                    method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger">Delete</button>
