@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Apartment;
 
 class UpdateApartmentRequest extends FormRequest
 {
@@ -12,7 +14,7 @@ class UpdateApartmentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return Auth::id() == $this->apartment->user_id;
     }
 
     /**

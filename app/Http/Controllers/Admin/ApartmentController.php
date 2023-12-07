@@ -38,6 +38,10 @@ class ApartmentController extends Controller
     {
         $val_data = $request->validated();
 
+        $request->validate([
+            'services' => ['required', 'array', 'min:1']
+        ]);
+
         $apartment = Apartment::create([
             'user_id' => Auth::user()->id,
             'title' => $val_data['title'],
@@ -52,6 +56,7 @@ class ApartmentController extends Controller
             'longitude' => ((rand(0, 180000000) / 1000000) * (rand(0, 1) ? 1 : -1)),
             'is_visible' => $val_data['is_visible'],
         ]);
+
 
         $apartment->services()->attach($request->services);
 
@@ -86,6 +91,10 @@ class ApartmentController extends Controller
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {
         $val_data = $request->validated();
+
+        $request->validate([
+            'services' => ['required', 'array', 'min:1']
+        ]);
 
         $apartment->update($val_data);
 
