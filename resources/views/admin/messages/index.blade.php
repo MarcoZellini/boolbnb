@@ -23,7 +23,8 @@
                         <div class="card-body d-flex px-5">
                             <div class="col-9">
                                 <h5 class="card-title">
-                                    {{ $message->name }} {{ $message->lastname }} - {{ $message->subject }}
+                                    Apt. ID {{ $message->apartment_id }} - {{ $message->name }} {{ $message->lastname }} -
+                                    {{ $message->subject }}
                                 </h5>
                                 <p class="card-text">
                                     {{ $message->message }}
