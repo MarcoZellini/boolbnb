@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreApartmentRequest;
 use App\Http\Requests\UpdateApartmentRequest;
+use App\Models\Message;
 use Illuminate\Support\Str;
 use App\Models\Service;
 use Illuminate\Support\Facades\Storage;
@@ -81,7 +82,8 @@ class ApartmentController extends Controller
     public function show(Apartment $apartment)
     {
         if ($apartment->user_id === Auth::id()) {
-            return view('admin.apartments.show', ['apartment' => $apartment]);
+            $services = Service::all();
+            return view('admin.apartments.show', ['apartment' => $apartment, 'services' => $services]);
         } else {
             abort(403);
         }
@@ -129,7 +131,22 @@ class ApartmentController extends Controller
     public function destroy(Apartment $apartment)
     {
         if ($apartment->user_id === Auth::id()) {
-            //code
+            /* TO DO:
+            - eliminazione immagini dalla tabella images che sono associate a questo appart
+            - applicazione metodo detach alla tabella apartment_image
+            - chiudere l'eventuale sponsorship attiva (necessario? tanto ho già pagato, si può lasciar scadere)
+            - le statistiche di questo appartamento vanno eliminate?
+        */
+
+        // eliminazione messaggi associati a questo appartamento
+        $messages = Message::where('apartment_id', $apartment->id)->delete();
+
+        //applicazione metodo detach alla tabella apartment_service
+        $apartment->services()->detach();
+
+        $apartment->delete();
+
+        return to_route('admin.apartments.index')->with('message', 'appartamento eliminato con successo!');
         } else {
             abort(403);
         }
