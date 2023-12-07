@@ -25,11 +25,6 @@ Route::get('/', function () {
     }
 });
 
-Route::middleware(['auth', 'verified'])->prefix('messages')->name('messages.')->group(function () {
-    Route::get('/', [MessageController::class, 'index'])->name('index');
-    Route::delete('{message}', [MessageController::class, 'destroy'])->name('delete');
-});
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -42,6 +37,8 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('/apartments', ApartmentController::class);
+    Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
+    Route::delete('/messages/{message}', [MessageController::class, 'destroy'])->name('messages.delete');
 });
 
 require __DIR__ . '/auth.php';
