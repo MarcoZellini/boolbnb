@@ -13,22 +13,8 @@ class MessageController extends Controller
      */
     public function index()
     {
-        $messages = Message::orderByDesc('id')->get();
-        return view('admin.messages.index', compact('messages'));
-
-        /* 
-        //messages pagination
         $messages = Message::orderByDesc('id')->paginate(10);
         return view('admin.messages.index', ['messages' => $messages]);
-        */
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Message $message)
-    {
-        return view('admin.messages.show', compact('message'));
     }
 
     /**
@@ -36,8 +22,10 @@ class MessageController extends Controller
      */
     public function destroy(Message $message)
     {
+
+        //dd('sto per eliminare');
         $message->delete();
 
-        return to_route('admin.messages.index')->with('message', 'message successfully deleted');
+        return to_route('messages.index')->with('message', 'message successfully deleted');
     }
 }
