@@ -81,7 +81,16 @@
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="" name="password_confirmation"
                                     required autocomplete="new-password">
+
+                                @error('password-confirm')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
+
+
+
                         </div>
 
                         <div class="mb-4 row">
@@ -90,8 +99,23 @@
 
                             <div class="col-md-6">
                                 <input id="date_of_birth" type="date" class="date-bnb" name="date_of_birth" required>
+
+                                @error('date_of_birth')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+
+                                    @php
+                                        // dd($message);
+                                    @endphp
+                                @enderror
+
                             </div>
+
+
+
                         </div>
+
                         <div class="mb-4 row mb-0">
 
                             <div class="col-md-6 offset-md-4">
