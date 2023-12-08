@@ -17,13 +17,14 @@
         @endif
 
         <div class="row row-cols-1 pt-2 gy-1">
-            @foreach ($messages as $message)
+            @forelse ($messages as $message)
                 <div class="col">
                     <div class="card">
                         <div class="card-body d-flex px-5">
                             <div class="col-9">
                                 <h5 class="card-title">
-                                    Apt. ID {{ $message->apartment_id }} - {{ $message->name }} {{ $message->lastname }} -
+                                    Apt. ID {{ $message->apartment_id }} - {{ $message->name }} {{ $message->lastname }}
+                                    -
                                     {{ $message->subject }}
                                 </h5>
                                 <p class="card-text">
@@ -138,7 +139,9 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <div>Non ci sono messaggi per ora!</div>
+            @endforelse
         </div>
     </div>
 @endsection
