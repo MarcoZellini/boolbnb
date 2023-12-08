@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreApartmentRequest;
 use App\Http\Requests\UpdateApartmentRequest;
@@ -41,6 +42,18 @@ class ApartmentController extends Controller
     {
         $val_data = $request->validated();
 
+        $GeocodeUrl = "https://api.tomtom.com/search/2/geocode/";
+        $TomtomKey = env('TOMTOM_KEY');
+        $address = str_replace(' ', '%20', $val_data['address']);
+
+        $GeoResponse = Http::withoutVerifying()->get($GeocodeUrl . $address .  ".json?key=" . $TomtomKey);
+
+        if (isset($val_data['address']) && $val_data['address'] !== null) {
+            if ($GeoResponse->successful()) {
+                $cordinates = $GeoResponse['results'][0]['position'];
+            }
+        }
+
         $request->validate([
             'services' => ['required', 'array', 'min:1']
         ]);
@@ -55,8 +68,8 @@ class ApartmentController extends Controller
             'bathrooms' => $val_data['bathrooms'],
             'square_meters' => $val_data['square_meters'],
             'address' => $val_data['address'],
-            'latitude' => ((rand(0, 90000000) / 1000000) * (rand(0, 1) ? 1 : -1)),
-            'longitude' => ((rand(0, 180000000) / 1000000) * (rand(0, 1) ? 1 : -1)),
+            'latitude' =>  $cordinates['lat'],
+            'longitude' =>  $cordinates['lon'],
             'is_visible' => $val_data['is_visible'],
         ]);
 
