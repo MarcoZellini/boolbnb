@@ -33,8 +33,8 @@
                 <div class="col-12">
                     {{-- description form --}}
                     <div class="form-floating mb-3">
-                        <textarea id="description" name="description" class="form-control" placeholder="" id="floatingTextarea"
-                            style="height: 100px">{{ old('description', $apartment->description) }}</textarea>
+                        <textarea style="min-height: 150px" id="description" name="description" class="form-control" placeholder=""
+                            id="floatingTextarea" style="height: 100px">{{ old('description', $apartment->description) }}</textarea>
                         <label for="description" class="text-capitalize">Descrizione</label>
                         <small id="helpId" class="form-text text-muted">Inserisci una descrizione</small>
                     </div>
@@ -61,34 +61,48 @@
                     </div>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label for="rooms" class="form-label text-capitalize">Camere</label>
-                    <div class="d-flex gap-2">
-                        1<input type="range" class="form-range" id="rooms" name="rooms" min="1"
-                            max="10" value="{{ old('rooms', $apartment->rooms) }}">10
+                    <label for="rooms" class="form-label text-capitalize">Camere:</label>
+                    <output id="amount_rooms" name="amount_rooms" for="rooms">0</output>
+
+                    <div class="d-flex align-items-center gap-2">
+                        <span>1</span>
+                        <input type="range" class="slider" id="rooms" name="rooms" min="1" max="10"
+                            value="{{ old('rooms', $apartment->rooms) }}" oninput="amount_rooms.value=rooms.value">
+                        <span>10</span>
                     </div>
                     <small id="helpId" class="form-text text-muted">Inserisci il numero di stanze</small>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label for="beds" class="form-label text-capitalize">Letti</label>
-                    <div class="d-flex gap-2">
-                        1<input type="range" class="form-range" id="beds" name="beds" min="1"
-                            max="10" value="{{ old('beds', $apartment->beds) }}">10
+                    <label for="beds" class="form-label text-capitalize">Letti:</label>
+                    <output id="amount_beds" name="amount_beds" for="beds">0</output>
+
+                    <div class="d-flex align-items-center gap-2">
+                        <span>1</span>
+                        <input type="range" class="slider" id="beds" name="beds" min="1" max="10"
+                            value="{{ old('beds', $apartment->beds) }}" oninput="amount_beds.value=beds.value">
+                        <span>10</span>
                     </div>
                     <small id="helpId" class="form-text text-muted">Inserisci il numero di letti</small>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label for="bathrooms" class="form-label text-capitalize">Bagni</label>
-                    <div class="d-flex gap-2">
-                        1<input type="range" class="form-range" id="bathrooms" name="bathrooms" min="1"
-                            max="10" value="{{ old('bathrooms', $apartment->bathrooms) }}">10
+                    <label for="bathrooms" class="form-label text-capitalize">Bagni:</label>
+                    <output id="amount_bathrooms" name="amount_bathrooms" for="bathrooms">0</output>
+
+                    <div class="d-flex align-items-center gap-2">
+                        <span>1</span>
+                        <input type="range" class="slider" id="bathrooms" name="bathrooms" min="1" max="10"
+                            value="{{ old('bathrooms', $apartment->bathrooms) }}"
+                            oninput="amount_bathrooms.value=bathrooms.value">
+                        <span>10</span>
                     </div>
                     <small id="helpId" class="form-text text-muted">Inserisci il numero di bagni</small>
                 </div>
                 <div class="col-12">
                     {{-- square meters form --}}
                     <div class="form-floating mb-3">
-                        <input type="number" id="square_meters" name="square_meters" class="form-control" placeholder=""
-                            id="floatingTextarea" value="{{ old('square_meters', $apartment->square_meters) }}" />
+                        <input type="number" id="square_meters" name="square_meters" class="form-control"
+                            placeholder="" id="floatingTextarea"
+                            value="{{ old('square_meters', $apartment->square_meters) }}" />
                         <label for="square_meters" class="text-capitalize">Metri Quadrati</label>
                         <small id="helpId" class="form-text text-muted">Inserisci la metratura</small>
                     </div>
@@ -118,7 +132,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-warning mt-2">
+                <button type="submit" class="w-25 btn btn-bnb mt-2 rounded-pill">
                     Modifica
                 </button>
             </div>
