@@ -3,7 +3,7 @@
 @section('content')
     <div class="container my-4">
 
-        <div class="py-4 row px-3">
+        <div class="mt-4 row px-3">
             <div class="col-8 m-0 p-0">
                 <img src="https://picsum.photos/400/200" alt="" class="w-100">
             </div>
@@ -23,15 +23,12 @@
             </div>
         </div>
 
-        <div class="mt-3">
-        </div>
-
-        <div class="row row-cols-2 pt-3">
+        <div class="row row-cols-1 mt-4">
             <div class="col">
                 <h1>
                     {{ $apartment->title }}
                 </h1>
-                <div class="mt-2">
+                <div class="mt-3">
                     <h3>
                         Descrizione
                     </h3>
@@ -39,7 +36,7 @@
                         {{ $apartment->description }}
                     </p>
                 </div>
-                <div class="mt-2">
+                <div class="mt-3">
                     <h3>
                         Informazioni
                     </h3>
@@ -74,7 +71,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="mt-2">
+                <div class="mt-3">
                     <h3>
                         Servizi
                     </h3>
@@ -87,13 +84,13 @@
                 </div>
             </div>
             <div class="col">
-                <div class="mt-2">
-                    <h1>
+                <div class="mt-3">
+                    <h3>
                         Messaggi
-                    </h1>
+                    </h3>
                     <div class="overflow-auto" style="height: 500px;">
-                        @foreach ($apartment->messages as $message)
-                            <div class="card border-bottom rounded-0">
+                        @forelse ($apartment->messages as $message)
+                            <div class="card border-0 border-top rounded-0">
                                 <div class="card-body d-flex px-5">
                                     <div class="col-9">
                                         <h6 class="card-title">
@@ -210,7 +207,11 @@
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
+                        @empty
+                            <div>
+                                Non ci sono messaggi per ora!
+                            </div>
+                        @endforelse
                     </div>
                 </div>
             </div>

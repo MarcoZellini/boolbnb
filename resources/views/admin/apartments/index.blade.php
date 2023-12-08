@@ -107,7 +107,8 @@
                                                                 </svg>
                                                                 <span class="mx-1">
                                                                     <strong>Attenzione</strong>: questa azione è
-                                                                    irreversibile
+                                                                    irreversibile e verranno eliminati immagini e messaggi
+                                                                    correlati a questo appartamento
                                                                 </span>
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                                     height="16" fill="#FF0000"
