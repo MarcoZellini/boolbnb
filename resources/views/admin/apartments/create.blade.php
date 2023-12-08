@@ -90,7 +90,12 @@
                     {{-- address form --}}
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" name="address" id="address" placeholder=""
-                            value="{{ old('address') }}" />
+                            value="{{ old('address') }}" list="Suggested_Address" />
+
+                        <datalist id="Suggested_Address">
+
+                        </datalist>
+
                         <label for="address" class="text-capitalize">Indirizzo</label>
                         <small id="helpId" class="form-text text-muted">Inserisci la posizione</small>
                     </div>
