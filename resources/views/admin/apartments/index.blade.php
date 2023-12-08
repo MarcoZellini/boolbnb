@@ -27,7 +27,7 @@
                                 <thead>
                                     <tr>
                                         <th scope="col" class="text-capitalize">titolo</th>
-                                        <th scope="col" class="text-capitalize">image</th>
+                                        <th scope="col" class="text-capitalize">immagine</th>
                                         <th scope="col" class="text-capitalize">indirizzo</th>
                                         <th scope="col" class="text-capitalize">visibile</th>
                                         <th scope="col" class="text-capitalize">azioni</th>
