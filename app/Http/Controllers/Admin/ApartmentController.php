@@ -42,6 +42,11 @@ class ApartmentController extends Controller
     {
         $val_data = $request->validated();
 
+        $cordinates = [
+            'lat' => 0.0,
+            'lon' => 0.0,
+        ];
+
         $GeocodeUrl = "https://api.tomtom.com/search/2/geocode/";
         $TomtomKey = env('TOMTOM_KEY');
         $address = str_replace(' ', '%20', $val_data['address']);
