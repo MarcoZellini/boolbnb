@@ -22,7 +22,7 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        return view('admin.apartments.index', ['apartments' => Apartment::where('user_id', Auth::user()->id)->get()]);
+        return view('admin.apartments.index', ['apartments' => Apartment::where('user_id', Auth::user()->id)->paginate(10)]);
     }
 
     /**
