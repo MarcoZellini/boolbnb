@@ -11,6 +11,14 @@ $bnb-secondary: #b0b0b0a4;
 
 /*#endregion VARIABLES*/
 
+/*#region Utilities*/
+.bnb-color {
+    color: $bnb-primary ;
+}
+
+
+/*#endregion Utilities*/
+
 /*#region GLOBAL RULES*/
 body {
     font-family: 'Mulish', sans-serif;
@@ -122,6 +130,79 @@ a {
     }
 }
 
+
+.custom-file-input {
+    color: $bnb-medium;
+
+    &::-webkit-file-upload-button {
+        visibility: hidden;
+    }
+
+    &::before {
+        content: 'Scegli file';
+        background: $bnb-primary;
+        color: $bnb-light;
+        border: 1px solid $bnb-primary;
+        border-radius: 50rem;
+        padding: 3px 6px;
+        outline: none;
+        white-space: nowrap;
+        cursor: pointer;
+
+    }
+
+    &:hover::before {
+        background: $bnb-accent;
+        border-color: $bnb-accent;
+    }
+
+    &:active::before {
+        background: $bnb-accent;
+        border-color: $bnb-accent;
+    }
+
+}
+
+
+
+/*#region services*/
+.services {
+    position: relative;
+    width: 120%;
+    height: 150%;
+    opacity: 0.3;
+    z-index: 2;
+
+
+    &:checked {
+        --bs-form-check-bg-image: none !important;
+        opacity: 0.5;
+        background-color: $bnb-accent !important;
+        color: $bnb-light !important;
+        box-shadow: 0px 1px 5px $bnb-secondary;
+
+        .services {
+            column-rule-color: #fff;
+        }
+
+    }
+
+    &:hover {
+        box-shadow: 0px 1px 5px $bnb-secondary !important;
+    }
+}
+
+.services_icons {
+    position: absolute;
+    top: 90%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+}
+
+/*#endregion services*/
+
 // FORM FIELDS STYLE
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -132,25 +213,66 @@ textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-    border-bottom: 1px solid $bnb-secondary;
+    border-bottom: 2px solid $bnb-secondary;
     -webkit-text-fill-color: $bnb-medium;
     transition: background-color 5000s ease-in-out 0s;
     font-size: 1rem;
 }
 
-textarea,
-input {
-    background-color: transparent;
-    border: 1px solid transparent;
-    border-bottom: 1px solid $bnb-secondary;
-    width: 100%;
-    font-size: 1rem;
-    margin: 0.25rem 0;
+.form-floating {
+    label {
+        padding: 1rem 0;
+    }
+}
+
+.form-control {
+    border-radius: 0;
+    border: none;
+    border-bottom: 2px solid $bnb-secondary ;
 
     &:focus {
-        outline: none;
+        box-shadow: none;
+        border-bottom: 2px solid $bnb-primary;
+        border-image: linear-gradient(to right, $bnb-accent, #fff);
+        border-image-slice: 1;
+    }
+
+    &:focus~label {
+        color: $bnb-primary !important;
+    }
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 5px;
+    background-color: $bnb-secondary;
+    opacity: 0.6;
+
+    &:hover {
+        opacity: 1;
+    }
+
+    &::-webkit-slider-thumb {
+        border-radius: 100%;
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        background: $bnb-primary;
+        cursor: pointer;
+        filter: drop-shadow(none);
+
+        &:hover {
+            background: $bnb-accent;
+            filter: drop-shadow(0px 0px 2px $bnb-accent);
+        }
 
     }
+}
+
+output {
+    color: $bnb-accent;
 }
 
 // FORM ERROR MESSAGE STYLE

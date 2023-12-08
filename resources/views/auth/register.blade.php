@@ -14,8 +14,9 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('nome') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class=" @error('name') is-invalid @enderror"
-                                    name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <input id="name" type="text"
+                                    class="@error('name') is-invalid @enderror form-control" name="name"
+                                    value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -29,9 +30,9 @@
                             <label for="lastname" class="col-md-4 col-form-label text-md-right">{{ __('cognome ') }}</label>
 
                             <div class="col-md-6">
-                                <input id="lastname" type="text" class=" @error('lastname') is-invalid @enderror"
-                                    name="lastname" value="{{ old('lastname') }}" required autocomplete="lastname"
-                                    autofocus>
+                                <input id="lastname" type="text"
+                                    class="@error('lastname') is-invalid @enderror form-control" name="lastname"
+                                    value="{{ old('lastname') }}" required autocomplete="lastname" autofocus>
 
                                 @error('lastname')
                                     <span class="invalid-feedback" role="alert">
@@ -46,8 +47,9 @@
                                 class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo E-Mail') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class=" @error('email') is-invalid @enderror"
-                                    name="email" value="{{ old('email') }}" required autocomplete="email">
+                                <input id="email" type="email"
+                                    class="@error('email') is-invalid @enderror form-control" name="email"
+                                    value="{{ old('email') }}" required autocomplete="email">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -62,8 +64,9 @@
                                 class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class=" @error('password') is-invalid @enderror"
-                                    name="password" required autocomplete="new-password">
+                                <input id="password" type="password"
+                                    class="@error('password') is-invalid @enderror form-control" name="password" required
+                                    autocomplete="new-password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -78,8 +81,8 @@
                                 class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="" name="password_confirmation"
-                                    required autocomplete="new-password">
+                                <input id="password-confirm" type="password" class="form-control"
+                                    name="password_confirmation" required autocomplete="new-password">
 
                                 @error('password-confirm')
                                     <span class="invalid-feedback" role="alert">
@@ -95,8 +98,8 @@
 
                             <div class="col-md-6">
                                 <input id="date_of_birth" type="date"
-                                    class="date-bnb @error('date_of_birth') is-invalid @enderror" name="date_of_birth"
-                                    required>
+                                    class="date-bnb @error('date_of_birth') is-invalid @enderror form-control"
+                                    name="date_of_birth" required>
 
                                 @error('date_of_birth')
                                     <span class="invalid-feedback" role="alert">
