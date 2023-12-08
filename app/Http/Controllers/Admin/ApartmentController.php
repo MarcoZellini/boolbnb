@@ -22,7 +22,7 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        return view('admin.apartments.index', ['apartments' => Apartment::where('user_id', Auth::user()->id)->get()]);
+        return view('admin.apartments.index', ['apartments' => Apartment::where('user_id', Auth::user()->id)->paginate(10)]);
     }
 
     /**
@@ -40,6 +40,11 @@ class ApartmentController extends Controller
      */
     public function store(StoreApartmentRequest $request)
     {
+        $cordinates = [
+            'lat' => 0.0,
+            'lon' => 0.0,
+        ];
+
         $val_data = $request->validated();
 
         $GeocodeUrl = "https://api.tomtom.com/search/2/geocode/";
@@ -55,7 +60,9 @@ class ApartmentController extends Controller
         }
 
         $request->validate([
-            'services' => ['required', 'array', 'min:1']
+            'services' => ['required', 'array', 'min:1'],
+            'images' => ['nullable', 'array'],
+            'images.*' => ['image', 'mimes:jpeg,jpg,png', 'max:1024'],
         ]);
 
         $apartment = Apartment::create([
@@ -73,7 +80,9 @@ class ApartmentController extends Controller
             'is_visible' => $val_data['is_visible'],
         ]);
 
-        if ($images = $request->file('images')) {
+        //validazione e salvataggio immagini
+
+        if ($images = $request->images) {
             foreach ($images as $image) {
                 $path = Storage::put('apartments', $image);
                 Image::create([
@@ -127,11 +136,25 @@ class ApartmentController extends Controller
     {
         $val_data = $request->validated();
 
+
         $request->validate([
-            'services' => ['required', 'array', 'min:1']
+            'services' => ['required', 'array', 'min:1'],
+            'images' => ['nullable', 'array'],
+            'images.*' => ['image', 'mimes:jpeg,jpg,png', 'max:1024'],
         ]);
 
         $apartment->update($val_data);
+
+        if ($images = $request->images) {
+            foreach ($images as $image) {
+                $path = Storage::put('apartments', $image);
+                Image::create([
+                    'apartment_id' => $apartment->id,
+                    'path' => $path,
+                    'is_main' => Image::where('apartment_id', $apartment->id)->get()->count() < 1 ? 1 : 0
+                ]);
+            }
+        }
 
         $apartment->services()->sync($request->services);
 

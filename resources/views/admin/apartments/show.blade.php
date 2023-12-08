@@ -88,8 +88,16 @@
                     <h3>
                         Messaggi
                     </h3>
+
+                    @if (session('message'))
+                        <div class="alert alert-success alert-dismissible fade show my-4" role="alert">
+                            <strong>Congratulazioni:</strong> {{ session('message') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+
                     <div class="overflow-auto" style="height: 500px;">
-                        @forelse ($apartment->messages as $message)
+                        @forelse ($apartment->messages->sortDesc() as $message)
                             <div class="card border-0 border-top rounded-0">
                                 <div class="card-body d-flex px-5">
                                     <div class="col-9">
