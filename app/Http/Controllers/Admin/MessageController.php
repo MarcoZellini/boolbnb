@@ -6,6 +6,7 @@ use App\Models\Message;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
 
 class MessageController extends Controller
 {
@@ -16,7 +17,7 @@ class MessageController extends Controller
     {
         $messages = DB::table('messages')
             ->join('apartments', 'messages.apartment_id', '=', 'apartments.id')
-            ->select('*')
+            ->select('messages.id', 'messages.apartment_id', 'messages.name', 'messages.lastname', 'messages.email', 'messages.phone', 'messages.subject', 'messages.message')
             ->where('apartments.user_id', Auth::id())
             ->orderByDesc('messages.id')
             ->paginate(10);
@@ -29,9 +30,15 @@ class MessageController extends Controller
      */
     public function destroy(Message $message)
     {
-        //dd('sto per eliminare');
+        $previous_url = URL::previous();
         $message->delete();
 
-        return to_route('admin.messages.index')->with('message', 'messaggio eliminato con successo!');
+        $alert = 'messaggio eliminato con successo!';
+
+        if (str_contains($previous_url, 'admin/apartments')) {
+            return to_route('admin.apartments.show', $message->apartment_id)->with('message', $alert);
+        } else {
+            return to_route('admin.messages.index')->with('message', $alert);
+        }
     }
 }
