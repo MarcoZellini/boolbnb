@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\ApartmentController;
+use App\Http\Controllers\Admin\ImageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,6 +40,8 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::resource('/apartments', ApartmentController::class);
     Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
     Route::delete('/messages/{message}', [MessageController::class, 'destroy'])->name('messages.delete');
+    Route::put('/apartments/{apartment}/image/{image}', [ImageController::class, 'setMain'])->name('apartments.image.setMain');
+    Route::delete('/apartments/{apartment}/image/{image}', [ImageController::class, 'destroy'])->name('apartments.image.delete');
 });
 
 require __DIR__ . '/auth.php';
