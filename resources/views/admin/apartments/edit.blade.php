@@ -3,8 +3,8 @@
 @section('content')
     <div class="container my-5">
         <div class="mb-3">
-            <h3>Nuovo Appartamento</h3>
-            <h6>Compila il form per aggiungere un nuovo appartamento!</h6>
+            <h3>Modifica Appartamento</h3>
+            <h6>Compila il form per modificare l'appartamento!</h6>
         </div>
 
         @if ($errors->any())
@@ -17,7 +17,21 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.apartments.update', $apartment->id) }}" method="POST">
+        @forelse ($apartment->images as $image)
+            <form id="set_main_{{ $image->id }}"
+                action="{{ route('admin.apartments.image.setMain', [$apartment, $image]) }}" method="POST">
+                @csrf
+                @method('PUT')
+            </form>
+            <form id="delete_image_{{ $image->id }}"
+                action="{{ route('admin.apartments.image.delete', [$apartment, $image]) }}" method="POST">
+                @csrf
+                @method('DELETE')
+            </form>
+        @empty
+        @endforelse
+
+        <form action="{{ route('admin.apartments.update', $apartment) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="row">
@@ -30,6 +44,93 @@
                         <small id="helpId" class="form-text text-muted">Inserisci un titolo</small>
                     </div>
                 </div>
+
+                <div class="col-12 mb-3">
+                    <label for="images">Aggiungi immagini:</label>
+                    <input type="file" id="images" name="images[]" multiple><br><br>
+                </div>
+
+                <div class="col-12 mb-3">
+                    <h6>Gestisci immagini</h6>
+                    <div class="table-responsive">
+                        <table class="table table-info table-striped table-bordered border-dark align-middle text-center">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="text-uppercase">id</th>
+                                    <th scope="col" class="text-capitalize">Immagine</th>
+                                    <th scope="col" class="text-capitalize">principale</th>
+                                    <th scope="col" class="text-capitalize">azioni</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($apartment->images as $image)
+                                    <tr>
+                                        <td>{{ $image->id }}</td>
+                                        <td>
+                                            <img height="50px" src="{{ asset('storage/' . $image->path) }}" alt="">
+                                        </td>
+                                        <td>
+
+                                            @if ($image->is_main)
+                                                <span>Si</span>
+                                            @else
+                                                <button type="submit" class="btn btn-success"
+                                                    form="set_main_{{ $image->id }}">Imposta
+                                                    Principale</button>
+                                            @endif
+                                        </td>
+                                        <td>
+
+                                            <!-- Modal trigger button -->
+                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#modalId-{{ $image->id }}">
+                                                Elimina
+                                            </button>
+
+                                            <!-- Modal Body -->
+                                            <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+                                            <div class="modal fade" id="modalId-{{ $image->id }}" tabindex="-1"
+                                                role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm"
+                                                    role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="modalTitleId">
+                                                                Eliminare immagine #{{ $image->id }}
+                                                            </h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">Vuoi davvero eliminare questa immagine?
+                                                            Quest'azione non e' reversibile.</div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">
+                                                                Close
+                                                            </button>
+                                                            {{-- TODO Impostare la action per eliminare la foto --}}
+
+                                                            <button type="submit" class="btn btn-danger"
+                                                                form="delete_image_{{ $image->id }}">Elimina</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="4">
+                                            Non ci sono immagini
+                                        </td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
                 <div class="col-12">
                     {{-- description form --}}
                     <div class="form-floating mb-3">
@@ -87,8 +188,9 @@
                 <div class="col-12">
                     {{-- square meters form --}}
                     <div class="form-floating mb-3">
-                        <input type="number" id="square_meters" name="square_meters" class="form-control" placeholder=""
-                            id="floatingTextarea" value="{{ old('square_meters', $apartment->square_meters) }}" />
+                        <input type="number" id="square_meters" name="square_meters" class="form-control"
+                            placeholder="" id="floatingTextarea"
+                            value="{{ old('square_meters', $apartment->square_meters) }}" />
                         <label for="square_meters" class="text-capitalize">Metri Quadrati</label>
                         <small id="helpId" class="form-text text-muted">Inserisci la metratura</small>
                     </div>
