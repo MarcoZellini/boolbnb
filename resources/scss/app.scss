@@ -73,14 +73,42 @@ a {
     }
 
     &:active {
-        background-color: $bnb-accent!important;
-        color: $bnb-light!important;
+        background-color: $bnb-accent !important;
+        color: $bnb-light !important;
+        box-shadow: 0px 1px 5px $bnb-secondary;
+    }
+}
+
+.btn-bnb-secondary {
+    background-color: $bnb-light;
+    color: $bnb-medium;
+
+    &:hover {
+        background-color: $bnb-secondary;
+        border-color: $bnb-secondary !important;
+        color: $bnb-light;
+        box-shadow: 0px 1px 5px $bnb-secondary;
+    }
+
+    &:active {
+        background-color: $bnb-secondary !important;
+        border-color: $bnb-secondary !important;
+        color: $bnb-light !important;
+        box-shadow: 0px 1px 5px $bnb-secondary;
+    }
+}
+
+.bnb-btn-shadow {
+    &:hover {
+        box-shadow: 0px 1px 5px $bnb-secondary;
+    }
+
+    &:active {
         box-shadow: 0px 1px 5px $bnb-secondary;
     }
 }
 
 /*#endregion ANCHOR TAGS AND BTNS*/
-
 
 /*#region FORMS*/
 // CHECKBOXES STYLE
@@ -138,3 +166,90 @@ input {
 }
 
 /*#endregion FORMS*/
+
+/*#region MEDIA QUERIES*/
+
+/* BS MEDIA QUERIES BREACKPOINTS
+Small	sm	≥576px
+Medium	md	≥768px
+Large	lg	≥992px
+Extra large	xl	≥1200px
+Extra extra large	xxl	≥1400px 
+*/
+
+@media screen and (max-width: 425px) {
+
+    .bnb-service-col {
+        width: 100% !important;
+    }
+
+}
+
+@media screen and (max-width: 575.97px) {
+
+    .bnb-main-img,
+    .bnb-extra-img {
+        max-height: 250px;
+        border-radius: 0.375rem !important;
+    }
+
+}
+
+@media screen and (min-width: 575.98px) {
+
+    .bnb-main-img,
+    .bnb-extra-img {
+        max-height: 200px;
+    }
+
+    .bnb-mid-img {
+        border-radius: 0px !important;
+    }
+
+    .bnb-tr-img {
+        border-radius: 0px !important;
+        border-top-right-radius: 0.375rem !important;
+    }
+
+    .bnb-br-img {
+        border-radius: 0px !important;
+        border-bottom-right-radius: 0.375rem !important;
+    }
+
+}
+
+@media screen and (min-width: 768px) {
+
+    .bnb-main-img,
+    .bnb-extra-img {
+        max-height: 250px;
+    }
+
+}
+
+@media screen and (min-width: 992px) {
+
+    .bnb-main-img,
+    .bnb-extra-img {
+        max-height: 345px;
+    }
+
+}
+
+@media screen and (min-width: 1200px) {
+
+    .bnb-main-img,
+    .bnb-extra-img {
+        max-height: 400px;
+    }
+
+}
+
+@media screen and (min-width: 1400px) {
+    .bnb-main-img {
+        height: 450px;
+    }
+
+}
+
+/*#endregion MEDIA QUERIES*/
