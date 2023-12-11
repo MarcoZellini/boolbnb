@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\Storage;
 class ImageController extends Controller
 {
 
+    public function index(Apartment $apartment)
+    {
+        return view('admin.apartments.images.index', ['apartment' => $apartment]);
+    }
+
+
     public function setMain(Apartment $apartment, Image $image)
     {
         $main_image = Image::where('apartment_id', $apartment->id)->where('is_main', '1')->first();
@@ -22,7 +28,7 @@ class ImageController extends Controller
             'is_main' => 1
         ]);
 
-        return to_route('admin.apartments.edit', $apartment)->with('message', 'Immagine principale sostituita con successo.');
+        return to_route('admin.apartments.images.index', $apartment)->with('message', 'Immagine principale sostituita con successo.');
     }
 
     public function destroy(Apartment $apartment, Image $image)
@@ -39,6 +45,6 @@ class ImageController extends Controller
             ]);
         }
 
-        return to_route('admin.apartments.edit', $apartment)->with('message', 'Immagine eliminata con successo.');
+        return to_route('admin.apartments.images.index', $apartment)->with('message', 'Immagine eliminata con successo.');
     }
 }
