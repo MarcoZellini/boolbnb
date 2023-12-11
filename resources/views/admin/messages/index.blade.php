@@ -71,7 +71,7 @@
                                                             <strong>Email:</strong> {{ $message->email }}
                                                         </li>
                                                         <li>
-                                                            <strong>Telefono:</strong> {{ $message->phone }}
+                                                            <strong>Numero di telefono:</strong> {{ $message->phone }}
                                                         </li>
                                                     </ul>
                                                 </div>
