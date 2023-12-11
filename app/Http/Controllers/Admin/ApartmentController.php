@@ -143,6 +143,23 @@ class ApartmentController extends Controller
     {
         $val_data = $request->validated();
 
+        $GeocodeUrl = "https://api.tomtom.com/search/2/geocode/";
+        $TomtomKey = env('TOMTOM_KEY');
+        $address = str_replace(' ', '%20', $val_data['address']);
+
+        /*      dd($request->address); */
+
+        if ($request->has('address') && $request->address != $apartment->address) {
+            if (isset($val_data['address']) && $val_data['address'] !== null) {
+                $GeoResponse = Http::withoutVerifying()->get($GeocodeUrl . $address .  ".json?key=" . $TomtomKey);
+                if ($GeoResponse->successful()) {
+                    $cordinates = $GeoResponse['results'][0]['position'];
+                    $apartment->latitude = $cordinates['lat'];
+                    $apartment->longitude = $cordinates['lon'];
+                    $apartment->save();
+                }
+            }
+        }
 
         $request->validate([
             'services' => ['required', 'array', 'min:1'],

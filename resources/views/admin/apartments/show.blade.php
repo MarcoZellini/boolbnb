@@ -78,7 +78,7 @@
 
         <div class="row row-cols-1">
             <div class="col-12 mt-2 mb-3">
-                <a class="btn btn-primary rounded-circle border bnb-btn-shadow me-1"
+                <a class="btn btn-primary rounded-circle border bnb-btn-shadow bnb-btn-actions  me-1 "
                     href="{{ route('admin.apartments.index', $apartment) }}" role="button">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
@@ -86,7 +86,7 @@
                             d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z" />
                     </svg>
                 </a>
-                <a class="btn btn-success rounded-circle border bnb-btn-shadow me-1"
+                <a class="btn btn-success rounded-circle border bnb-btn-shadow bnb-btn-actions  me-1"
                     href="{{ route('admin.apartments.images.index', $apartment) }}" role="button">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-images" viewBox="0 0 16 16">
@@ -95,7 +95,7 @@
                             d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2M14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1M2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1h-10" />
                     </svg>
                 </a>
-                <a class="btn btn-warning rounded-circle border bnb-btn-shadow me-1"
+                <a class="btn btn-warning rounded-circle border bnb-btn-shadow bnb-btn-actions  me-1"
                     href="{{ route('admin.apartments.edit', $apartment->id) }}" role="button">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -106,7 +106,7 @@
                     </svg>
                 </a>
                 <!-- MODAL DELETE -->
-                <button type="button" class="btn btn-danger rounded-circle border bnb-btn-shadow me-1"
+                <button type="button" class="btn btn-danger rounded-circle border bnb-btn-shadow bnb-btn-actions  me-1"
                     data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $apartment->id }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-trash" viewBox="0 0 16 16">
