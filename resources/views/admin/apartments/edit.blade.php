@@ -7,15 +7,7 @@
             <h6>Compila il form per modificare l'appartamento!</h6>
         </div>
 
-        @if ($errors->any())
-            <div class="alert alert-danger" role="alert">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li><strong>Errore! </strong> {{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+
 
         <form action="{{ route('admin.apartments.update', $apartment) }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -27,7 +19,15 @@
                         <input type="text" class="form-control" name="title" id="title" placeholder=""
                             value="{{ old('title', $apartment->title) }}" />
                         <label for="title" class="text-capitalize">Titolo</label>
-                        <small id="helpId" class="form-text text-muted">Inserisci un titolo</small>
+                        <div class="d-flex justify-content-between">
+                            <small id="helpId" class="form-text text-muted">Inserisci un titolo</small>
+                            @if ($errors->get('title'))
+                                @foreach ($errors->get('title') as $error)
+                                    <small class="form-text text-danger ">{{ $error }}
+                                    </small>
+                                @endforeach
+                            @endif
+                        </div>
                     </div>
                 </div>
 
@@ -43,13 +43,19 @@
                 </div>
 
                 <div class="col-12 mb-3">
-                    <a class="btn btn-success" href="{{ route('admin.apartments.images.index', $apartment) }}"
+                    <a class="btn btn-bnb rounded-pill" href="{{ route('admin.apartments.images.index', $apartment) }}"
                         role="button">Gestisci Immagini</a>
                 </div>
 
                 <div class="col-12">
                     <label for="images" class="d-block mb-2">Aggiungi immagini:</label>
-                    <input type="file" id="images" name="images[]" multiple><br><br>
+                    <input type="file" id="images" class="custom-file-input w-100" name="images[]" multiple><br><br>
+                    @if ($errors->get('images'))
+                        @foreach ($errors->get('images') as $error)
+                            <small class="form-text text-danger ">{{ $error }}
+                            </small>
+                        @endforeach
+                    @endif
                 </div>
 
                 <div class="col-12 mb-3">
@@ -57,34 +63,53 @@
                     <div class="form-floating mb-3">
                         <textarea id="description" name="description" class="form-control" placeholder="" id="floatingTextarea">{{ old('description', $apartment->description) }}</textarea>
                         <label for="description" class="text-capitalize">Descrizione</label>
-                        <small id="helpId" class="form-text text-muted">Inserisci una descrizione</small>
+
+                        <div class="d-flex justify-content-between">
+                            <small id="helpId" class="form-text text-muted">Inserisci una descrizione</small>
+                            @if ($errors->get('description'))
+                                @foreach ($errors->get('description') as $error)
+                                    <small class="form-text text-danger ">{{ $error }}
+                                    </small>
+                                @endforeach
+                            @endif
+                        </div>
                     </div>
                 </div>
 
                 <div class="col-12 mb-3">
-                    <p class="fs-5">Seleziona i servizi</p>
+                    <div class="d-flex justify-content-between">
+                        <h6 class="fs-5">Seleziona i servizi</h6>
+                        @if ($errors->get('services'))
+                            @foreach ($errors->get('services') as $error)
+                                <small class="form-text text-danger">{{ $error }}
+                                </small>
+                            @endforeach
+                        @endif
+                    </div>
 
                     <div class="row justify-content-center px-3">
                         @foreach ($services as $service)
                             <div class="col-2 form-check form-check-inline my-2 d-flex-inline flex-grow-1">
                                 @if ($errors->any())
-                                    <input class="form-check-input me-2" type="checkbox" id="services[]" name="services[]"
-                                        value="{{ $service->id }}"
+                                    <input class="form-check-input me-2 services rounded-pill" type="checkbox"
+                                        id="service_{{ $service->id }}" name="services[]" value="{{ $service->id }}"
                                         {{ in_array($service->id, old('services', [])) ? 'checked' : '' }} />
                                 @else
-                                    <input class="form-check-input me-2" type="checkbox" id="services[]" name="services[]"
-                                        value="{{ $service->id }}"
+                                    <input class="form-check-input me-2 services rounded-pill" type="checkbox"
+                                        id="service_{{ $service->id }}" name="services[]" value="{{ $service->id }}"
                                         {{ $apartment->services->contains($service->id) ? 'checked' : '' }} />
                                 @endif
                                 <img style="height:20px" src="{{ asset($service->icon) }}" alt="">
-                                <label class="form-check-label" for="">{{ $service->name }}</label>
+                                <label class="form-check-label"
+                                    for="service_{{ $service->id }}">{{ $service->name }}</label>
                             </div>
                         @endforeach
                     </div>
+
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="rooms" class="form-label text-capitalize">Camere:</label>
-                    <output id="amount_rooms" name="amount_rooms" for="rooms">0</output>
+                    <output id="amount_rooms" name="amount_rooms" for="rooms">1</output>
 
                     <div class="d-flex align-items-center gap-2">
                         <span>1</span>
@@ -92,11 +117,20 @@
                             value="{{ old('rooms', $apartment->rooms) }}" oninput="amount_rooms.value=rooms.value">
                         <span>10</span>
                     </div>
-                    <small id="helpId" class="form-text text-muted">Inserisci il numero di stanze</small>
+                    <div class="d-flex justify-content-between">
+                        <small id="helpId" class="form-text text-muted">Inserisci il numero di stanze</small>
+
+                        @if ($errors->get('rooms'))
+                            @foreach ($errors->get('rooms') as $error)
+                                <small class="form-text text-danger ">{{ $error }}
+                                </small>
+                            @endforeach
+                        @endif
+                    </div>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="beds" class="form-label text-capitalize">Letti:</label>
-                    <output id="amount_beds" name="amount_beds" for="beds">0</output>
+                    <output id="amount_beds" name="amount_beds" for="beds">1</output>
 
                     <div class="d-flex align-items-center gap-2">
                         <span>1</span>
@@ -104,11 +138,20 @@
                             value="{{ old('beds', $apartment->beds) }}" oninput="amount_beds.value=beds.value">
                         <span>10</span>
                     </div>
-                    <small id="helpId" class="form-text text-muted">Inserisci il numero di letti</small>
+                    <div class="d-flex justify-content-between">
+                        <small id="helpId" class="form-text text-muted">Inserisci il numero di letti</small>
+
+                        @if ($errors->get('beds'))
+                            @foreach ($errors->get('beds') as $error)
+                                <small class="form-text text-danger ">{{ $error }}
+                                </small>
+                            @endforeach
+                        @endif
+                    </div>
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="bathrooms" class="form-label text-capitalize">Bagni:</label>
-                    <output id="amount_bathrooms" name="amount_bathrooms" for="bathrooms">0</output>
+                    <output id="amount_bathrooms" name="amount_bathrooms" for="bathrooms">1</output>
 
                     <div class="d-flex align-items-center gap-2">
                         <span>1</span>
@@ -117,7 +160,17 @@
                             oninput="amount_bathrooms.value=bathrooms.value">
                         <span>10</span>
                     </div>
-                    <small id="helpId" class="form-text text-muted">Inserisci il numero di bagni</small>
+
+                    <div class="d-flex justify-content-between">
+                        <small id="helpId" class="form-text text-muted">Inserisci il numero di bagni</small>
+
+                        @if ($errors->get('bathrooms'))
+                            @foreach ($errors->get('bathrooms') as $error)
+                                <small class="form-text text-danger ">{{ $error }}
+                                </small>
+                            @endforeach
+                        @endif
+                    </div>
                 </div>
                 <div class="col-12">
                     {{-- square meters form --}}
@@ -126,19 +179,39 @@
                             placeholder="" id="floatingTextarea"
                             value="{{ old('square_meters', $apartment->square_meters) }}" />
                         <label for="square_meters" class="text-capitalize">Metri Quadrati</label>
-                        <small id="helpId" class="form-text text-muted">Inserisci la metratura</small>
+
+                        <div class="d-flex justify-content-between">
+                            <small id="helpId" class="form-text text-muted">Inserisci la metratura</small>
+
+                            @if ($errors->get('square_meters'))
+                                @foreach ($errors->get('square_meters') as $error)
+                                    <small class="form-text text-danger ">{{ $error }}
+                                    </small>
+                                @endforeach
+                            @endif
+                        </div>
                     </div>
                 </div>
                 <div class="col-12">
                     {{-- address form --}}
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" name="address" id="address" placeholder=""
-                            value="{{ old('address', $apartment->address) }}" list="Suggested_Address" />
-                        <datalist id="Suggested_Address">
+                            value="{{ old('address', $apartment->address) }}" list="suggested_address" />
+
+                        <datalist id="suggested_address">
 
                         </datalist>
+
                         <label for="address" class="text-capitalize">Indirizzo</label>
-                        <small id="helpId" class="form-text text-muted">Inserisci la posizione</small>
+                        <div class="d-flex justify-content-between">
+                            <small id="helpId" class="form-text text-muted">Inserisci la posizione</small>
+                            @if ($errors->get('address'))
+                                @foreach ($errors->get('address') as $error)
+                                    <small class="form-text text-danger ">{{ $error }}
+                                    </small>
+                                @endforeach
+                            @endif
+                        </div>
                     </div>
                 </div>
 

@@ -92,9 +92,9 @@ return [
     'mac_address' => 'The :attribute field must be a valid MAC address.',
     'max' => [
         'array' => 'The :attribute field must not have more than :max items.',
-        'file' => 'The :attribute field must not be greater than :max kilobytes.',
-        'numeric' => 'The :attribute field must not be greater than :max.',
-        'string' => 'The :attribute field must not be greater than :max characters.',
+        'file' => 'il campo :attribute non puo essere più grande di :max kilobytes.',
+        'numeric' => 'il campo :attribute non puo essere più grande di :max.',
+        'string' => 'Il campo :attribute non deve contenere più di :max caratteri.',
     ],
     'max_digits' => 'The :attribute field must not have more than :max digits.',
     'mimes' => 'The :attribute field must be a file of type: :values.',
@@ -102,7 +102,7 @@ return [
     'min' => [
         'array' => 'The :attribute field must have at least :min items.',
         'file' => 'The :attribute field must be at least :min kilobytes.',
-        'numeric' => 'The :attribute field must be at least :min.',
+        'numeric' => 'il campo :attribute deve essere almeno :min.',
         // 'string' => 'The :attribute field must be at least :min characters.',
         'string' => 'Il campo :attribute deve essere lungo almeno :min caratteri.',
     ],
@@ -152,7 +152,7 @@ return [
     'starts_with' => 'The :attribute field must start with one of the following: :values.',
     'string' => 'The :attribute field must be a string.',
     'timezone' => 'The :attribute field must be a valid timezone.',
-    'unique' => 'The :attribute has already been taken.',
+    'unique' => 'il :attribute è stato già preso .',
     'uploaded' => 'The :attribute failed to upload.',
     'uppercase' => 'The :attribute field must be uppercase.',
     'url' => 'The :attribute field must be a valid URL.',
@@ -174,17 +174,17 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
+        /*       'attribute-name' => [
             'rule-name' => 'custom-message',
-        ],
+        ], */
 
-        'min' => [
+        /* 'min' => [
             'array' => 'Il campo :attribute deve contenere almeno :min valore/i.',
             'file' => 'Il campo :attribute deve avere una dimenzione minima di :min kilobytes.',
             'numeric' => 'Il valore minimo del campo :attribute deve essere :min.',
             'string' => 'Il campo :attribute deve essere lungo almeno :min caratteri.',
         ],
-    ],
+ */],
 
     /*
     |--------------------------------------------------------------------------
@@ -196,7 +196,14 @@ return [
     | of "email". This simply helps us make our message more expressive.
     |
     */
+    'attributes' => [
+        'title' => 'titolo',
+        'description' => 'descrizione',
+        'services' => 'servizi',
+        'rooms' => 'camere',
+        'beds' => 'letti',
+        'bathrooms' => 'bagni',
 
-    'attributes' => [],
+    ],
 
 ];
