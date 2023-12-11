@@ -13,7 +13,8 @@
                 {{-- SHOWS PLACEHOLDER IMAGE IF THE DB ENTRY IS EMPTY --}}
                 @if (count($apartment->images) == 0)
                     <img class="w-100 object-fit-cover rounded-start bnb-main-img shadow"
-                        src="https://picsum.photos/1400/1200" alt="Placeholder" style="border-radius: 0.375rem">
+                        src="{{ asset('storage/placeholders/placeholder.jpg') }}" alt="Placeholder"
+                        style="border-radius: 0.375rem">
                 @endif
 
                 {{-- FIND is_main IMAGE --}}

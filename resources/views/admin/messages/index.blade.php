@@ -19,8 +19,8 @@
         <div class="row row-cols-1 pt-2 gy-1">
             @forelse ($messages as $message)
                 <div class="col">
-                    <div class="card">
-                        <div class="card-body d-flex px-5">
+                    <div class="card border-0 border-top rounded-0">
+                        <div class="card-body d-flex px-0">
                             <div class="col-9">
                                 <h5 class="card-title">
                                     Apt. ID {{ $message->apartment_id }} - {{ $message->name }} {{ $message->lastname }}
@@ -33,8 +33,8 @@
                             </div>
                             <div class="col-3 d-flex justify-content-end align-items-center">
                                 <!-- MODAL DETAILS -->
-                                <button type="button" class="btn btn-light" data-bs-toggle="modal"
-                                    data-bs-target="#showModal-{{ $message->id }}">
+                                <button type="button" class="btn btn-light rounded-circle border bnb-btn-shadow"
+                                    data-bs-toggle="modal" data-bs-target="#showModal-{{ $message->id }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
                                         <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
@@ -48,17 +48,18 @@
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h1 class="modal-title fs-5" id="showModalLabel">
-                                                    Messaggio n. {{ $message->id }}: {{ $message->subject }}
+                                                    <strong>Oggetto:</strong> "{{ $message->subject }}"
                                                 </h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
                                                 <div class="mt-2">
-                                                    <h5>ID appartamento: {{ $message->apartment_id }}</h5>
+                                                    <h6><strong>Appartamento ID:
+                                                            {{ $message->apartment_id }}</h6>
                                                 </div>
                                                 <div class="mt-4">
-                                                    <h5>Dettagli interessato</h5>
+                                                    <h6><strong>Dettagli del mittente:</strong></h6>
                                                     <ul class="list-unstyled m-0">
                                                         <li>
                                                             Nome: {{ $message->name }}
@@ -75,7 +76,7 @@
                                                     </ul>
                                                 </div>
                                                 <div class="mt-4">
-                                                    <h5>Messaggio</h5>
+                                                    <h6><strong>Messaggio:</strong></h6>
                                                     {{ $message->message }}
                                                 </div>
                                             </div>
@@ -84,8 +85,8 @@
                                 </div>
 
                                 <!-- MODAL DELETE -->
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                    data-bs-target="#deleteModal-{{ $message->id }}">
+                                <button type="button" class="btn btn-danger rounded-circle ms-1 bnb-btn-shadow"
+                                    data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $message->id }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                         <path
