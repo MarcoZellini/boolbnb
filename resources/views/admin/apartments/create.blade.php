@@ -50,15 +50,7 @@
                     </div>
                 </div>
                 <div class="col-12 mb-3">
-                    <div class="d-flex justify-content-between">
-                        <h6 class="fs-5">Seleziona i servizi</h6>
-                        @if ($errors->get('services'))
-                            @foreach ($errors->get('services') as $error)
-                                <small class="form-text text-danger">{{ $error }}
-                                </small>
-                            @endforeach
-                        @endif
-                    </div>
+                    <h6 class="fs-5">Seleziona i servizi</h6>
 
                     <div class="row justify-content-center px-3 px-md-1">
                         @foreach ($services as $service)
@@ -73,19 +65,23 @@
 
                                 <div class="services_icons d-flex align-items-center ">
                                     <img style="height:20px" src="{{ asset($service->icon) }}" alt="">
-                                    <label class="form-check-label"
+                                    <label class="form-check-label me-2"
                                         for="service_{{ $service->id }}">{{ $service->name }}</label>
                                 </div>
 
                             </div>
                         @endforeach
                     </div>
-                    @if ($errors->get('services'))
-                        @foreach ($errors->get('services') as $error)
-                            <small class="form-text text-danger ">{{ $error }}
-                            </small>
-                        @endforeach
-                    @endif
+                    <div class="d-flex justify-content-between">
+                        <small id="helpId" class="form-text text-muted">Inserisci almeno un servizio</small>
+                        @if ($errors->get('services'))
+                            @foreach ($errors->get('services') as $error)
+                                <small class="form-text text-danger">{{ $error }}
+                                </small>
+                            @endforeach
+                        @endif
+                    </div>
+
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="rooms" class="form-label text-capitalize">Camere: </label>
