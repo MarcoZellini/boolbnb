@@ -170,7 +170,7 @@ class ApartmentController extends Controller
 
         $apartment->services()->sync($request->services);
 
-        return to_route('admin.apartments.index')->with('message', 'Aggiornamento effettuato con successo!');
+        return to_route('admin.apartments.index')->with('message', "Aggiornamento dell'appartamento $apartment->title  effettuato con successo!");
     }
 
     /**
