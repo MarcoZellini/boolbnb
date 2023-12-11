@@ -64,7 +64,7 @@
                         </div>
                     </div>
                     <div class="d-flex align-items-center justify-content-end">
-                        <a class="btn btn-light rounded-circle border bnb-btn-shadow"
+                        <a class="btn btn-light rounded-circle border bnb-btn-shadow me-1"
                             href="{{ route('admin.apartments.show', $apartment->id) }}" role="button">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-eye-fill" viewBox="0 0 16 16">
