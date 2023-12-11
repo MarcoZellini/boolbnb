@@ -59,12 +59,6 @@ class ApartmentController extends Controller
             }
         }
 
-        $request->validate([
-            'services' => ['required', 'array', 'min:1'],
-            'images' => ['nullable', 'array'],
-            'images.*' => ['image', 'mimes:jpeg,jpg,png', 'max:1024'],
-        ]);
-
         $apartment = Apartment::create([
             'user_id' => Auth::user()->id,
             'title' => $val_data['title'],
@@ -141,31 +135,29 @@ class ApartmentController extends Controller
      */
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {
-        $val_data = $request->validated();
+        if ($apartment->user_id === Auth::id()) {
 
+            $val_data = $request->validated();
 
-        $request->validate([
-            'services' => ['required', 'array', 'min:1'],
-            'images' => ['nullable', 'array'],
-            'images.*' => ['image', 'mimes:jpeg,jpg,png', 'max:1024'],
-        ]);
+            $apartment->update($val_data);
 
-        $apartment->update($val_data);
-
-        if ($images = $request->images) {
-            foreach ($images as $image) {
-                $path = Storage::put('apartments', $image);
-                Image::create([
-                    'apartment_id' => $apartment->id,
-                    'path' => $path,
-                    'is_main' => Image::where('apartment_id', $apartment->id)->get()->count() < 1 ? 1 : 0
-                ]);
+            if ($images = $request->images) {
+                foreach ($images as $image) {
+                    $path = Storage::put('apartments', $image);
+                    Image::create([
+                        'apartment_id' => $apartment->id,
+                        'path' => $path,
+                        'is_main' => Image::where('apartment_id', $apartment->id)->get()->count() < 1 ? 1 : 0
+                    ]);
+                }
             }
+
+            $apartment->services()->sync($request->services);
+
+            return to_route('admin.apartments.index')->with('message', "Aggiornamento dell'appartamento $apartment->title  effettuato con successo!");
+        } else {
+            abort(403);
         }
-
-        $apartment->services()->sync($request->services);
-
-        return to_route('admin.apartments.index')->with('message', "Aggiornamento dell'appartamento $apartment->title  effettuato con successo!");
     }
 
     /**

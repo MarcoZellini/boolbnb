@@ -31,7 +31,10 @@ class StoreApartmentRequest extends FormRequest
             'bathrooms' => ['bail', 'nullable', 'integer', 'min:1', 'max:10'],
             'square_meters' => ['bail', 'nullable', 'integer', 'max:1000'],
             'address' => ['bail', 'nullable', 'string', 'max: 255'],
-            'is_visible' => ['bail', 'nullable', 'boolean']
+            'is_visible' => ['bail', 'nullable', 'boolean'],
+            'services' => ['required', 'array', 'min:1'],
+            'images' => ['nullable', 'array'],
+            'images.*' => ['image', 'mimes:jpeg,jpg,png', 'max:1024'],
         ];
     }
 }
