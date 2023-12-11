@@ -1,5 +1,8 @@
 /* Dom elements */
-const SuggestedAddress = document.getElementById('Suggested_Address');
+const suggestedAddress = document.getElementById('suggested_address');
+const addressInput = document.getElementById('address');
+
+let selectedOption = false;
 
 function searchAddress(query) {
     const apiKey = 'zGXu3iFl86vJs8yD3Uq6OGoANFEGzFkS';
@@ -8,34 +11,47 @@ function searchAddress(query) {
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
-            SuggestedAddress.innerHTML = "";
+            /*      suggestedAddress.innerHTML = ""; */
+            let hints = data.results;
 
-
-            let hints = data.results
             hints.forEach((hint, i) => {
-                let position = hint.position
-                let address = hint.address.freeformAddress
+                let address = hint.address.freeformAddress;
                 let option = document.createElement('option');
-                option.setAttribute('id', 'option' + i)
+                option.setAttribute('id', 'option' + i);
                 option.value = address;
                 option.innerHTML = address;
-                SuggestedAddress.appendChild(option);
-
+                suggestedAddress.appendChild(option);
             });
 
+            selectedOption = false;
         })
         .catch(error => {
             console.error('Errore nella chiamata API:', error);
         });
 }
 
-document.getElementById('address').addEventListener('keyup', function (event) {
+addressInput.addEventListener('keyup', function (event) {
     const inputValue = event.target.value;
+    console.log(inputValue.length > 2 && !selectedOption);
 
-    if (inputValue.length > 2) {
+    if (inputValue.length > 2 && !selectedOption) {
         setTimeout(() => {
             searchAddress(inputValue);
         }, 200);
     }
-
 });
+
+addressInput.addEventListener('change', function () {
+    selectedOption = true;
+
+    suggestedAddress.innerHTML = "";
+    console.log('fine', selectedOption);
+});
+
+addressInput.addEventListener('keydown', function (event) {
+    const key = event.key;
+    if (key === "Backspace" || key === "Delete") {
+        selectedOption = false
+        console.log('inizio', selectedOption);
+    }
+})

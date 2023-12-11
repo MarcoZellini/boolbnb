@@ -44,8 +44,9 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::resource('/apartments', ApartmentController::class);
     Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
     Route::delete('/messages/{message}', [MessageController::class, 'destroy'])->name('messages.delete');
-    Route::put('/apartments/{apartment}/image/{image}', [ImageController::class, 'setMain'])->name('apartments.image.setMain');
-    Route::delete('/apartments/{apartment}/image/{image}', [ImageController::class, 'destroy'])->name('apartments.image.delete');
+    Route::put('/apartments/{apartment}/images/{image}', [ImageController::class, 'setMain'])->name('apartments.image.setMain');
+    Route::delete('/apartments/{apartment}/images/{image}', [ImageController::class, 'destroy'])->name('apartments.image.delete');
+    Route::get('/apartments/{apartment}/images', [ImageController::class, 'index'])->name('apartments.images.index');
 });
 
 require __DIR__ . '/auth.php';
