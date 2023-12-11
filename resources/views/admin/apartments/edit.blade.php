@@ -151,8 +151,8 @@
                                         value="{{ $service->id }}"
                                         {{ in_array($service->id, old('services', [])) ? 'checked' : '' }} />
                                 @else
-                                    <input class="form-check-input me-2" type="checkbox" id="services[]" name="services[]"
-                                        value="{{ $service->id }}"
+                                    <input class="form-check-input me-2" type="checkbox" id="services[]"
+                                        name="services[]" value="{{ $service->id }}"
                                         {{ $apartment->services->contains($service->id) ? 'checked' : '' }} />
                                 @endif
                                 <img style="height:20px" src="{{ asset($service->icon) }}" alt="">
@@ -167,8 +167,9 @@
 
                     <div class="d-flex align-items-center gap-2">
                         <span>1</span>
-                        <input type="range" class="slider" id="rooms" name="rooms" min="1" max="10"
-                            value="{{ old('rooms', $apartment->rooms) }}" oninput="amount_rooms.value=rooms.value">
+                        <input type="range" class="slider" id="rooms" name="rooms" min="1"
+                            max="10" value="{{ old('rooms', $apartment->rooms) }}"
+                            oninput="amount_rooms.value=rooms.value">
                         <span>10</span>
                     </div>
                     <small id="helpId" class="form-text text-muted">Inserisci il numero di stanze</small>
@@ -179,8 +180,9 @@
 
                     <div class="d-flex align-items-center gap-2">
                         <span>1</span>
-                        <input type="range" class="slider" id="beds" name="beds" min="1" max="10"
-                            value="{{ old('beds', $apartment->beds) }}" oninput="amount_beds.value=beds.value">
+                        <input type="range" class="slider" id="beds" name="beds" min="1"
+                            max="10" value="{{ old('beds', $apartment->beds) }}"
+                            oninput="amount_beds.value=beds.value">
                         <span>10</span>
                     </div>
                     <small id="helpId" class="form-text text-muted">Inserisci il numero di letti</small>
@@ -191,8 +193,8 @@
 
                     <div class="d-flex align-items-center gap-2">
                         <span>1</span>
-                        <input type="range" class="slider" id="bathrooms" name="bathrooms" min="1" max="10"
-                            value="{{ old('bathrooms', $apartment->bathrooms) }}"
+                        <input type="range" class="slider" id="bathrooms" name="bathrooms" min="1"
+                            max="10" value="{{ old('bathrooms', $apartment->bathrooms) }}"
                             oninput="amount_bathrooms.value=bathrooms.value">
                         <span>10</span>
                     </div>
@@ -212,7 +214,10 @@
                     {{-- address form --}}
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" name="address" id="address" placeholder=""
-                            value="{{ old('address', $apartment->address) }}" />
+                            value="{{ old('address', $apartment->address) }}" list="Suggested_Address" />
+                        <datalist id="Suggested_Address">
+
+                        </datalist>
                         <label for="address" class="text-capitalize">Indirizzo</label>
                         <small id="helpId" class="form-text text-muted">Inserisci la posizione</small>
                     </div>

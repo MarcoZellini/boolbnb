@@ -24,9 +24,9 @@
         </div>
 
         <div class="row mt-3">
-            <div class="col-4">
-                <div class="card">
-                    <div class="card-body">
+            <div class="col-4 ">
+                <div class="card h-100 ">
+                    <div class="card-body h-100">
                         <h4 class="bnb-color">
                             <i class="fa-solid fa-building"></i> Totale Appartamenti registrati
                         </h4>
@@ -34,7 +34,7 @@
                     </div>
                     <div class="card-footer d-flex align-items-center flex-row-reverse">
 
-                        <a href="#" class="btn btn-bnb rounded-pill">
+                        <a href="{{ route('admin.apartments.index') }}" class="btn btn-bnb rounded-pill">
                             vai ai tuoi appartamenti
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
@@ -43,8 +43,8 @@
             </div>
 
             <div class="col-4">
-                <div class="card">
-                    <div class="card-body">
+                <div class="card h-100">
+                    <div class="card-body h-100">
                         <h4 class="bnb-color">
                             <i class="fa-regular fa-comments"></i>
                             Totale Messaggi
@@ -53,7 +53,7 @@
                     </div>
                     <div class="card-footer d-flex align-items-center flex-row-reverse">
 
-                        <a href="#" class="btn btn-bnb rounded-pill">
+                        <a href="{{ route('admin.messages.index') }}" class="btn btn-bnb rounded-pill">
                             vai ai tuoi appartamenti
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>

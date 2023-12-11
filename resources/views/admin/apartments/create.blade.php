@@ -50,15 +50,16 @@
                             <div
                                 class="col-4 col-md-3 col-lg-2 form-check form-check-inline my-2 d-flex-inline flex-grow-1 bnb-service-col position-relative">
 
-                                <input class="form-check-input me-2 services rounded-pill" type="checkbox" id="services[]"
-                                    name="services[]" value="{{ $service->id }}"
-                                    {{ in_array($service->id, old('services', [])) ? 'checked' : '' }} />
+                                <input class="form-check-input me-2 services rounded-pill" type="checkbox"
+                                    id="service_{{ $service->id }}" name="services[]" value="{{ $service->id }}"
+                                    {{ in_array($service->id, old('services', [])) ? 'checked' : '' }} />{{-- "services[]" --}}
                                 {{-- TODO: FINERE I CHECKBOX + RIPROPORRE IL LAYOUT IN EDIT  --}}
                                 {{-- <i class="fa-regular fa-circle-check"></i> --}}
 
                                 <div class="services_icons d-flex align-items-center ">
                                     <img style="height:20px" src="{{ asset($service->icon) }}" alt="">
-                                    <label class="form-check-label" for="">{{ $service->name }}</label>
+                                    <label class="form-check-label"
+                                        for="service_{{ $service->id }}">{{ $service->name }}</label>
                                 </div>
                             </div>
                         @endforeach
