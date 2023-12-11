@@ -11,7 +11,7 @@ function searchAddress(query) {
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
-            /*      suggestedAddress.innerHTML = ""; */
+            suggestedAddress.innerHTML = "";
             let hints = data.results;
 
             hints.forEach((hint, i) => {
@@ -32,7 +32,6 @@ function searchAddress(query) {
 
 addressInput.addEventListener('keyup', function (event) {
     const inputValue = event.target.value;
-    console.log(inputValue.length > 2 && !selectedOption);
 
     if (inputValue.length > 2 && !selectedOption) {
         setTimeout(() => {
@@ -43,15 +42,12 @@ addressInput.addEventListener('keyup', function (event) {
 
 addressInput.addEventListener('change', function () {
     selectedOption = true;
-
     suggestedAddress.innerHTML = "";
-    console.log('fine', selectedOption);
 });
 
 addressInput.addEventListener('keydown', function (event) {
     const key = event.key;
     if (key === "Backspace" || key === "Delete") {
         selectedOption = false
-        console.log('inizio', selectedOption);
     }
 })

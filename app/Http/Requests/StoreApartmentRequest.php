@@ -24,14 +24,14 @@ class StoreApartmentRequest extends FormRequest
     {
         return [
             'user_id' => [Rule::exists('users', 'id')],
-            'title' => ['required', 'string', 'min:3', 'max:100', Rule::unique('apartments')],
-            'description' => ['nullable', 'string', 'max:300'],
-            'rooms' => ['nullable', 'integer', 'min:1', 'max:10'],
-            'beds' => ['nullable', 'integer', 'min:1', 'max:10'],
-            'bathrooms' => ['nullable', 'integer', 'min:1', 'max:10'],
-            'square_meters' => ['nullable', 'integer', 'max:1000'],
-            'address' => ['nullable', 'string', 'max: 255'],
-            'is_visible' => ['nullable', 'boolean']
+            'title' => ['bail', 'required', 'string', 'min:3', 'max:100', Rule::unique('apartments')],
+            'description' => ['bail', 'nullable', 'string', 'max:300'],
+            'rooms' => ['bail', 'nullable', 'integer', 'min:1', 'max:10'],
+            'beds' => ['bail', 'nullable', 'integer', 'min:1', 'max:10'],
+            'bathrooms' => ['bail', 'nullable', 'integer', 'min:1', 'max:10'],
+            'square_meters' => ['bail', 'nullable', 'integer', 'max:1000'],
+            'address' => ['bail', 'nullable', 'string', 'max: 255'],
+            'is_visible' => ['bail', 'nullable', 'boolean']
         ];
     }
 }
