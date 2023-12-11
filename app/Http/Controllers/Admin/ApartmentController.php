@@ -40,11 +40,6 @@ class ApartmentController extends Controller
      */
     public function store(StoreApartmentRequest $request)
     {
-        $cordinates = [
-            'lat' => 0.0,
-            'lon' => 0.0,
-        ];
-
         $val_data = $request->validated();
 
         $cordinates = [

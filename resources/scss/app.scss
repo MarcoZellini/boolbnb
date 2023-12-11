@@ -27,26 +27,33 @@ body {
 /*#endregion GLOBAL RULES*/
 
 /*#region NAVBAR*/
-.nav-link-bnb {
-    font-weight: bold !important;
-    border: 1px solid transparent;
-    display: inline-block;
-    white-space: nowrap;
-    width: auto;
-    border-radius: 100px;
-    line-height: 2;
-    margin: 0;
-    padding: 5px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: 1.25rem;
-    word-break: break-word;
-    transition: background-color 0.2s ease-in-out;
 
-    &:hover {
-        background-color: $bnb-nav-btn-hover;
+nav {
+    box-shadow: 0px -4px 15px rgba(176, 176, 176, 0.6431372549);
+
+    .nav-link-bnb {
+        font-weight: bold !important;
+        border: 1px solid transparent;
+        display: inline-block;
+        white-space: nowrap;
+        width: auto;
+        border-radius: 100px;
+        line-height: 2;
+        margin: 0;
+        padding: 5px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 1.25rem;
+        word-break: break-word;
+        transition: background-color 0.2s ease-in-out;
+
+        &:hover {
+            background-color: $bnb-nav-btn-hover;
+        }
     }
 }
+
+
 
 // DROPDOWN
 .dropdown-bnb {
@@ -305,6 +312,25 @@ output {
 }
 
 /*#endregion FORMS*/
+
+
+/* #region main */
+
+#site_main {
+    min-height: calc(100vh - 140px);
+}
+
+/* #endregion main */
+
+
+/* #region footer */
+
+#site_footer {
+
+    box-shadow: -1px 0px 15px rgba(176, 176, 176, 0.6431372549);
+}
+
+/* #endregion footer */
 
 /*#region MEDIA QUERIES*/
 

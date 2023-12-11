@@ -31,8 +31,6 @@
                     </div>
                 </div>
 
-
-
                 <div class="col-12 mb-3">
                     <label for="images" class="text-capitalize d-block">Immagini</label>
 
