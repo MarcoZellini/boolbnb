@@ -79,19 +79,12 @@
                 </div>
 
                 <div class="col-12 mb-3">
-                    <div class="d-flex justify-content-between">
-                        <h6 class="fs-5">Seleziona i servizi</h6>
-                        @if ($errors->has('services'))
-                            @foreach ($errors->get('services') as $error)
-                                <small class="form-text text-danger">{{ $error }}
-                                </small>
-                            @endforeach
-                        @endif
-                    </div>
+                    <h6 class="fs-5">Seleziona i servizi</h6>
 
                     <div class="row justify-content-center px-3">
                         @foreach ($services as $service)
-                            <div class="col-2 form-check form-check-inline my-2 d-flex-inline flex-grow-1">
+                            <div
+                                class="col-4 col-md-3 col-lg-2 form-check form-check-inline my-2 d-flex-inline flex-grow-1 bnb-service-col position-relative">
                                 @if ($errors->any())
                                     <input class="form-check-input me-2 services rounded-pill" type="checkbox"
                                         id="service_{{ $service->id }}" name="services[]" value="{{ $service->id }}"
@@ -102,10 +95,19 @@
                                         {{ $apartment->services->contains($service->id) ? 'checked' : '' }} />
                                 @endif
                                 <img style="height:20px" src="{{ asset($service->icon) }}" alt="">
-                                <label class="form-check-label"
+                                <label class="form-check-label me-2"
                                     for="service_{{ $service->id }}">{{ $service->name }}</label>
                             </div>
                         @endforeach
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <small id="helpId" class="form-text text-muted">Inserisci almeno un servizio</small>
+                        @if ($errors->get('services'))
+                            @foreach ($errors->get('services') as $error)
+                                <small class="form-text text-danger">{{ $error }}
+                                </small>
+                            @endforeach
+                        @endif
                     </div>
 
                 </div>
@@ -136,8 +138,9 @@
 
                     <div class="d-flex align-items-center gap-2">
                         <span>1</span>
-                        <input type="range" class="slider" id="beds" name="beds" min="1" max="10"
-                            value="{{ old('beds', $apartment->beds) }}" oninput="amount_beds.value=beds.value">
+                        <input type="range" class="slider" id="beds" name="beds" min="1"
+                            max="10" value="{{ old('beds', $apartment->beds) }}"
+                            oninput="amount_beds.value=beds.value">
                         <span>10</span>
                     </div>
                     <div class="d-flex justify-content-between">
