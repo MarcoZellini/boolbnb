@@ -5,8 +5,8 @@
 
         <h1>Lista appartamenti</h1>
 
-        <div class="my-4 text-end">
-            <a class="btn btn-primary d-flex d-inline-flex align-items-center gap-1"
+        <div class="my-4 d-flex justify-content-end">
+            <a class="btn btn-bnb mt-2 rounded-pill d-flex justify-content-center align-items-center"
                 href="{{ route('admin.apartments.create') }}" role="button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-plus-circle" viewBox="0 0 16 16">
@@ -14,7 +14,7 @@
                     <path
                         d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
                 </svg>
-                Aggiungi Appartamento
+                <span class="ms-2">Aggiungi Appartamento</span>
             </a>
         </div>
 
@@ -30,7 +30,7 @@
 
         @forelse ($apartments as $apartment)
             <div class="card border-0 border-top rounded-0">
-                <div class="card-body row row-cols-1 row-cols-md-5 px-5">
+                <div class="card-body row row-cols-1 row-cols-md-5 justify-content-between px-0">
                     <div class="d-flex align-items-center">
                         @if ($apartment->images->where('is_main', true)->first()?->path)
                             <img style="height:60px"
@@ -63,15 +63,14 @@
                             {{ $apartment->is_visible ? 'Si' : 'No' }}
                         </div>
                     </div>
-                    <div class="d-flex align-items-center">
-                        <a class="btn btn-primary rounded-circle border bnb-btn-shadow me-1"
+                    <div class="d-flex align-items-center justify-content-end">
+                        <a class="btn btn-light rounded-circle border bnb-btn-shadow"
                             href="{{ route('admin.apartments.show', $apartment->id) }}" role="button">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-eye" viewBox="0 0 16 16">
+                                class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
                                 <path
-                                    d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
-                                <path
-                                    d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                                    d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
                             </svg>
                         </a>
                         <a class="btn btn-success rounded-circle border bnb-btn-shadow me-1"
@@ -94,7 +93,7 @@
                             </svg>
                         </a>
                         <!-- MODAL DELETE -->
-                        <button type="button" class="btn btn-danger rounded-circle border bnb-btn-shadow me-1"
+                        <button type="button" class="btn btn-danger rounded-circle border bnb-btn-shadow ms-1"
                             data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $apartment->id }}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-trash" viewBox="0 0 16 16">
@@ -116,21 +115,14 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FF0000"
-                                            class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
-                                            <path
-                                                d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
-                                        </svg>
                                         <span class="mx-1">
-                                            <strong>Attenzione</strong>: questa azione è
-                                            irreversibile e verranno eliminati immagini e messaggi
-                                            correlati a questo appartamento
+                                            <i class="fa-solid fa-circle-exclamation fa-lg" style="color: #e00b41;"></i>
+                                            <span class="mx-1">
+                                                <strong>Attenzione</strong>: questa azione è
+                                                irreversibile e verranno eliminati immagini e messaggi
+                                                correlati a questo appartamento
+                                            </span>
                                         </span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FF0000"
-                                            class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
-                                            <path
-                                                d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
-                                        </svg>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"

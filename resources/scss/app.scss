@@ -118,6 +118,23 @@ a {
 
 /*#endregion ANCHOR TAGS AND BTNS*/
 
+/*#region PAGINATION*/
+
+.pagination {
+
+    .page-item.active>.page-link {
+        background-color: $bnb-primary;
+        border: 1px solid $bnb-primary;
+        color: $bnb-light;
+    }
+
+    .page-link {
+        color: $bnb-primary;
+    }
+}
+
+/*#endregion PAGINATION*/
+
 /*#region FORMS*/
 // CHECKBOXES STYLE
 .form-check-input {
