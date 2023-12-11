@@ -110,7 +110,14 @@ class ApartmentController extends Controller
     {
         if ($apartment->user_id === Auth::id()) {
             $services = Service::all();
-            return view('admin.apartments.show', ['apartment' => $apartment, 'services' => $services]);
+
+            // STYLE CLASSES ARRAY
+            $styleClasses = ['bnb-mid-img', 'bnb-tr-img', 'bnb-mid-img', 'bnb-br-img'];
+
+            // STYLE CLASSES INDEX
+            $styleIndex = 0;
+
+            return view('admin.apartments.show', ['apartment' => $apartment, 'services' => $services], compact('styleClasses', 'styleIndex'));
         } else {
             abort(403);
         }

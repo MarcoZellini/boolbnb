@@ -6,48 +6,65 @@
 
         <div class="mt-4 row p-2 flex-column flex-sm-row">
 
-            <div class="{{ count($apartment->images) == 5 ? 'col-12 col-sm-8' : 'col-12' }} m-0 p-1 pe-sm-1">
-                <img class="w-100 object-fit-cover rounded-start bnb-main-img shadow"
-                    src="{{ count($apartment->images) == 0 ? 'https://picsum.photos/1400/1200' : URL::asset('storage/' . $apartment->images[0]['path']) }}"
-                    alt="" style="{{ count($apartment->images) < 5 ? 'border-radius: 0.375rem' : '' }}">
+            <div class="{{ count($apartment->images) == 5 ? 'col-12 col-sm-8' : 'col-12' }} m-0 p-1 ">
+
+                {{-- MAIN IMAGE --}}
+
+                {{-- SHOWS PLACEHOLDER IMAGE IF THE DB ENTRY IS EMPTY --}}
+                @if (count($apartment->images) == 0)
+                    <img class="w-100 object-fit-cover rounded-start bnb-main-img shadow"
+                        src="https://picsum.photos/1400/1200" alt="Placeholder" style="border-radius: 0.375rem">
+                @endif
+
+                {{-- FIND is_main IMAGE --}}
+                @foreach ($apartment->images as $image)
+                    @if ($image->is_main)
+                        {{-- IF THERE ARE LESS THAN 5 IMAGES THE is_main IMAGE TAKES THE ENTIRE AVAIABLE SPACE AND GETS ROUNDED CORNERS --}}
+                        <img class="w-100 object-fit-cover rounded-start bnb-main-img shadow"
+                            src="{{ URL::asset('storage/' . $image->path) }}" alt="{{ $apartment->title }}"
+                            style="{{ count($apartment->images) < 5 ? 'border-radius: 0.375rem' : '' }}">
+                    @endif
+                @endforeach
+
             </div>
 
+            {{-- OTHER IMAGES --}}
+
+            {{-- IF THERE ARE 5 IMAGES APPLIES STYLE BASED ON THE POSITION THE IMAGE SHOULD TAKE ON THE PAGE --}}
             @if (count($apartment->images) > 1 && count($apartment->images) == 5)
                 <div class="col col-sm-4 row align-items-center m-0 p-0">
 
-                    <div class="col-6 m-0 p-1 px-sm-1 pb-sm-1 h-50">
-                        <img class="h-100 img-fluid object-fit-cover rounded bnb-mid-img shadow"
-                            src="{{ URL::asset('storage/' . $apartment->images[1]['path']) }}" alt="">
-                    </div>
+                    {{-- LOOPS THE IMAGES... --}}
+                    @foreach ($apartment->images as $image)
+                        {{-- FIND THE IMAGES THAT ARE NOT is_main --}}
+                        @if (!$image->is_main)
+                            {{-- AND APPLIES STYLE --}}
+                            @php
+                                $styleClass = $styleClasses[$styleIndex];
 
-                    <div class="col-6 m-0 p-1 ps-sm-1 pb-sm-1 h-50">
-                        <img class="h-100 img-fluid object-fit-cover rounded bnb-tr-img shadow"
-                            src="{{ URL::asset('storage/' . $apartment->images[2]['path']) }}" alt=""
-                            style="">
-                    </div>
+                                // INCREASES THE STYLE INDEX FOR THE NEX ITERATION
+                                $styleIndex++;
+                            @endphp
 
-                    <div class="col-6 m-0 p-1 px-sm-1 pt-sm-1 h-50">
-                        <img class="h-100 img-fluid object-fit-cover rounded bnb-mid-img shadow"
-                            src="{{ URL::asset('storage/' . $apartment->images[3]['path']) }}" alt="">
-                    </div>
-
-                    <div class="col-6 m-0 p-1 ps-sm-1 pt-sm-1 h-50">
-                        <img class="h-100 img-fluid object-fit-cover rounded bnb-br-img shadow"
-                            src="{{ URL::asset('storage/' . $apartment->images[4]['path']) }}" alt=""
-                            style="">
-                    </div>
-
+                            {{-- APPLIES PADDING CLASSES BASED ON THE LOOP ITERATION --}}
+                            <div class="col-6 m-0 p-1 h-50">
+                                <img class="h-100 img-fluid object-fit-cover rounded {{ $styleClass }} shadow"
+                                    src="{{ URL::asset('storage/' . $image->path) }}" alt="{{ $apartment->title }}">
+                            </div>
+                        @endif
+                    @endforeach
                 </div>
             @endif
 
+            {{-- IF THERE ARE LESS THAN 5 IMAGES SHOWS THEM UNDER THE "is_main" IMAGE --}}
             @if (count($apartment->images) < 5)
                 <div class="col row align-items-center m-0 p-0">
 
-                    @foreach ($apartment->images as $index => $image)
-                        @if ($index > 0)
-                            <div class="col m-0 p-1 px-sm-1 pb-sm-1">
+                    @foreach ($apartment->images as $image)
+                        @if (!$image->is_main)
+                            <div class="col m-0 p-1">
                                 <img class="w-100 img-fluid object-fit-cover shadow bnb-extra-img"
-                                    src="{{ URL::asset('storage/' . $image->path) }}" alt=""
+                                    src="{{ URL::asset('storage/' . $image->path) }}" alt="{{ $apartment->title }}"
                                     style="border-radius: 0.375rem;">
                             </div>
                         @endif
