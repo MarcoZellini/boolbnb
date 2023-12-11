@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="container py-4">
+    <div class="container mt-4">
 
         <h1>Tutti i messaggi</h1>
 
