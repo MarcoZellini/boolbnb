@@ -59,12 +59,6 @@ class ApartmentController extends Controller
             }
         }
 
-        $request->validate([
-            'services' => ['required', 'array', 'min:1'],
-            'images' => ['nullable', 'array'],
-            'images.*' => ['image', 'mimes:jpeg,jpg,png', 'max:1024'],
-        ]);
-
         $apartment = Apartment::create([
             'user_id' => Auth::user()->id,
             'title' => $val_data['title'],
@@ -141,48 +135,46 @@ class ApartmentController extends Controller
      */
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {
-        $val_data = $request->validated();
+        if ($apartment->user_id === Auth::id()) {
 
-        $GeocodeUrl = "https://api.tomtom.com/search/2/geocode/";
-        $TomtomKey = env('TOMTOM_KEY');
-        $address = str_replace(' ', '%20', $val_data['address']);
+            $val_data = $request->validated();
+            $GeocodeUrl = "https://api.tomtom.com/search/2/geocode/";
+            $TomtomKey = env('TOMTOM_KEY');
+            $address = str_replace(' ', '%20', $val_data['address']);
 
-        /*      dd($request->address); */
+            /*      dd($request->address); */
 
-        if ($request->has('address') && $request->address != $apartment->address) {
-            if (isset($val_data['address']) && $val_data['address'] !== null) {
-                $GeoResponse = Http::withoutVerifying()->get($GeocodeUrl . $address .  ".json?key=" . $TomtomKey);
-                if ($GeoResponse->successful()) {
-                    $cordinates = $GeoResponse['results'][0]['position'];
-                    $apartment->latitude = $cordinates['lat'];
-                    $apartment->longitude = $cordinates['lon'];
-                    $apartment->save();
+            if ($request->has('address') && $request->address != $apartment->address) {
+                if (isset($val_data['address']) && $val_data['address'] !== null) {
+                    $GeoResponse = Http::withoutVerifying()->get($GeocodeUrl . $address .  ".json?key=" . $TomtomKey);
+                    if ($GeoResponse->successful()) {
+                        $cordinates = $GeoResponse['results'][0]['position'];
+                        $apartment->latitude = $cordinates['lat'];
+                        $apartment->longitude = $cordinates['lon'];
+                        $apartment->save();
+                    }
                 }
             }
-        }
 
-        $request->validate([
-            'services' => ['required', 'array', 'min:1'],
-            'images' => ['nullable', 'array'],
-            'images.*' => ['image', 'mimes:jpeg,jpg,png', 'max:1024'],
-        ]);
+            $apartment->update($val_data);
 
-        $apartment->update($val_data);
-
-        if ($images = $request->images) {
-            foreach ($images as $image) {
-                $path = Storage::put('apartments', $image);
-                Image::create([
-                    'apartment_id' => $apartment->id,
-                    'path' => $path,
-                    'is_main' => Image::where('apartment_id', $apartment->id)->get()->count() < 1 ? 1 : 0
-                ]);
+            if ($images = $request->images) {
+                foreach ($images as $image) {
+                    $path = Storage::put('apartments', $image);
+                    Image::create([
+                        'apartment_id' => $apartment->id,
+                        'path' => $path,
+                        'is_main' => Image::where('apartment_id', $apartment->id)->get()->count() < 1 ? 1 : 0
+                    ]);
+                }
             }
+
+            $apartment->services()->sync($request->services);
+
+            return to_route('admin.apartments.index')->with('message', "Aggiornamento dell'appartamento $apartment->title  effettuato con successo!");
+        } else {
+            abort(403);
         }
-
-        $apartment->services()->sync($request->services);
-
-        return to_route('admin.apartments.index')->with('message', "Aggiornamento dell'appartamento $apartment->title  effettuato con successo!");
     }
 
     /**

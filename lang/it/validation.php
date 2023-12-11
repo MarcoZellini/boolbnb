@@ -103,7 +103,6 @@ return [
         'array' => 'The :attribute field must have at least :min items.',
         'file' => 'The :attribute field must be at least :min kilobytes.',
         'numeric' => 'il campo :attribute deve essere almeno :min.',
-        // 'string' => 'The :attribute field must be at least :min characters.',
         'string' => 'Il campo :attribute deve essere lungo almeno :min caratteri.',
     ],
     'min_digits' => 'The :attribute field must have at least :min digits.',
@@ -174,17 +173,12 @@ return [
     */
 
     'custom' => [
-        /*       'attribute-name' => [
-            'rule-name' => 'custom-message',
-        ], */
-
-        /* 'min' => [
-            'array' => 'Il campo :attribute deve contenere almeno :min valore/i.',
-            'file' => 'Il campo :attribute deve avere una dimenzione minima di :min kilobytes.',
-            'numeric' => 'Il valore minimo del campo :attribute deve essere :min.',
-            'string' => 'Il campo :attribute deve essere lungo almeno :min caratteri.',
-        ],
- */],
+        'images.*' => [
+            'max' => [
+                'file' => "L' :attribute non puo essere più grande di :max kilobytes."
+            ]
+        ]
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -203,7 +197,7 @@ return [
         'rooms' => 'camere',
         'beds' => 'letti',
         'bathrooms' => 'bagni',
-
+        'images.*' => 'immagine'
     ],
 
 ];

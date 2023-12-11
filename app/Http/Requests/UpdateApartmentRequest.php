@@ -33,7 +33,10 @@ class UpdateApartmentRequest extends FormRequest
             'bethrooms' => ['nullable', 'integer', 'min:1', 'max:10'],
             'square_meters' => ['nullable', 'integer', 'max:1000'],
             'address' => ['nullable', 'string', 'max: 255'],
-            'is_visible' => ['nullable', 'boolean']
+            'is_visible' => ['nullable', 'boolean'],
+            'services' => ['required', 'array', 'min:1'],
+            'images' => ['nullable', 'array'],
+            'images.*' => ['image', 'mimes:jpeg,jpg,png', 'max:1024'],
         ];
     }
 }

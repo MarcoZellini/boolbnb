@@ -21,7 +21,7 @@
                         <label for="title" class="text-capitalize">Titolo</label>
                         <div class="d-flex justify-content-between">
                             <small id="helpId" class="form-text text-muted">Inserisci un titolo</small>
-                            @if ($errors->get('title'))
+                            @if ($errors->has('title'))
                                 @foreach ($errors->get('title') as $error)
                                     <small class="form-text text-danger ">{{ $error }}
                                     </small>
@@ -50,10 +50,12 @@
                 <div class="col-12">
                     <label for="images" class="d-block mb-2">Aggiungi immagini:</label>
                     <input type="file" id="images" class="custom-file-input w-100" name="images[]" multiple><br><br>
-                    @if ($errors->get('images'))
-                        @foreach ($errors->get('images') as $error)
-                            <small class="form-text text-danger ">{{ $error }}
-                            </small>
+                    @if ($errors->has('images.*'))
+                        @foreach ($errors->get('images.*') as $key => $error)
+                            @foreach ($error as $message)
+                                <small class="form-text text-danger ">{{ $message }}
+                                </small>
+                            @endforeach
                         @endforeach
                     @endif
                 </div>
@@ -66,7 +68,7 @@
 
                         <div class="d-flex justify-content-between">
                             <small id="helpId" class="form-text text-muted">Inserisci una descrizione</small>
-                            @if ($errors->get('description'))
+                            @if ($errors->has('description'))
                                 @foreach ($errors->get('description') as $error)
                                     <small class="form-text text-danger ">{{ $error }}
                                     </small>
@@ -122,7 +124,7 @@
                     <div class="d-flex justify-content-between">
                         <small id="helpId" class="form-text text-muted">Inserisci il numero di stanze</small>
 
-                        @if ($errors->get('rooms'))
+                        @if ($errors->has('rooms'))
                             @foreach ($errors->get('rooms') as $error)
                                 <small class="form-text text-danger ">{{ $error }}
                                 </small>
@@ -144,7 +146,7 @@
                     <div class="d-flex justify-content-between">
                         <small id="helpId" class="form-text text-muted">Inserisci il numero di letti</small>
 
-                        @if ($errors->get('beds'))
+                        @if ($errors->has('beds'))
                             @foreach ($errors->get('beds') as $error)
                                 <small class="form-text text-danger ">{{ $error }}
                                 </small>
@@ -167,7 +169,7 @@
                     <div class="d-flex justify-content-between">
                         <small id="helpId" class="form-text text-muted">Inserisci il numero di bagni</small>
 
-                        @if ($errors->get('bathrooms'))
+                        @if ($errors->has('bathrooms'))
                             @foreach ($errors->get('bathrooms') as $error)
                                 <small class="form-text text-danger ">{{ $error }}
                                 </small>
@@ -186,7 +188,7 @@
                         <div class="d-flex justify-content-between">
                             <small id="helpId" class="form-text text-muted">Inserisci la metratura</small>
 
-                            @if ($errors->get('square_meters'))
+                            @if ($errors->has('square_meters'))
                                 @foreach ($errors->get('square_meters') as $error)
                                     <small class="form-text text-danger ">{{ $error }}
                                     </small>
@@ -208,7 +210,7 @@
                         <label for="address" class="text-capitalize">Indirizzo</label>
                         <div class="d-flex justify-content-between">
                             <small id="helpId" class="form-text text-muted">Inserisci la posizione</small>
-                            @if ($errors->get('address'))
+                            @if ($errors->has('address'))
                                 @foreach ($errors->get('address') as $error)
                                     <small class="form-text text-danger ">{{ $error }}
                                     </small>
