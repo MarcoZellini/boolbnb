@@ -15,4 +15,8 @@ class ApartmentController extends Controller
             'result' => Apartment::all()
         ]);
     }
+
+    // rotta appart per via
+
+    // rotta appart sponsorizzati
 }
