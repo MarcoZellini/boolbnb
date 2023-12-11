@@ -29,15 +29,14 @@
                         <small id="helpId" class="form-text text-muted">Inserisci un titolo</small>
                     </div>
                 </div>
-                <div class="col-12 mb-3 ">
-                    <label for="images" class="form-label">Select images:</label>
+                <div class="col-12">
+                    <label for="images" class="d-block mb-2">Select images:</label>
                     <input type="file" id="images" class="custom-file-input w-100" name="images[]" multiple><br><br>
                 </div>
                 <div class="col-12">
                     {{-- description form --}}
                     <div class="form-floating mb-3">
-                        <textarea id="description" name="description" class="form-control" placeholder="" id="floatingTextarea"
-                            style="height: 100px">{{ old('description') }}</textarea>
+                        <textarea id="description" name="description" class="form-control" placeholder="" id="floatingTextarea">{{ old('description') }}</textarea>
                         <label for="description" class="text-capitalize">Descrizione</label>
                         <small id="helpId" class="form-text text-muted">Inserisci una descrizione</small>
                     </div>
@@ -45,14 +44,14 @@
                 <div class="col-12 mb-3">
                     <h6 class="fs-5">Seleziona i servizi</h6>
 
-                    <div class="row justify-content-center px-1">
+                    <div class="row justify-content-center px-3 px-md-1">
                         @foreach ($services as $service)
                             <div
                                 class="col-4 col-md-3 col-lg-2 form-check form-check-inline my-2 d-flex-inline flex-grow-1 bnb-service-col position-relative">
 
                                 <input class="form-check-input me-2 services rounded-pill" type="checkbox"
                                     id="service_{{ $service->id }}" name="services[]" value="{{ $service->id }}"
-                                    {{ in_array($service->id, old('services', [])) ? 'checked' : '' }} />{{-- "services[]" --}}
+                                    {{ in_array($service->id, old('services', [])) ? 'checked' : '' }} />
                                 {{-- TODO: FINERE I CHECKBOX + RIPROPORRE IL LAYOUT IN EDIT  --}}
                                 {{-- <i class="fa-regular fa-circle-check"></i> --}}
 
@@ -115,9 +114,9 @@
                     {{-- address form --}}
                     <div class="form-floating mb-3">
                         <input type="text" class="form-control" name="address" id="address" placeholder=""
-                            value="{{ old('address') }}" list="Suggested_Address" />
+                            value="{{ old('address') }}" list="suggested_address" />
 
-                        <datalist id="Suggested_Address">
+                        <datalist id="suggested_address">
 
                         </datalist>
 
