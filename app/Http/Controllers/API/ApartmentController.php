@@ -17,32 +17,30 @@ class ApartmentController extends Controller
         ]);
     }
 
+    public function apartments(Request $request)
+    {
+
+        //dd($request->id);
+
+        $id = $request->all();
+
+        $apartments = DB::table('apartments')->whereIn('id', $id)->get();
+
+        return response()->json([
+            'success' => true,
+            'result' => $apartments
+        ]);
+    }
+
     // ricerca semplice: appartamenti entro un raggio di 20 km
     public function search(Request $request)
     {
-        /* 
-        $distance = 400000;
-        $TomTomKey = 'QTQljhHM9rS4d2vJLMcDX9qzl8tyGA43';
-
-        $baseUrl = 'https://api.tomtom.com/search/2/geometryFilter.json?key=' . $TomTomKey;
-
-        $circle = '[{"position": "45.3967794,11.9139147","radius": 45000,"type": "CIRCLE"}]';
-        $poi = '[{"address": {"freeformAddress": "Strada Statale Romea, 101, 30015 Chioggia VE"},"poi": {"name": "MC Chioggia"},"position": {"lat": 45.1804672,"lon": 12.2703012}}]';
-
-        $completeUrl = $baseUrl . '&geometryList=' . $circle . '&poiList=' . $poi;
-
-        [{"address": {"freeformAddress": "Strada Statale Romea, 101, 30015 Chioggia VE"},"poi": {"name": "MC Chioggia"},"position": {"lat": 45.1804672,"lon": 12.2703012}}]
-         */
-
-        $apartments = DB::table('apartments')
-            ->select('title', 'address', 'latitude', 'longitude')
-            ->get();
-
+        $apartments = Apartment::all();
         $responseArray = [];
 
         foreach ($apartments as $apartment) {
-
             $responseItem = [
+                'id' => $apartment->id,
                 'address' => [
                     'freeformAddress' => $apartment->address
                 ],
@@ -52,9 +50,10 @@ class ApartmentController extends Controller
                     'lon' => $apartment->longitude
                 ]
             ];
-
             array_push($responseArray, $responseItem);
         }
+
+        //dd($responseArray);
 
         return response()->json($responseArray);
     }
@@ -62,12 +61,14 @@ class ApartmentController extends Controller
     // ricerca avanzata: appartamenti entro un raggio variabile + filtri
     public function advancedSearch(Request $request)
     {
-        $address = $request->query('address');
+        $id = $request->query('id');
         $min_beds = $request->query('beds');
         $min_rooms = $request->query('rooms');
-        $distance = $request->query('distance');
+        //$radius = $request->query('radius');
 
-        $apartments = Apartment::where('address', 'LIKE', '%' . $address . '%')
+        dd($id);
+
+        $apartments = Apartment::where('id', $id)
             ->where('beds', '>=', $min_beds)
             ->where('rooms', '>=', $min_rooms)
             ->get();
