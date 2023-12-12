@@ -13,14 +13,12 @@ class ApartmentController extends Controller
     {
         return response()->json([
             'success' => true,
-            'result' => Apartment::all()
+            'result' => Apartment::with(['images', 'sponsorships', 'user', 'services'])->paginate(20)
         ]);
     }
 
     public function apartments(Request $request)
     {
-
-        //dd($request->id);
 
         $id = $request->all();
 
