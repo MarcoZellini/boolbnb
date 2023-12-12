@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\ApartmentController;
 use App\Http\Controllers\API\ServiceController;
+use App\Http\Controllers\API\MessageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +22,4 @@ Route::get('apartments/{apartment}', [ApartmentController::class, 'singleApartme
 Route::get('apartments/advSearch', [ApartmentController::class, 'advancedSearch']);
 
 Route::get('services', [ServiceController::class, 'index']);
+Route::post('contacts', [MessageController::class, 'store']);
