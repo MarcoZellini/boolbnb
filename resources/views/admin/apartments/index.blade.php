@@ -24,9 +24,7 @@
             </div>
         @endif
 
-        <div class="pt-2">
-            {{ $apartments->links('pagination::bootstrap-5') }}
-        </div>
+
         <div class="wrapper my-2">
             @forelse ($apartments as $apartment)
                 <div class="card border-0 border-top rounded-0">
@@ -63,7 +61,7 @@
                                 {{ $apartment->is_visible ? 'Si' : 'No' }}
                             </div>
                         </div>
-                        <div class="d-flex align-items-center justify-content-end">
+                        <div class="d-flex align-items-center justify-content-xsm-center  justify-content-end">
                             <a class="btn btn-light rounded-circle border bnb-btn-shadow me-1 bnb-btn-actions"
                                 href="{{ route('admin.apartments.show', $apartment->id) }}" role="button">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -126,13 +124,14 @@
                                             </span>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="button"
+                                                class="btn rounded-pill btn-outline-secondary btn-bnb-secondary"
+                                                data-bs-dismiss="modal">Chiudi</button>
                                             <form action="{{ route('admin.apartments.destroy', $apartment->id) }}"
                                                 method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                <button type="submit" class="btn btn-bnb rounded-pill">Elimina</button>
                                             </form>
                                         </div>
                                     </div>
@@ -147,6 +146,8 @@
                 </div>
             @endforelse
         </div>
-
+        <div class="py-2">
+            {{ $apartments->links('pagination::bootstrap-5') }}
+        </div>
     </div>
 @endsection
