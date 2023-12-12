@@ -54,7 +54,7 @@
                     <div class="card-footer d-flex align-items-center flex-row-reverse">
 
                         <a href="{{ route('admin.messages.index') }}" class="btn btn-bnb rounded-pill">
-                            vai ai tuoi appartamenti
+                            vai ai tuoi messaggi
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </div>

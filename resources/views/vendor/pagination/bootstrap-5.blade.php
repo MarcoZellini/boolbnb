@@ -1,7 +1,7 @@
 @if ($paginator->hasPages())
     <nav class="d-flex justify-items-center justify-content-between">
-        <div class="d-flex justify-content-between flex-fill d-sm-none">
-            <ul class="pagination">
+        <div class="d-flex justify-content-end flex-fill d-sm-none">
+            <ul class="paginazione rounded-pill">
                 {{-- Previous Page Link --}}
                 @if ($paginator->onFirstPage())
                     <li class="page-item disabled" aria-disabled="true">

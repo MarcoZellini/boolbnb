@@ -30,6 +30,32 @@ body {
 
 /*#endregion GLOBAL RULES*/
 
+/*#region SCROLLBAR*/
+
+/* LARGHEZZA */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* TRACK */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 3px $bnb-secondary;
+    border-radius: 10px;
+}
+
+/* GUIDA */
+::-webkit-scrollbar-thumb {
+    background: $bnb-primary;
+    border-radius: 10px;
+}
+
+/* GUIDA ALL'HOVER */
+::-webkit-scrollbar-thumb:hover {
+    background: $bnb-accent;
+}
+
+/*#endregion SCROLLBAR*/
+
 /*#region NAVBAR*/
 
 .header-shadow {
@@ -289,6 +315,7 @@ select:-webkit-autofill:focus {
 
 .slider {
     -webkit-appearance: none;
+    appearance: none;
     width: 100%;
     height: 5px;
     background-color: $bnb-secondary;
@@ -364,6 +391,9 @@ Extra extra large	xxl	≥1400px
         width: 100% !important;
     }
 
+    .justify-content-xsm-center {
+        justify-content: center !important;
+    }
 }
 
 @media screen and (max-width: 575.97px) {
@@ -377,6 +407,8 @@ Extra extra large	xxl	≥1400px
 }
 
 @media screen and (min-width: 575.98px) {
+
+
 
     .bnb-main-img,
     .bnb-extra-img {
