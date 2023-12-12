@@ -16,3 +16,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('apartments', [ApartmentController::class, 'index']);
+Route::post('apartments', [ApartmentController::class, 'apartments']);
+Route::get('apartments/search', [ApartmentController::class, 'search']);
+Route::get('apartments/advSearch', [ApartmentController::class, 'advancedSearch']);
