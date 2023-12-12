@@ -35,33 +35,8 @@ class ApartmentController extends Controller
         }
     }
 
-    // ricerca semplice: appartamenti entro un raggio di 20 km
-    public function search(Request $request)
-    {
-        $apartments = Apartment::all();
-        $responseArray = [];
-
-        foreach ($apartments as $apartment) {
-            $responseItem = [
-                'id' => $apartment->id,
-                'address' => [
-                    'freeformAddress' => $apartment->address
-                ],
-                'poi' => $apartment->title,
-                'position' => [
-                    'lat' => $apartment->latitude,
-                    'lon' => $apartment->longitude
-                ]
-            ];
-            array_push($responseArray, $responseItem);
-        }
-
-        //dd($responseArray);
-
-        return response()->json($responseArray);
-    }
-
     // ricerca avanzata: appartamenti entro un raggio variabile + filtri
+    // Potrebbe essere fatta direttamente nella funzione index
     public function advancedSearch(Request $request)
     {
         $id = $request->query('id');
