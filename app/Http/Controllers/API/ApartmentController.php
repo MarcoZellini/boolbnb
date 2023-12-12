@@ -17,17 +17,22 @@ class ApartmentController extends Controller
         ]);
     }
 
-    public function apartments(Request $request)
+    public function singleApartment($id)
     {
 
-        $id = $request->all();
+        $apartment = Apartment::with(['images', 'sponsorships', 'user', 'services'])->where('id', $id)->first();
 
-        $apartments = DB::table('apartments')->whereIn('id', $id)->get();
-
-        return response()->json([
-            'success' => true,
-            'result' => $apartments
-        ]);
+        if ($apartment) {
+            return response()->json([
+                'success' => true,
+                'result' => $apartment
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'error' => 'There is no apartment'
+            ]);
+        }
     }
 
     // ricerca semplice: appartamenti entro un raggio di 20 km
