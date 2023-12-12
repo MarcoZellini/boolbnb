@@ -170,7 +170,7 @@
                     </h3>
                     <p>
                         @if (isset($apartment->description))
-                            {{ $apartment->description }}
+                            <p class="text-break">{{ $apartment->description }}</p>
                         @else
                             <p>Caro proprietario, <br>
                                 Il tuo appartamento è un gioiello unico, e ora è il momento di farlo brillare nel miglior
