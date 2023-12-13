@@ -31,26 +31,4 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     enabledTransports: ['ws', 'wss'],
 // });
 
-const dropdownElement = document.querySelector('#navbarDropdown');
-let dropdownValue = false;
 
-dropdownElement.addEventListener('click', function () {
-    /* if (dropdownElement.getAttribute('aria-expanded')) {
-        console.log('ciaociao', true);
-    } else {
-        console.log('ciaociao', false);
-    } */
-
-    if (dropdownValue) {
-        dropdownValue = false;
-        dropdownElement.setAttribute('aria-expanded', dropdownValue);
-        dropdownElement.classList.remove('current_page');
-    } else {
-        dropdownValue = true;
-        dropdownElement.setAttribute('aria-expanded', dropdownValue);
-        dropdownElement.classList.add('current_page');
-
-    }
-
-
-});

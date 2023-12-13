@@ -26,6 +26,7 @@
     <!-- Usando Vite -->
     @vite(['resources/js/app.js'])
     @vite(['resources/js/SearchBoxAddress.js'])
+    @vite(['resources/js/script.js'])
 
 </head>
 
@@ -72,7 +73,7 @@
                                     {{ Auth::user()->name }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ url('/') }}">{{ __('Dashboard') }}</a>
                                     {{-- <a class="dropdown-item" href="{{ url('profile') }}">{{ __('Profilo') }}</a> --}}
 
