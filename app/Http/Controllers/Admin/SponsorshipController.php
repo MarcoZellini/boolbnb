@@ -23,47 +23,54 @@ class SponsorshipController extends Controller
 
     public function store(Apartment $apartment, Sponsorship $sponsorship)
     {
-        //prendo l'ultima sponsorizzazione attiva
-        $previous_sponsorships = $apartment->sponsorships()->where('end_date', '>', Carbon::now()->format('Y-m-d H:i:s'))->orderByPivot('created_at', 'desc')->first();
 
-        //controllo se esiste
-        if ($previous_sponsorships) {
-            $previous_sponsorships_end_date = $previous_sponsorships->pivot->end_date;
 
-            //dd($previous_sponsorships_end_date);
+        if ($apartment->user_id === Auth::id()) {
 
-            //uso la data di scadenza dell'ultima sponsorizzazione come partenza
-            $end_date = Carbon::createFromFormat('Y-m-d H:i:s', $previous_sponsorships_end_date);
+            //prendo l'ultima sponsorizzazione attiva
+            $previous_sponsorships = $apartment->sponsorships()->where('end_date', '>', Carbon::now()->format('Y-m-d H:i:s'))->orderByPivot('created_at', 'desc')->first();
+
+            //controllo se esiste
+            if ($previous_sponsorships) {
+                $previous_sponsorships_end_date = $previous_sponsorships->pivot->end_date;
+
+                //dd($previous_sponsorships_end_date);
+
+                //uso la data di scadenza dell'ultima sponsorizzazione come partenza
+                $end_date = Carbon::createFromFormat('Y-m-d H:i:s', $previous_sponsorships_end_date);
+            } else {
+                //uso la data attuale come partenza
+                $end_date = Carbon::now();
+            }
+
+            //separo ore minuti e secondi
+            $time = explode(':', $sponsorship->duration);
+
+            $hours = (int)$time[0];
+            $minutes = (int)$time[1];
+            $seconds = (int)$time[2];
+
+
+            //li aggiungo alla data se ci sono
+            if ($hours) {
+                $end_date->addHours($hours);
+            }
+            if ($minutes) {
+                dd($minutes);
+                $end_date->addMinuts($minutes);
+            }
+            if ($seconds) {
+                dd($seconds);
+                $end_date->addSeconds($seconds);
+            }
+
+            //aggiungo un nuovo record dove viene segnata che sponsorizzazione viene scelta e la data di scadenza (se ci sono sponsorizzazioni attive vengono sommate)
+            $apartment->sponsorships()->attach([$sponsorship->id => ['end_date' => $end_date]]);
+
+            return to_route('admin.apartments.index')->with('message', 'Appartamento sponsorizzato con successo!');
         } else {
-            //uso la data attuale come partenza
-            $end_date = Carbon::now();
+            abort(403);
         }
-
-        //separo ore minuti e secondi
-        $time = explode(':', $sponsorship->duration);
-
-        $hours = (int)$time[0];
-        $minutes = (int)$time[1];
-        $seconds = (int)$time[2];
-
-
-        //li aggiungo alla data se ci sono
-        if ($hours) {
-            $end_date->addHours($hours);
-        }
-        if ($minutes) {
-            dd($minutes);
-            $end_date->addMinuts($minutes);
-        }
-        if ($seconds) {
-            dd($seconds);
-            $end_date->addSeconds($seconds);
-        }
-
-        //aggiungo un nuovo record dove viene segnata che sponsorizzazione viene scelta e la data di scadenza (se ci sono sponsorizzazioni attive vengono sommate)
-        $apartment->sponsorships()->attach([$sponsorship->id => ['end_date' => $end_date]]);
-
-        return to_route('admin.apartments.index')->with('message', 'Appartamento sponsorizzato con successo!');
 
         /* !!!!!!!!!!!!!! NON ELIMINARE  !!!!!!!!!!!!!!!! */
 
