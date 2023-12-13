@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\MessageController;
+use App\Http\Controllers\Admin\SponsorshipController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -47,6 +48,8 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::put('/apartments/{apartment}/images/{image}', [ImageController::class, 'setMain'])->name('apartments.image.setMain');
     Route::delete('/apartments/{apartment}/images/{image}', [ImageController::class, 'destroy'])->name('apartments.image.delete');
     Route::get('/apartments/{apartment}/images', [ImageController::class, 'index'])->name('apartments.images.index');
+    Route::get('/apartments/{apartment}/sponsorships', [SponsorshipController::class, 'index'])->name('apartments.sponsorships.index');
+    Route::get('/apartments/{apartment}/sponsorships/{sponsorship}', [SponsorshipController::class, 'store'])->name('apartments.sponsorships.store');
 });
 
 require __DIR__ . '/auth.php';
