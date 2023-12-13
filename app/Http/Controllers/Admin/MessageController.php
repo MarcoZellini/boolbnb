@@ -17,7 +17,7 @@ class MessageController extends Controller
     {
         $messages = DB::table('messages')
             ->join('apartments', 'messages.apartment_id', '=', 'apartments.id')
-            ->select('messages.id', 'messages.apartment_id', 'messages.name', 'messages.lastname', 'messages.email', 'messages.phone', 'messages.subject', 'messages.message')
+            ->select('messages.id', 'messages.apartment_id', 'apartments.title', 'messages.name', 'messages.lastname', 'messages.email', 'messages.phone', 'messages.subject', 'messages.message')
             ->where('apartments.user_id', Auth::id())
             ->orderByDesc('messages.id')
             ->paginate(10);

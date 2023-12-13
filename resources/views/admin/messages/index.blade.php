@@ -23,7 +23,7 @@
                         <div class="card-body d-flex px-0">
                             <div class="col-9">
                                 <h5 class="card-title">
-                                    Apt. ID {{ $message->apartment_id }} - {{ $message->name }} {{ $message->lastname }}
+                                    {{ $message->title }} (ID: {{ $message->apartment_id }})
                                     -
                                     {{ $message->subject }}
                                 </h5>
@@ -55,8 +55,8 @@
                                             </div>
                                             <div class="modal-body">
                                                 <div class="mt-2">
-                                                    <h6><strong>Appartamento ID:</strong>
-                                                        {{ $message->apartment_id }}</h6>
+                                                    <h6><strong>Appartamento:</strong> {{ $message->title }} (ID:
+                                                        {{ $message->apartment_id }})</h6>
                                                 </div>
                                                 <div class="mt-4">
                                                     <h6><strong>Dettagli del mittente:</strong></h6>
