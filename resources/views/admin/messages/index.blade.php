@@ -16,7 +16,7 @@
             </div>
         @endif
 
-        <div class="row row-cols-1 pt-2 gy-1">
+        <div class="row row-cols-1 pt-2 gy-1 mb-3">
             @forelse ($messages as $message)
                 <div class="col">
                     <div class="card border-0 border-top rounded-0">
@@ -27,14 +27,15 @@
                                     -
                                     {{ $message->subject }}
                                 </h5>
-                                <p class="card-text">
+                                <p class="card-text text-truncate">
                                     {{ $message->message }}
                                 </p>
                             </div>
-                            <div class="col-3 d-flex justify-content-end align-items-center">
+                            <div
+                                class="col-3 d-flex align-items-center justify-content-center justify-content-sm-end  flex-column flex-sm-row gap-1">
                                 <!-- MODAL DETAILS -->
                                 <button type="button"
-                                    class="btn btn-light rounded-circle border bnb-btn-shadow bnb-btn-actions"
+                                    class="btn btn-light rounded-circle border bnb-btn-shadow bnb-btn-actions align-self-center align-self-sm-center "
                                     data-bs-toggle="modal" data-bs-target="#showModal-{{ $message->id }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
@@ -69,7 +70,9 @@
                                                             <strong>Cognome:</strong> {{ $message->lastname }}
                                                         </li>
                                                         <li>
-                                                            <strong>Email:</strong> {{ $message->email }}
+                                                            <a href="mailto:{{ $message->email }}">
+                                                                <strong>Email:</strong> {{ $message->email }}
+                                                            </a>
                                                         </li>
                                                         <li>
                                                             <strong>Numero di telefono:</strong> {{ $message->phone }}
@@ -87,7 +90,7 @@
 
                                 <!-- MODAL DELETE -->
                                 <button type="button"
-                                    class="btn btn-danger rounded-circle ms-1 bnb-btn-shadow bnb-btn-actions"
+                                    class="btn btn-danger rounded-circle bnb-btn-shadow bnb-btn-actions align-self-center align-self-sm-center "
                                     data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $message->id }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">

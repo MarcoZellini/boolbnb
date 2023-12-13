@@ -35,20 +35,20 @@ class ApartmentController extends Controller
         }
     }
 
-    // ricerca avanzata: appartamenti entro un raggio variabile + filtri
-    // Potrebbe essere fatta direttamente nella funzione index
-    public function advancedSearch(Request $request)
+    // ricerca: appartamenti entro un raggio variabile + filtri
+    public function search(Request $request)
     {
-        $id = $request->query('id');
-        $min_beds = $request->query('beds');
-        $min_rooms = $request->query('rooms');
-        //$radius = $request->query('radius');
+        $inputAddressLat = $request->all('inputAddressLat');
+        $inputAddressLong = $request->all('inputAddressLong');
+        $maxRadius = $request->all('maxRadius');
+        $minBeds = $request->all('minBeds');
+        $minRooms = $request->all('minRooms');
 
-        dd($id);
-
-        $apartments = Apartment::where('id', $id)
-            ->where('beds', '>=', $min_beds)
-            ->where('rooms', '>=', $min_rooms)
+        $apartments = Apartment::with(['images', 'sponsorships', 'user', 'services'])
+            ->whereRaw('st_distance_sphere(point(apartments.latitude,apartments.longitude),point(' . implode($inputAddressLat) . ',' . implode($inputAddressLong) . ')) <=' . implode($maxRadius) . '000')
+            ->where('beds', '>=', $minBeds)
+            ->where('rooms', '>=', $minRooms)
+            ->orderByRaw('st_distance_sphere(point(apartments.latitude,apartments.longitude),point(' . implode($inputAddressLat) . ',' . implode($inputAddressLong) . '))')
             ->get();
 
         return response()->json([

@@ -24,17 +24,16 @@
         </div>
 
         <div class="row mt-3">
-            <div class="col-4 ">
+            <div class="col-12 col-md-6 col-lg-4 mb-3">
                 <div class="card h-100 ">
                     <div class="card-body h-100">
-                        <h4 class="bnb-color">
+                        <h5 class="bnb-color ">
                             <i class="fa-solid fa-building"></i> Totale Appartamenti registrati
-                        </h4>
+                        </h5>
                         <strong class="fs-2">{{ $total_apartments }}</strong>
                     </div>
-                    <div class="card-footer d-flex align-items-center flex-row-reverse">
-
-                        <a href="{{ route('admin.apartments.index') }}" class="btn btn-bnb rounded-pill">
+                    <div class="card-footer d-flex align-items-center flex-row-reverse p-0 py-2">
+                        <a href="{{ route('admin.apartments.index') }}" class="btn btn-bnb rounded-pill mx-2">
                             vai ai tuoi appartamenti
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
@@ -42,24 +41,25 @@
                 </div>
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-md-6 col-lg-4 mb-3">
                 <div class="card h-100">
                     <div class="card-body h-100">
-                        <h4 class="bnb-color">
+                        <h5 class="bnb-color">
                             <i class="fa-regular fa-comments"></i>
                             Totale Messaggi
-                        </h4>
+                        </h5>
                         <strong class="fs-2">{{ $total_messages }}</strong>
                     </div>
-                    <div class="card-footer d-flex align-items-center flex-row-reverse">
+                    <div class="card-footer d-flex align-items-center flex-row-reverse p-0 py-2">
 
-                        <a href="{{ route('admin.messages.index') }}" class="btn btn-bnb rounded-pill">
+                        <a href="{{ route('admin.messages.index') }}" class="btn btn-bnb rounded-pill mx-2">
                             vai ai tuoi messaggi
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </div>
                 </div>
             </div>
+
         </div>
 
     </div>

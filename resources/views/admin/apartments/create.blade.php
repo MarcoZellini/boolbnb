@@ -223,7 +223,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn w-25 btn-bnb mt-2 rounded-pill">
+                <button type="submit" class="btn w-25 btn-bnb mt-2 rounded-pill ms-2">
                     Aggiungi
                 </button>
             </div>
