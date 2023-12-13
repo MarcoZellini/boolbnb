@@ -27,7 +27,7 @@
                                     -
                                     {{ $message->subject }}
                                 </h5>
-                                <p class="card-text">
+                                <p class="card-text text-truncate">
                                     {{ $message->message }}
                                 </p>
                             </div>
