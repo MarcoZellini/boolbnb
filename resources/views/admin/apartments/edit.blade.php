@@ -236,7 +236,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="w-25 btn btn-bnb mt-2 rounded-pill">
+                <button type="submit" class="w-25 btn btn-bnb mt-2 rounded-pill ms-2">
                     Modifica
                 </button>
             </div>

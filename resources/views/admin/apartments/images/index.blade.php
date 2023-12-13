@@ -232,6 +232,14 @@
                 </div>
             </div>
 
+            <div class="col-12">
+                <a name="" id="" class="btn btn-success" href="{{ url()->previous() }}" role="button">Back
+                    To
+                    Apartments</a>
+                <a name="" id="" class="btn btn-primary"
+                    href="{{ route('admin.apartments.show', $apartment) }}" role="button">Show
+                    Apartment</a>
+            </div>
         </div>
     </div>
 @endsection
