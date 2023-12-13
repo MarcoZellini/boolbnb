@@ -20,6 +20,9 @@ $bnb-secondary: #b0b0b0a4;
     aspect-ratio: 1/1;
 }
 
+.current_page {
+    color: $bnb_primary !important;
+}
 
 /*#endregion Utilities*/
 
@@ -466,3 +469,9 @@ Extra extra large	xxl	≥1400px
 }
 
 /*#endregion MEDIA QUERIES*/
+
+nav a.nav-link {
+    &:hover {
+        color: $bnb_primary;
+    }
+}
