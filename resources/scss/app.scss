@@ -20,6 +20,14 @@ $bnb-secondary: #b0b0b0a4;
     aspect-ratio: 1/1;
 }
 
+.badge {
+    transition: box-shadow 0.3s;
+
+    &:hover {
+        box-shadow: 0px 0px 5px $bnb-secondary;
+    }
+}
+
 .current_page {
     color: $bnb_primary !important;
 }

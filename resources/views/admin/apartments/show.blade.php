@@ -79,7 +79,7 @@
         <div class="row row-cols-1">
             <div class="col-12 mt-2 mb-3">
                 <a class="btn btn-primary rounded-circle border bnb-btn-shadow bnb-btn-actions  me-1 "
-                    href="{{ route('admin.apartments.index', $apartment) }}" role="button">
+                    href="{{ url()->previous() }}" role="button">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
                         <path fill-rule="evenodd"
@@ -232,15 +232,15 @@
             </div>
 
             {{-- SERVIZI --}}
-            <div class="col">
+            <h3>
+                Servizi
+            </h3>
+            <div class="col d-flex ">
 
                 <div class="mt-3">
-                    <h3>
-                        Servizi
-                    </h3>
                     @foreach ($apartment->services as $service)
-                        <span class="badge rounded-pill me-1 border text-black">
-                            <img src="{{ asset($service->icon) }}" alt="{{ $service->name }}" style="width: 20px;">
+                        <span class="badge rounded-pill m-1 border text-black">
+                            <img src="{{ asset($service->icon) }}" alt="{{ $service->name }}" style="width: 20px">
                             {{ $service->name }}
                         </span>
                     @endforeach
