@@ -33,7 +33,8 @@
                             </div>
                             <div class="col-3 d-flex justify-content-end align-items-center">
                                 <!-- MODAL DETAILS -->
-                                <button type="button" class="btn btn-light rounded-circle border bnb-btn-shadow"
+                                <button type="button"
+                                    class="btn btn-light rounded-circle border bnb-btn-shadow bnb-btn-actions"
                                     data-bs-toggle="modal" data-bs-target="#showModal-{{ $message->id }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
@@ -85,7 +86,8 @@
                                 </div>
 
                                 <!-- MODAL DELETE -->
-                                <button type="button" class="btn btn-danger rounded-circle ms-1 bnb-btn-shadow"
+                                <button type="button"
+                                    class="btn btn-danger rounded-circle ms-1 bnb-btn-shadow bnb-btn-actions"
                                     data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $message->id }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -115,12 +117,13 @@
                                             <div class="modal-footer">
                                                 <button type="button"
                                                     class="btn rounded-pill btn-outline-secondary btn-bnb-secondary"
-                                                    data-bs-dismiss="modal">Close</button>
+                                                    data-bs-dismiss="modal">Chiudi</button>
                                                 <form action="{{ route('admin.messages.delete', $message->id) }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-bnb rounded-pill">Delete</button>
+                                                    <button type="submit"
+                                                        class="btn btn-bnb rounded-pill">Cancella</button>
                                                 </form>
                                             </div>
                                         </div>

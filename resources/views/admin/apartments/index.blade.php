@@ -31,34 +31,43 @@
                     <div class="card-body row row-cols-1 row-cols-md-5 justify-content-between px-0">
                         <div class="d-flex align-items-center">
                             @if ($apartment->images->where('is_main', true)->first()?->path)
-                                <img style="height:60px"
+                                <img class=" object-fit-cover img-fluid" style="height:60px; width:90px;"
                                     src="{{ asset('storage/' . $apartment->images->where('is_main', true)->first()->path) }}">
                             @else
                                 <img style="height:60px" src="{{ asset('storage/placeholders/placeholder.jpg') }}">
                             @endif
                         </div>
                         <div class="row row-cols-2 row-cols-md-1 align-items-center my-1">
-                            <div>
-                                <strong>Titolo</strong>:
-                            </div>
-                            <div>
-                                {{ $apartment->title }}
-                            </div>
-                        </div>
-                        <div class="row row-cols-2 row-cols-md-1 align-items-center my-1">
-                            <div>
-                                <strong>Indirizzo</strong>:
-                            </div>
-                            <div>
-                                {{ $apartment->address ? $apartment->address : 'Non Impostato' }}
+                            <div class=" align-self-start">
+
+                                <div>
+                                    <strong>Titolo</strong>:
+                                </div>
+                                <div>
+                                    {{ $apartment->title }}
+                                </div>
                             </div>
                         </div>
                         <div class="row row-cols-2 row-cols-md-1 align-items-center my-1">
-                            <div>
-                                <strong>Visibile su BoolBnB</strong>:
+                            <div class=" align-self-start">
+
+                                <div>
+                                    <strong>Indirizzo</strong>:
+                                </div>
+                                <div>
+                                    {{ $apartment->address ? $apartment->address : 'Non Impostato' }}
+                                </div>
                             </div>
-                            <div>
-                                {{ $apartment->is_visible ? 'Si' : 'No' }}
+                        </div>
+                        <div class="row row-cols-2 row-cols-md-1 align-items-center my-1">
+                            <div class=" align-self-start">
+
+                                <div>
+                                    <strong>Visibile su BoolBnB</strong>:
+                                </div>
+                                <div>
+                                    {{ $apartment->is_visible ? 'Si' : 'No' }}
+                                </div>
                             </div>
                         </div>
                         <div class="d-flex align-items-center justify-content-xsm-center  justify-content-end">
