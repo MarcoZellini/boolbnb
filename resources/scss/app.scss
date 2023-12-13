@@ -483,3 +483,9 @@ nav a.nav-link {
         color: $bnb_primary;
     }
 }
+
+a {
+    &:hover {
+        color: $bnb_primary;
+    }
+}
