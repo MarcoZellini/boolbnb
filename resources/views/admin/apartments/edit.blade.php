@@ -113,7 +113,7 @@
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="rooms" class="form-label text-capitalize">Camere:</label>
-                    <output id="amount_rooms" name="amount_rooms" for="rooms">1</output>
+                    <output id="amount_rooms" name="amount_rooms" for="rooms">{{ old('rooms', 1) }}</output>
 
                     <div class="d-flex align-items-center gap-2">
                         <span>1</span>
@@ -134,7 +134,7 @@
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="beds" class="form-label text-capitalize">Letti:</label>
-                    <output id="amount_beds" name="amount_beds" for="beds">1</output>
+                    <output id="amount_beds" name="amount_beds" for="beds">{{ old('beds', 1) }}</output>
 
                     <div class="d-flex align-items-center gap-2">
                         <span>1</span>
@@ -156,7 +156,8 @@
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="bathrooms" class="form-label text-capitalize">Bagni:</label>
-                    <output id="amount_bathrooms" name="amount_bathrooms" for="bathrooms">1</output>
+                    <output id="amount_bathrooms" name="amount_bathrooms"
+                        for="bathrooms">{{ old('bathrooms', 1) }}</output>
 
                     <div class="d-flex align-items-center gap-2">
                         <span>1</span>
