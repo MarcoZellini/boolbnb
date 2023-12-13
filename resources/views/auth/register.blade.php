@@ -7,11 +7,11 @@
                 <div class="">
                     <h4 class="fw-bold">Registrati </h4>
 
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" id="registerForm" action="{{ route('register') }}">
                         @csrf
 
                         <div class="mb-4 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('nome') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nome') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text"
@@ -27,7 +27,7 @@
                         </div>
 
                         <div class="mb-4 row">
-                            <label for="lastname" class="col-md-4 col-form-label text-md-right">{{ __('cognome ') }}</label>
+                            <label for="lastname" class="col-md-4 col-form-label text-md-right">{{ __('Cognome ') }}</label>
 
                             <div class="col-md-6">
                                 <input id="lastname" type="text"
@@ -67,6 +67,9 @@
                                 <input id="password" type="password"
                                     class="@error('password') is-invalid @enderror form-control" name="password" required
                                     autocomplete="new-password">
+
+                                {{-- PASSWORD ERROR MESSAGE --}}
+                                <span id="message" style="font-weight: bolder; font-size: 14px; color: #dc354b"></span>
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -111,7 +114,7 @@
 
                         <div class="mb-4 row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-bnb rounded-pill">
+                                <button type="submit" id="submitBtn" class="btn btn-bnb rounded-pill">
                                     {{ __('Register') }}
                                 </button>
                             </div>
