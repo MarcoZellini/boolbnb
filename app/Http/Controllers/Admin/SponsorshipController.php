@@ -56,11 +56,9 @@ class SponsorshipController extends Controller
                 $end_date->addHours($hours);
             }
             if ($minutes) {
-                dd($minutes);
-                $end_date->addMinuts($minutes);
+                $end_date->addMinutes($minutes);
             }
             if ($seconds) {
-                dd($seconds);
                 $end_date->addSeconds($seconds);
             }
 

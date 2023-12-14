@@ -5,7 +5,6 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Apartment;
-use Illuminate\Support\Facades\DB;
 
 class ApartmentController extends Controller
 {

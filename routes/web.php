@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\ApartmentController;
 
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Admin\DashboardController;
 
 
 use App\Http\Controllers\Admin\ImageController;

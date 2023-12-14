@@ -1,3 +1,9 @@
+<?php
+
+use Carbon\Carbon;
+
+?>
+
 @extends('layouts.admin')
 
 @section('content')
@@ -58,6 +64,15 @@
                             </div>
                             <div>
                                 {{ $apartment->address ? $apartment->address : 'Non Impostato' }}
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div>
+                                <strong>Sponsorizzato</strong>:
+                            </div>
+                            <div>
+                                {{ $apartment->sponsorships()->orderByPivot('created_at', 'desc')->where('end_date', '>', Carbon::now()->format('Y-m-d H:i:s'))->first()? 'Si': 'No' }}
                             </div>
                         </div>
 
