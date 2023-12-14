@@ -6,8 +6,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\ApartmentController;
-
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Payments\PaymentController;
 
 
 use App\Http\Controllers\Admin\ImageController;
@@ -50,6 +50,8 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::get('/apartments/{apartment}/images', [ImageController::class, 'index'])->name('apartments.images.index');
     Route::get('/apartments/{apartment}/sponsorships', [SponsorshipController::class, 'index'])->name('apartments.sponsorships.index');
     Route::get('/apartments/{apartment}/sponsorships/{sponsorship}', [SponsorshipController::class, 'store'])->name('apartments.sponsorships.store');
+    Route::get('/apartments/{apartment}/sponsorships/{sponsorship}/payment', [PaymentController::class, 'index'])->name('apartments.sponsorships.payment.index');
+    Route::post('/apartments/{apartment}/sponsorships/{sponsorship}/payment/process', [PaymentController::class, 'process'])->name('apartments.sponsorships.payment.process');
 });
 
 require __DIR__ . '/auth.php';
