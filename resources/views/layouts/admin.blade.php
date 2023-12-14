@@ -24,9 +24,8 @@
 
 
     <!-- Usando Vite -->
-    @vite(['resources/js/app.js'])
-    @vite(['resources/js/SearchBoxAddress.js'])
-    @vite(['resources/js/script.js'])
+    <script src="https://js.braintreegateway.com/web/dropin/1.41.0/js/dropin.min.js"></script>
+    @vite(['resources/js/app.js', 'resources/js/SearchBoxAddress.js', 'resources/js/script.js', 'resources/js/payment.js'])
 
 </head>
 
