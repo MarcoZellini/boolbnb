@@ -27,12 +27,6 @@ class StoreViewRequest extends FormRequest
             'apartment_id' => [Rule::exists('apartments', 'id')],
             'ip_address' => ['ip'],
             'date' => 'date',
-            /* 'date' => [
-                'date', Rule::unique('views')->where(function ($query) {
-                    $query->where('ip_address', $this->ip_address)
-                        ->where('date', '>', Carbon::now()->subDay()->format('Y-m-d H:i:s'));
-                }),
-            ], */
         ];
     }
 }

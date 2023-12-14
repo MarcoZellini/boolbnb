@@ -23,14 +23,7 @@ class ViewController extends Controller
      */
     public function store(StoreViewRequest $request)
     {
-        /* try {
-            $val_data = $request->validated();
-            $new_view = View::create($val_data);
-            return response()->json(['success' => true, 'message' => 'ok']);
-        } catch (\Exception $e) {
-            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
-        }
- */
+
         $val_data = $request->validated();
 
         $apartment_id = $val_data['apartment_id'];
@@ -46,10 +39,10 @@ class ViewController extends Controller
 
             $new_view = View::create($val_data);
 
-            return response()->json(['Result' => $val_data, 'Message' => 'Visita aggiunta al database']);
+            return response()->json(['message' => 'Visita aggiunta al database']);
         }
 
-        return response()->json(['Message' => 'Visitato entro le 24 ore']);
+        return response()->json(['message' => 'Visitato entro le 24 ore']);
     }
 
     /**
