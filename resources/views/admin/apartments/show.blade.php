@@ -48,7 +48,7 @@
                             @endphp
 
                             {{-- APPLIES PADDING CLASSES BASED ON THE LOOP ITERATION --}}
-                            <div class="col-6 m-0 p-1 h-50">
+                            <div class="col-6 m-0 p-1 bnb-extra-img-5">
                                 <img class="w-100 h-100 img-fluid object-fit-cover rounded {{ $styleClass }} shadow"
                                     src="{{ URL::asset('storage/' . $image->path) }}" alt="{{ $apartment->title }}">
                             </div>
@@ -63,7 +63,7 @@
 
                     @foreach ($apartment->images as $image)
                         @if (!$image->is_main)
-                            <div class="col m-0 p-1 w-100 h-100">
+                            <div class="col m-0 p-1 bnb-extra-img-wrapper">
                                 <img class="w-100 h-100 img-fluid object-fit-cover shadow bnb-extra-img"
                                     src="{{ URL::asset('storage/' . $image->path) }}" alt="{{ $apartment->title }}"
                                     style="border-radius: 0.375rem;">
