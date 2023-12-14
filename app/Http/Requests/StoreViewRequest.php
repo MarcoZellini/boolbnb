@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use Carbon\Carbon;
 
 class StoreViewRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class StoreViewRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +24,14 @@ class StoreViewRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'apartment_id' => [Rule::exists('apartments', 'id')],
+            'ip' => ['ip'],
+            'date' => [
+                'date', Rule::unique('views')->where(function ($query) {
+                    $query->where('ip', $this->ip)
+                        ->where('date', '>', Carbon::now()->subDay()->format('Y-m-d H:i:s'));
+                }),
+            ],
         ];
     }
 }
