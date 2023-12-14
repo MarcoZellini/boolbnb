@@ -405,13 +405,19 @@ Extra extra large	xxl	≥1400px
     .justify-content-xsm-center {
         justify-content: center !important;
     }
+
+    .bnb-extra-img-5 {
+        height: 150px !important;
+    }
 }
 
 @media screen and (max-width: 575.97px) {
 
+    .bnb-extra-img-wrapper,
+    .bnb-extra-img-5,
     .bnb-main-img,
     .bnb-extra-img {
-        max-height: 250px;
+        height: 200px;
         border-radius: 0.375rem !important;
     }
 
@@ -419,11 +425,14 @@ Extra extra large	xxl	≥1400px
 
 @media screen and (min-width: 575.98px) {
 
+    .bnb-extra-img-5 {
+        height: 50% !important;
+    }
 
-
+    .bnb-extra-img-wrapper,
     .bnb-main-img,
     .bnb-extra-img {
-        max-height: 200px;
+        height: 200px;
     }
 
     .bnb-mid-img {
@@ -442,29 +451,43 @@ Extra extra large	xxl	≥1400px
 
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 575.98px) {
 
+    .bnb-extra-img-wrapper,
     .bnb-main-img,
     .bnb-extra-img {
-        max-height: 250px;
+        min-height: 200px;
+        border-radius: 0.375rem !important;
+    }
+
+}
+
+@media screen and (min-width: 768px) {
+
+    .bnb-extra-img-wrapper,
+    .bnb-main-img,
+    .bnb-extra-img {
+        height: 250px;
     }
 
 }
 
 @media screen and (min-width: 992px) {
 
+    .bnb-extra-img-wrapper,
     .bnb-main-img,
     .bnb-extra-img {
-        max-height: 345px;
+        height: 345px;
     }
 
 }
 
 @media screen and (min-width: 1200px) {
 
+    .bnb-extra-img-wrapper,
     .bnb-main-img,
     .bnb-extra-img {
-        max-height: 400px;
+        height: 400px;
     }
 
 }

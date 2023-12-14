@@ -39,7 +39,7 @@
                                 @forelse ($apartment->images as $image)
                                     <tr class="border-top">
                                         {{-- <td>{{ $image->id }}</td> --}}
-                                        <td class="text-start py-4">
+                                        <td class="text-center py-4">
                                             <img height="50px" src="{{ asset('storage/' . $image->path) }}" alt="">
                                         </td>
                                         <td>
@@ -81,21 +81,27 @@
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title" id="modalTitleId">
-                                                                Eliminare immagine #{{ $image->id }}
+                                                                Eliminare l'immagine?
                                                             </h5>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                                 aria-label="Close"></button>
                                                         </div>
-                                                        <div class="modal-body">Vuoi davvero eliminare questa immagine?
-                                                            Quest'azione non e' reversibile.</div>
+                                                        <div class="modal-body">
+                                                            <i class="fa-solid fa-circle-exclamation fa-lg"
+                                                                style="color: #e00b41;"></i>
+                                                            Vuoi davvero eliminare questa immagine?
+                                                            <br>
+                                                            L'operazione è irreversibile!
+                                                        </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
+                                                            <button type="button"
+                                                                class="btn rounded-pill btn-outline-secondary btn-bnb-secondary"
                                                                 data-bs-dismiss="modal">
                                                                 Close
                                                             </button>
                                                             {{-- TODO Impostare la action per eliminare la foto --}}
 
-                                                            <button type="submit" class="btn btn-danger"
+                                                            <button type="submit" class="btn btn-bnb rounded-pill"
                                                                 form="delete_image_{{ $image->id }}">Elimina</button>
                                                         </div>
                                                     </div>
@@ -233,7 +239,8 @@
             </div>
 
             <div class="col-12">
-                <a name="" id="" class="btn btn-success" href="{{ url()->previous() }}" role="button">Back
+                <a name="" id="" class="btn btn-success" href="{{ url()->previous() }}"
+                    role="button">Back
                     To
                     Apartments</a>
                 <a name="" id="" class="btn btn-primary"
