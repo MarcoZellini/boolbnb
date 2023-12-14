@@ -34,7 +34,7 @@
                     </div>
                     <div class="card-footer d-flex align-items-center flex-row-reverse p-0 py-2">
                         <a href="{{ route('admin.apartments.index') }}" class="btn btn-bnb rounded-pill mx-2">
-                            vai ai tuoi appartamenti
+                            Vai ai tuoi appartamenti
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </div>
@@ -53,7 +53,7 @@
                     <div class="card-footer d-flex align-items-center flex-row-reverse p-0 py-2">
 
                         <a href="{{ route('admin.messages.index') }}" class="btn btn-bnb rounded-pill mx-2">
-                            vai ai tuoi messaggi
+                            Vai ai tuoi messaggi
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </div>
