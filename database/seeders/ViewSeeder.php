@@ -24,7 +24,7 @@ class ViewSeeder extends Seeder
             $new_view = new View();
             $new_view->apartment_id = $apartments[rand(0, count($apartments) - 1)];
             $new_view->ip_address = long2ip(mt_rand());
-            $new_view->date = Carbon::create(2024, rand(1, 12), rand(1, 28), rand(0, 24), rand(0, 60), rand(0, 60));
+            $new_view->date = Carbon::create(rand(2020, 2023), rand(1, 12), rand(1, 28), rand(0, 24), rand(0, 60), rand(0, 60));
             $new_view->save();
         }
     }
