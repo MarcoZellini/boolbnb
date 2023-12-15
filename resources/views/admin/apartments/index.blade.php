@@ -30,11 +30,11 @@ use Carbon\Carbon;
             </div>
         @endif
 
-        {{-- @if (session('error'))
+        @if (session('error'))
             <div class="alert alert-danger" role="alert">
-                {{ session('error') }} 😒 <span>attendere che scada il precedente per assegnarne uno nuovo!</span>
+                {{ session('error') }} 😒
             </div>
-        @endif --}}
+        @endif
 
         @forelse  ($apartments as $apartment)
             <div class="row border-top mt-2 align-items-center py-1">
