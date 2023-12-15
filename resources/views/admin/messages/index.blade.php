@@ -70,8 +70,9 @@
                                                             <strong>Cognome:</strong> {{ $message->lastname }}
                                                         </li>
                                                         <li>
+                                                            <strong>Email:</strong>
                                                             <a href="mailto:{{ $message->email }}">
-                                                                <strong>Email:</strong> {{ $message->email }}
+                                                                {{ $message->email }}
                                                             </a>
                                                         </li>
                                                         <li>

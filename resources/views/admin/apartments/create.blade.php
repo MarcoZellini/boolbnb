@@ -223,9 +223,21 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn w-25 btn-bnb mt-2 rounded-pill ms-2">
-                    Aggiungi
-                </button>
+                <div>
+
+                </div>
+
+                <div>
+                    <button type="submit" class="btn w-25 btn-bnb rounded-pill me-2">
+                        Aggiungi
+                    </button>
+
+                    <a class="btn rounded-pill btn-outline-secondary btn-bnb-secondary" href="{{ url()->previous() }}"
+                        role="button">
+                        Annulla
+                    </a>
+                </div>
+
             </div>
         </form>
     </div>

@@ -7,8 +7,6 @@
             <h6>Compila il form per modificare l'appartamento!</h6>
         </div>
 
-
-
         <form action="{{ route('admin.apartments.update', $apartment) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
@@ -236,9 +234,19 @@
                     </div>
                 </div>
 
-                <button type="submit" class="w-25 btn btn-bnb mt-2 rounded-pill ms-2">
-                    Modifica
-                </button>
+                <div>
+
+                    <button type="submit" class="w-25 btn btn-bnb rounded-pill me-2">
+                        Modifica
+                    </button>
+
+                    <a class="btn rounded-pill btn-outline-secondary btn-bnb-secondary" href="{{ url()->previous() }}"
+                        role="button">
+                        Annulla
+                    </a>
+
+                </div>
+
             </div>
         </form>
     </div>

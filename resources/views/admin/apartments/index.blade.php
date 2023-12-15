@@ -38,7 +38,8 @@ use Carbon\Carbon;
 
         @forelse  ($apartments as $apartment)
             <div class="row border-top mt-2 align-items-center py-1">
-                <div class="col-10 col-md-9">
+                {{-- col-10 col-md-9 --}}
+                <div class="col mt-2">
                     <div class="d-flex flex-column gap-1 flex-md-row align-items-md-center ">
                         <div class="col ">
                             @if ($apartment->images->where('is_main', true)->first()?->path)
@@ -86,9 +87,9 @@ use Carbon\Carbon;
                         </div>
                     </div>
                 </div>
-                <div class="col-2 col-md-3">
-                    <div
-                        class="d-flex align-items-end align-items-md-center flex-column flex-md-row gap-1 justify-content-md-end">
+                <div class="col-12 mt-3">
+
+                    <div>
                         <a class="btn btn-light rounded-circle border bnb-btn-shadow bnb-btn-actions"
                             href="{{ route('admin.apartments.show', $apartment->id) }}" role="button">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

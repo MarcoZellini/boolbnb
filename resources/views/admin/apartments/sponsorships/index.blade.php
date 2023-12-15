@@ -3,22 +3,29 @@
 @section('content')
     <div class="container mt-4">
 
-        <h2 class="mb-4">Lista Sponsorizzazioni</h2>
+        <h2 class="mb-4"> Seleziona una sponsorizzazione:</h2>
+
+        <div class="col-12 mb-3">
+
+            <a class="btn btn-primary rounded-circle border bnb-btn-shadow bnb-btn-actions me-1 "
+                href="{{ url()->previous() }}" role="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z" />
+                </svg>
+            </a>
+
+        </div>
 
         <div class="wrapper my-2">
             @forelse ($sponsorships as $sponsorship)
                 <div class="card border-0 border-top rounded-0">
                     <div class="card-body row row-cols-1 row-cols-md-5 justify-content-between align-items-center px-0">
+
                         <div class="row row-cols-2 row-cols-md-1 align-items-center my-1">
                             <div class=" align-self-start">
-                                <h4>
-                                    {{ $sponsorship->id }}
-                                </h4>
-                            </div>
-                        </div>
-                        <div class="row row-cols-2 row-cols-md-1 align-items-center my-1">
-                            <div class=" align-self-start">
-                                <h4>
+                                <h4 class="fw-bold">
                                     {{ $sponsorship->name }}
                                 </h4>
                             </div>
@@ -47,9 +54,9 @@
                         </div>
                         <div class="row row-cols-2 row-cols-md-1 align-items-center my-1">
                             <div class=" align-self-start">
-                                <a class="btn btn-primary"
+                                <a class="btn btn-bnb rounded-pill"
                                     href="{{ route('admin.apartments.sponsorships.payment.index', ['sponsorship' => $sponsorship->id, 'apartment' => $apartment->id]) }}"
-                                    role="button">Sponsorizza!
+                                    role="button">Sponsorizza
                                 </a>
                             </div>
                         </div>
@@ -57,9 +64,10 @@
                 </div>
             @empty
                 <div>
-                    Non sono ancora stati caricati appartamenti!
+                    Attualmente non sono disponibili opzioni di sponsorizzazione.
                 </div>
             @endforelse
         </div>
+
     </div>
 @endsection
