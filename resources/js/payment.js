@@ -21,6 +21,7 @@ braintree.dropin.create({
             //   it a the hidden field before submitting the complete form to
             //   a server-side integration
             document.querySelector('#nonce').value = payload.nonce;
+            document.querySelector('#form_button').style.display = 'none';
             form.submit();
         });
     });

@@ -13,27 +13,27 @@ class PaymentController extends Controller
 {
     public function index(Apartment $apartment, Sponsorship $sponsorship)
     {
-        /* dd([
-            'sponsorship' => $sponsorship->id,
-            'apartment' => $apartment->id
-        ]); */
+        if ($apartment->user_id === Auth::id()) {
 
-        $gateway =  new Gateway([
-            'environment' => env('BRAINTREE_ENVIRONMENT'),
-            'merchantId' => env('BRAINTREE_MERCHANT_ID'),
-            'publicKey' => env('BRAINTREE_PUBLIC_KEY'),
-            'privateKey' => env('BRAINTREE_PRIVATE_KEY')
-        ]);
+            $gateway =  new Gateway([
+                'environment' => env('BRAINTREE_ENVIRONMENT'),
+                'merchantId' => env('BRAINTREE_MERCHANT_ID'),
+                'publicKey' => env('BRAINTREE_PUBLIC_KEY'),
+                'privateKey' => env('BRAINTREE_PRIVATE_KEY')
+            ]);
 
+            $client_token = $gateway->clientToken()->generate();
 
-        $client_token = $gateway->clientToken()->generate();
-
-        return view('admin.apartments.payments.index', [
-            'client_token' => $client_token,
-            'sponsorship' => $sponsorship,
-            'apartment' => $apartment
-        ]);
+            return view('admin.apartments.payments.index', [
+                'client_token' => $client_token,
+                'sponsorship' => $sponsorship,
+                'apartment' => $apartment
+            ]);
+        } else {
+            abort(403);
+        }
     }
+
 
     public function process(Request $request, Apartment $apartment, Sponsorship $sponsorship)
     {
@@ -55,17 +55,14 @@ class PaymentController extends Controller
         ]);
 
         if (!$result->success) {
-            //return error
+            return to_route('admin.apartments.index')->with('error', "Appartamento non sponsorizzato, c'e' stato un errore con il pagamento");
+        } else {
+            //dd($result->transaction);
         }
 
-        /* return to_route('admin.apartments.sponsorships.store', [
-            'sponsorship' => $sponsorship->id,
-            'apartment' => $apartment->id
-        ]); */
-
-        return redirect()->route('admin.apartments.sponsorships.store', [
-            'sponsorship' => $sponsorship->id,
-            'apartment' => $apartment->id
+        return to_route('admin.apartments.sponsorships.store', [
+            'sponsorship' => $sponsorship,
+            'apartment' => $apartment
         ]);
     }
 }

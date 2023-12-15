@@ -67,7 +67,7 @@
                             <i class="fa-regular fa-comments"></i>
                             Totale Ore Sponsorizzazione
                         </h5>
-                        <strong class="fs-4"> {{ $total_sponsorships_time['hours'] }} </strong>
+                        <strong class="fs-2"> {{ $total_sponsorships_time['hours'] }} </strong>
                     </div>
                     <div class="card-footer d-flex align-items-center flex-row-reverse p-0 py-2">
 
