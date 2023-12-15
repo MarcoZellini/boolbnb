@@ -395,6 +395,13 @@ Large	lg	≥992px
 Extra large	xl	≥1200px
 Extra extra large	xxl	≥1400px 
 */
+.bnb-main-img,
+.bnb-br-img,
+.bnb-extra-img,
+.bnb-mid-img,
+.bnb-tr-img {
+    border: 3px solid transparent;
+}
 
 @media screen and (max-width: 425px) {
 
@@ -402,10 +409,7 @@ Extra extra large	xxl	≥1400px
         width: 100% !important;
     }
 
-    .justify-content-xsm-center {
-        justify-content: center !important;
-    }
-
+    .bnb-img-row,
     .bnb-extra-img-5 {
         height: 150px !important;
     }
@@ -413,7 +417,7 @@ Extra extra large	xxl	≥1400px
 
 @media screen and (max-width: 575.97px) {
 
-    .bnb-extra-img-wrapper,
+    .bnb-img-row,
     .bnb-extra-img-5,
     .bnb-main-img,
     .bnb-extra-img {
@@ -424,16 +428,6 @@ Extra extra large	xxl	≥1400px
 }
 
 @media screen and (min-width: 575.98px) {
-
-    .bnb-extra-img-5 {
-        height: 50% !important;
-    }
-
-    .bnb-extra-img-wrapper,
-    .bnb-main-img,
-    .bnb-extra-img {
-        height: 200px;
-    }
 
     .bnb-mid-img {
         border-radius: 0px !important;
@@ -449,9 +443,24 @@ Extra extra large	xxl	≥1400px
         border-bottom-right-radius: 0.375rem !important;
     }
 
+    .bnb-extra-img-5 {
+        height: 50% !important;
+
+        img {
+            height: 100% !important;
+        }
+    }
+
+    .bnb-img-row,
+    .bnb-main-img,
+    .bnb-extra-img,
+    .bnb-extra-img-5 {
+        height: 250px;
+    }
+
 }
 
-@media screen and (max-width: 575.98px) {
+/* @media screen and (max-width: 575.98px) {
 
     .bnb-extra-img-wrapper,
     .bnb-main-img,
@@ -460,21 +469,22 @@ Extra extra large	xxl	≥1400px
         border-radius: 0.375rem !important;
     }
 
-}
+} */
 
 @media screen and (min-width: 768px) {
 
-    .bnb-extra-img-wrapper,
+    .bnb-img-row,
     .bnb-main-img,
     .bnb-extra-img {
         height: 250px;
+        // border: 2px dotted #E00B41;
     }
 
 }
 
 @media screen and (min-width: 992px) {
 
-    .bnb-extra-img-wrapper,
+    .bnb-img-row,
     .bnb-main-img,
     .bnb-extra-img {
         height: 345px;
@@ -484,15 +494,18 @@ Extra extra large	xxl	≥1400px
 
 @media screen and (min-width: 1200px) {
 
-    .bnb-extra-img-wrapper,
+    .bnb-img-row,
     .bnb-main-img,
     .bnb-extra-img {
         height: 400px;
+        // background-color: #000000;
     }
 
 }
 
 @media screen and (min-width: 1400px) {
+
+    .bnb-img-row,
     .bnb-main-img {
         height: 450px;
     }

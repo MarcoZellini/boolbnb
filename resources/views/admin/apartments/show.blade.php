@@ -4,9 +4,9 @@
 
     <div class="container my-4">
 
-        <div class="mt-4 row p-2 flex-column flex-sm-row">
+        <div class="mt-4 row p-2 align-items-center flex-column flex-sm-row">
 
-            <div class="{{ count($apartment->images) == 5 ? 'col-12 col-sm-8' : 'col-12' }} m-0 p-1 ">
+            <div class="{{ count($apartment->images) == 5 ? 'col-12 col-sm-8' : 'col-12' }} m-0 p-0 ">
 
                 {{-- MAIN IMAGE --}}
 
@@ -33,7 +33,7 @@
 
             {{-- IF THERE ARE 5 IMAGES APPLIES STYLE BASED ON THE POSITION THE IMAGE SHOULD TAKE ON THE PAGE --}}
             @if (count($apartment->images) > 1 && count($apartment->images) == 5)
-                <div class="col col-sm-4 row align-items-center m-0 p-0">
+                <div class="col col-sm-4 row align-items-center m-0 p-0 bnb-img-row">
 
                     {{-- LOOPS THE IMAGES... --}}
                     @foreach ($apartment->images as $image)
@@ -47,8 +47,8 @@
                                 $styleIndex++;
                             @endphp
 
-                            {{-- APPLIES PADDING CLASSES BASED ON THE LOOP ITERATION --}}
-                            <div class="col-6 m-0 p-1 bnb-extra-img-5">
+                            {{-- APPLIES STYLECLASSES CLASSES BASED ON THE LOOP ITERATION --}}
+                            <div class="col-6 m-0 p-0 bnb-extra-img-5">
                                 <img class="w-100 h-100 img-fluid object-fit-cover rounded {{ $styleClass }} shadow"
                                     src="{{ URL::asset('storage/' . $image->path) }}" alt="{{ $apartment->title }}">
                             </div>
@@ -63,8 +63,8 @@
 
                     @foreach ($apartment->images as $image)
                         @if (!$image->is_main)
-                            <div class="col m-0 p-1 bnb-extra-img-wrapper">
-                                <img class="w-100 h-100 img-fluid object-fit-cover shadow bnb-extra-img"
+                            <div class="col m-0 p-0">
+                                <img class="w-100 img-fluid object-fit-cover shadow bnb-extra-img"
                                     src="{{ URL::asset('storage/' . $image->path) }}" alt="{{ $apartment->title }}"
                                     style="border-radius: 0.375rem;">
                             </div>
