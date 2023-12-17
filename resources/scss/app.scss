@@ -28,6 +28,10 @@ $bnb-secondary: #b0b0b0a4;
     }
 }
 
+.shadow_filter {
+    filter: drop-shadow(0 0 20px $bnb-secondary ) !important;
+}
+
 .current_page {
     color: $bnb_primary !important;
 }

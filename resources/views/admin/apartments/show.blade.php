@@ -12,7 +12,7 @@
 
                 {{-- SHOWS PLACEHOLDER IMAGE IF THE DB ENTRY IS EMPTY --}}
                 @if (count($apartment->images) == 0)
-                    <img class="w-100 object-fit-cover rounded-start bnb-main-img shadow"
+                    <img class="w-100 object-fit-cover rounded-start bnb-main-img shadow_filter"
                         src="{{ asset('storage/placeholders/placeholder.jpg') }}" alt="Placeholder"
                         style="border-radius: 0.375rem">
                 @endif
@@ -21,7 +21,7 @@
                 @foreach ($apartment->images as $image)
                     @if ($image->is_main)
                         {{-- IF THERE ARE LESS THAN 5 IMAGES THE is_main IMAGE TAKES THE ENTIRE AVAIABLE SPACE AND GETS ROUNDED CORNERS --}}
-                        <img class="w-100 object-fit-cover rounded-start bnb-main-img shadow"
+                        <img class="w-100 object-fit-cover rounded-start bnb-main-img shadow_filter"
                             src="{{ URL::asset('storage/' . $image->path) }}" alt="{{ $apartment->title }}"
                             style="{{ count($apartment->images) < 5 ? 'border-radius: 0.375rem' : '' }}">
                     @endif
@@ -49,7 +49,7 @@
 
                             {{-- APPLIES STYLECLASSES CLASSES BASED ON THE LOOP ITERATION --}}
                             <div class="col-6 m-0 p-0 bnb-extra-img-5">
-                                <img class="w-100 h-100 img-fluid object-fit-cover rounded {{ $styleClass }} shadow"
+                                <img class="w-100 h-100 img-fluid object-fit-cover rounded {{ $styleClass }} shadow_filter"
                                     src="{{ URL::asset('storage/' . $image->path) }}" alt="{{ $apartment->title }}">
                             </div>
                         @endif
@@ -64,7 +64,7 @@
                     @foreach ($apartment->images as $image)
                         @if (!$image->is_main)
                             <div class="col m-0 p-0">
-                                <img class="w-100 img-fluid object-fit-cover shadow bnb-extra-img"
+                                <img class="w-100 img-fluid object-fit-cover shadow_filter bnb-extra-img"
                                     src="{{ URL::asset('storage/' . $image->path) }}" alt="{{ $apartment->title }}"
                                     style="border-radius: 0.375rem;">
                             </div>

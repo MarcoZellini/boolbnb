@@ -1,4 +1,4 @@
-let submitBtn, message;
+let submitBtn, message, message_date_of_birth;
 
 document.addEventListener('DOMContentLoaded', function () {
     submitBtn = document.getElementById('submitBtn');
@@ -9,6 +9,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     console.log("message", message);
 
+    message_date_of_birth = document.getElementById('message_date_of_birth');
+
+    console.log("message_date_of_birth", message_date_of_birth);
+
 });
 
 document.getElementById('registerForm').addEventListener('submit', function (e) {
@@ -16,9 +20,34 @@ document.getElementById('registerForm').addEventListener('submit', function (e) 
 
     let password = document.getElementById('password').value;
     let confirmPassword = document.getElementById('password-confirm').value;
-
+    let dateOfBirth = document.getElementById('date_of_birth').value
     // RESETTA IL MESSAGGIO
     message.textContent = '';
+
+    /* validazione data di nascita  */
+
+    let currentDate = new Date()
+    let userDate = new Date(dateOfBirth)
+
+    if (userDate > currentDate) {
+        message_date_of_birth.textContent = 'la data di nascita non puo essere futura';
+        return false;
+    }
+
+    const MaxAge = 100
+    const MinAge = 18
+    let UserAge = currentDate.getFullYear() - userDate.getFullYear()
+
+    if (UserAge > MaxAge) {
+        message_date_of_birth.textContent = `l'utente non puo avere piu di 100 anni`;
+        return false;
+    }
+    else if (UserAge < MinAge) {
+        message_date_of_birth.textContent = `l'utente deve essere maggiorenne`;
+        return false;
+    }
+
+    /* validazione password */
 
     // CONTROLLA CHE LA PASSWORD SIA LUNGA ALMENO 8 CARATTERI
     if (password.length < 8) {
@@ -55,6 +84,7 @@ document.getElementById('registerForm').addEventListener('submit', function (e) 
         message.textContent = 'I campi password e conferma password devono essere identici';
         return false;
     }
+
 
     // SE TUTTI I CONTROLLI PASSANO IL FORM VIENE INVIATI
     document.getElementById('registerForm').submit()
