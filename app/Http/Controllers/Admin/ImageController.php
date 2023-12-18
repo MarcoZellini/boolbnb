@@ -50,9 +50,11 @@ class ImageController extends Controller
 
             if ($was_main) {
                 $new_main_image = Image::where('apartment_id', $apartment->id)->first();
-                $new_main_image->update([
-                    'is_main' => 1
-                ]);
+                if ($new_main_image) {
+                    $new_main_image->update([
+                        'is_main' => 1
+                    ]);
+                }
             }
 
             return to_route('admin.apartments.images.index', $apartment)->with('message', 'Immagine eliminata con successo.');
