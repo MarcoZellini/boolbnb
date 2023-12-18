@@ -90,12 +90,7 @@
         </div>
         <div class="row my-3">
             <div class="col-12 col-md-6">
-                <select name="year-dropdown" id="year-dropdown">
-                    <option value="2020">2020</option>
-                    <option value="2021">2021</option>
-                    <option value="2022">2022</option>
-                    <option value="2023">2023</option>
-                </select>
+
                 <canvas class="col-2" id="chart-views"></canvas>
 
             </div>
