@@ -103,7 +103,8 @@
                                 <input id="date_of_birth" type="date"
                                     class="date-bnb @error('date_of_birth') is-invalid @enderror form-control"
                                     name="date_of_birth" required>
-
+                                <span id="message_date_of_birth"
+                                    style="font-weight: bolder; font-size: 14px; color: #dc354b"></span>
                                 @error('date_of_birth')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
