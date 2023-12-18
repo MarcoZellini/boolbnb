@@ -85,7 +85,6 @@ document.getElementById('registerForm').addEventListener('submit', function (e) 
         return false;
     }
 
-
     // SE TUTTI I CONTROLLI PASSANO IL FORM VIENE INVIATI
     document.getElementById('registerForm').submit()
 }
