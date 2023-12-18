@@ -22,7 +22,7 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        return view('admin.apartments.index', ['apartments' => Apartment::where('user_id', Auth::user()->id)->paginate(10)])->with('message', 'Appartamento sponsorizzato con successo!');;
+        return view('admin.apartments.index', ['apartments' => Apartment::where('user_id', Auth::user()->id)->orderByDesc('id')->paginate(10)])->with('message', 'Appartamento sponsorizzato con successo!');;
     }
 
     /**

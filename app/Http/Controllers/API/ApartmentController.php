@@ -97,8 +97,7 @@ class ApartmentController extends Controller
         ])->whereRaw('st_distance_sphere(point(apartments.latitude,apartments.longitude),point(' . implode($inputAddressLat) . ',' . implode($inputAddressLong) . ')) <=' . implode($maxRadius) . '000')
             ->where('beds', '>=', $minBeds)
             ->where('rooms', '>=', $minRooms)
-            ->orderByRaw('st_distance_sphere(point(apartments.latitude,apartments.longitude),point(' . implode($inputAddressLat) . ',' . implode($inputAddressLong) . '))')
-            ->orderByRaw('FIELD(id, ' . $field_string . ') DESC')
+            ->orderByRaw('FIELD(id, ' . $field_string . ') DESC, st_distance_sphere(point(apartments.latitude,apartments.longitude),point(' . implode($inputAddressLat) . ',' . implode($inputAddressLong) . '))')
             ->paginate(20);
 
         $apartments = $apartments->toArray();
