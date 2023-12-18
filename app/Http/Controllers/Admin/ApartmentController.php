@@ -14,6 +14,7 @@ use Illuminate\Support\Str;
 use App\Models\Service;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Image;
+use App\Models\View;
 
 class ApartmentController extends Controller
 {
@@ -100,13 +101,56 @@ class ApartmentController extends Controller
         if ($apartment->user_id === Auth::id()) {
             $services = Service::all();
 
+            $total_apartments = Apartment::where('user_id', Auth::id())->count();
+
+            /* total messages */
+            $total_messages = Message::whereHas('apartment', function ($query) {
+                $query->where('user_id', Auth::id());
+            })->count();
+
+            $apartment_id = $apartment->id;
+
+            /* Total Messages by year */
+            $total_year_messages = Message::whereHas('apartment', function ($query) use ($apartment_id) {
+                $query->where('apartment_id', $apartment_id);
+            })->selectRaw('YEAR(created_at) as year, count(*) as messages')
+                ->groupBy('year')
+                ->get();
+
+            /* Total Messages by month  */
+            $total_month_messages = Message::whereHas('apartment', function ($query) use ($apartment_id) {
+                $query->where('apartment_id', $apartment_id);
+            })->selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, count(*) as messages')
+                ->groupBy('year', 'month')
+                ->get();
+
+            /* Total Views */
+            $total_views = View::whereHas('apartment', function ($query) use ($apartment_id) {
+                $query->where('apartment_id', $apartment_id);
+            })->count();
+
+            /* Total Views by year */
+            $total_year_views = View::whereHas('apartment', function ($query) use ($apartment_id) {
+                $query->where('apartment_id', $apartment_id);
+            })->selectRaw('YEAR(date) as year, count(*) as views')
+                ->groupBy('year')
+                ->get();
+
+            /* Total Views by month  */
+            $total_month_views = View::whereHas('apartment', function ($query) use ($apartment_id) {
+                $query->where('apartment_id', $apartment_id);
+            })->selectRaw('YEAR(date) as year, MONTH(date) as month, count(*) as views')
+                ->groupBy('year', 'month')
+                ->get();
+
+
             // STYLE CLASSES ARRAY
             $styleClasses = ['bnb-mid-img', 'bnb-tr-img', 'bnb-mid-img', 'bnb-br-img'];
 
             // STYLE CLASSES INDEX
             $styleIndex = 0;
 
-            return view('admin.apartments.show', ['apartment' => $apartment, 'services' => $services], compact('styleClasses', 'styleIndex'));
+            return view('admin.apartments.show', ['apartment' => $apartment, 'services' => $services, 'total_views' => $total_views, 'total_year_views' => $total_year_views, 'total_month_views' => $total_month_views, 'total_year_messages' => $total_year_messages, 'total_month_messages' => $total_month_messages], compact('styleClasses', 'styleIndex'));
         } else {
             abort(403);
         }
