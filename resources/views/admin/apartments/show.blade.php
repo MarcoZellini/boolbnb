@@ -269,17 +269,6 @@
                 </div>
             </div>
 
-            <h5>TOT VIEWS</h5>
-            {{ $total_views }}
-            {{--  <h5>TOT VIEWS BY YEAR</h5>
-            {{ $total_year_views }} --}}
-            <h5>TOT VIEWS BY MONTH</h5>
-            {{ $total_month_views }}
-            <h5>TOT MESSAGES BY YEAR</h5>
-            {{--             {{ $total_year_messages }}
-            <h5>TOT MESSAGES BY MONTH</h5> --}}
-            {{ $total_month_messages }}
-
             {{-- MESSAGGI --}}
             <div class="col">
                 <div class="mt-3 overflow-auto px-2">
