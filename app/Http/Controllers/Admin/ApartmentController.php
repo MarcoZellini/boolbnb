@@ -100,17 +100,6 @@ class ApartmentController extends Controller
         if ($apartment->user_id === Auth::id()) {
             $services = Service::all();
 
-            $total_messages = Message::whereHas('apartment', function ($query) {
-                $query->where('user_id', Auth::id());
-            })->count();
-
-            /* Total Messages by year */
-            $total_year_messages = Message::whereHas('apartment', function ($query) {
-                $query->where('user_id', Auth::id());
-            })->selectRaw('YEAR(created_at) as year, count(*) as messages')
-                ->groupBy('year')
-                ->get();
-            dd($total_year_messages);
             // STYLE CLASSES ARRAY
             $styleClasses = ['bnb-mid-img', 'bnb-tr-img', 'bnb-mid-img', 'bnb-br-img'];
 

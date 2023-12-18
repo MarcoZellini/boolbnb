@@ -1,6 +1,12 @@
 @extends('layouts.admin')
 
 @section('content')
+    @vite(['resources/js/chart.js'])
+    <script>
+        let total_month_views = @json($total_month_views);
+        let total_month_messages = @json($total_month_messages);
+    </script>
+
     <div class="container">
         <h2 class="fs-4 text-secondary my-4">
             {{ __('Dashboard') }}
@@ -79,17 +85,25 @@
                 </div>
             </div>
 
-            <div>
-                <h1>vievs year</h1>
-                {{ $total_year_views }}
-                <h1>vievs month</h1>
-                {{ $total_month_views }}
-                <h1>messages year</h1>
-                {{ $total_year_messages }}
-                <h1>messages month</h1>
-                {{ $total_month_messages }}
-            </div>
-        </div>
 
+
+        </div>
+        <div class="row my-3">
+            <div class="col-12 col-md-6">
+                <select name="year-dropdown" id="year-dropdown">
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                </select>
+                <canvas class="col-2" id="chart-views"></canvas>
+
+            </div>
+            <div class="col-12 col-md-6">
+
+                <canvas class="col" id="chart-message"></canvas>
+            </div>
+
+        </div>
     </div>
 @endsection

@@ -26,13 +26,6 @@ class DashboardController extends Controller
             $query->where('user_id', Auth::id());
         })->count();
 
-        /* Total Messages by year */
-        $total_year_messages = Message::whereHas('apartment', function ($query) {
-            $query->where('user_id', Auth::id());
-        })->selectRaw('YEAR(created_at) as year, count(*) as messages')
-            ->groupBy('year')
-            ->get();
-
         /* Total Messages by month  */
         $total_month_messages = Message::whereHas('apartment', function ($query) {
             $query->where('user_id', Auth::id());
@@ -44,13 +37,6 @@ class DashboardController extends Controller
         $total_views = View::whereHas('apartment', function ($query) {
             $query->where('user_id', Auth::id());
         })->count();
-
-        /* Total Views by year */
-        $total_year_views = View::whereHas('apartment', function ($query) {
-            $query->where('user_id', Auth::id());
-        })->selectRaw('YEAR(date) as year, count(*) as views')
-            ->groupBy('year')
-            ->get();
 
         /* Total Views by month  */
         $total_month_views = View::whereHas('apartment', function ($query) {
@@ -77,19 +63,22 @@ class DashboardController extends Controller
         $final_minutes = (int)(($seconds / 60) + (int)($minutes)) % 60;
         $final_hours = (int)($hours) + (int)((($seconds / 60) + ($minutes)) / 60);
 
-        return view('admin.dashboard', [
-            'total_apartments' => $total_apartments,
-            'total_messages' => $total_messages,
-            'total_sponsorships_time' => [
-                'hours' => $final_hours,
-                'minutes' => $final_minutes,
-                'seconds' => $final_seconds,
-            ],
-            'total_year_views' => $total_year_views,
-            'total_month_views' => $total_month_views,
-            'total_year_messages' => $total_year_messages,
-            'total_month_messages' => $total_month_messages,
+        return view(
+            'admin.dashboard',
+            [
+                'total_apartments' => $total_apartments,
+                'total_messages' => $total_messages,
+                'total_views' => $total_views,
+                'total_sponsorships_time' => [
+                    'hours' => $final_hours,
+                    'minutes' => $final_minutes,
+                    'seconds' => $final_seconds,
+                ],
+                'total_month_views' => $total_month_views,
+                'total_month_messages' => $total_month_messages,
 
-        ]);
+            ],
+
+        );
     }
 }
