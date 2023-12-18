@@ -111,11 +111,11 @@ class ApartmentController extends Controller
             $apartment_id = $apartment->id;
 
             /* Total Messages by year */
-            $total_year_messages = Message::whereHas('apartment', function ($query) use ($apartment_id) {
+            /* $total_year_messages = Message::whereHas('apartment', function ($query) use ($apartment_id) {
                 $query->where('apartment_id', $apartment_id);
             })->selectRaw('YEAR(created_at) as year, count(*) as messages')
                 ->groupBy('year')
-                ->get();
+                ->get(); */
 
             /* Total Messages by month  */
             $total_month_messages = Message::whereHas('apartment', function ($query) use ($apartment_id) {
@@ -130,11 +130,11 @@ class ApartmentController extends Controller
             })->count();
 
             /* Total Views by year */
-            $total_year_views = View::whereHas('apartment', function ($query) use ($apartment_id) {
+            /* $total_year_views = View::whereHas('apartment', function ($query) use ($apartment_id) {
                 $query->where('apartment_id', $apartment_id);
             })->selectRaw('YEAR(date) as year, count(*) as views')
                 ->groupBy('year')
-                ->get();
+                ->get(); */
 
             /* Total Views by month  */
             $total_month_views = View::whereHas('apartment', function ($query) use ($apartment_id) {
@@ -143,14 +143,14 @@ class ApartmentController extends Controller
                 ->groupBy('year', 'month')
                 ->get();
 
-
             // STYLE CLASSES ARRAY
             $styleClasses = ['bnb-mid-img', 'bnb-tr-img', 'bnb-mid-img', 'bnb-br-img'];
 
             // STYLE CLASSES INDEX
             $styleIndex = 0;
 
-            return view('admin.apartments.show', ['apartment' => $apartment, 'services' => $services, 'total_views' => $total_views, 'total_year_views' => $total_year_views, 'total_month_views' => $total_month_views, 'total_year_messages' => $total_year_messages, 'total_month_messages' => $total_month_messages], compact('styleClasses', 'styleIndex'));
+            // 'total_year_views' => $total_year_views, 'total_year_messages' => $total_year_messages,
+            return view('admin.apartments.show', ['apartment' => $apartment, 'services' => $services, 'total_views' => $total_views,  'total_month_views' => $total_month_views, 'total_month_messages' => $total_month_messages], compact('styleClasses', 'styleIndex'));
         } else {
             abort(403);
         }
