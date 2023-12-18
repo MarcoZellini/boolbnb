@@ -79,6 +79,16 @@
                 </div>
             </div>
 
+            <div>
+                <h1>vievs year</h1>
+                {{ $total_year_views }}
+                <h1>vievs month</h1>
+                {{ $total_month_views }}
+                <h1>messages year</h1>
+                {{ $total_year_messages }}
+                <h1>messages month</h1>
+                {{ $total_month_messages }}
+            </div>
         </div>
 
     </div>
