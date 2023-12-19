@@ -80,6 +80,7 @@ class ApartmentController extends Controller
         $maxRadius = $request->all('maxRadius');
         $minBeds = $request->all('minBeds');
         $minRooms = $request->all('minRooms');
+        $serviceIDs = $request->input('services');
         $field_string = '';
 
         $sponsorized_apartments = DB::table('apartment_sponsorship')
@@ -92,9 +93,6 @@ class ApartmentController extends Controller
             $field_string !== '' ? $field_string .= ',' . $apartment->apartment_id : $field_string .= $apartment->apartment_id;
         }
 
-        //$apartments = Apartment::with(['images', 'sponsorships', 'user', 'services'])->orderByRaw('FIELD(id, ' . $field_string . ') DESC')->paginate(20);
-
-        /* $apartments */
         $query = Apartment::with([
             'images',
             'sponsorships' => function ($query) {
@@ -105,6 +103,14 @@ class ApartmentController extends Controller
         ])->whereRaw('st_distance_sphere(point(apartments.latitude,apartments.longitude),point(' . implode($inputAddressLat) . ',' . implode($inputAddressLong) . ')) <=' . implode($maxRadius) . '000')
             ->where('beds', '>=', $minBeds)
             ->where('rooms', '>=', $minRooms);
+
+        if ($serviceIDs) {
+            foreach ($serviceIDs as $id) {
+                $query->whereHas('services', function ($query) use ($id) {
+                    $query->where('services.id', $id);
+                });
+            }
+        }
 
         if ($field_string) {
             $apartments = $query->orderByRaw('FIELD(id, ' . $field_string . ') DESC, st_distance_sphere(point(apartments.latitude,apartments.longitude),point(' . implode($inputAddressLat) . ',' . implode($inputAddressLong) . '))')
