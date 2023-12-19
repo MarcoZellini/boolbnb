@@ -70,7 +70,7 @@
                 <div class="card h-100">
                     <div class="card-body h-100">
                         <h5 class="bnb-color">
-                            <i class="fa-regular fa-comments"></i>
+                            <i class="fa-solid fa-clock-rotate-left"></i>
                             Totale Ore Sponsorizzazione
                         </h5>
                         <strong class="fs-2"> {{ $total_sponsorships_time['hours'] }} </strong>

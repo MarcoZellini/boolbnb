@@ -24,14 +24,21 @@ class ApartmentController extends Controller
             $field_string !== '' ? $field_string .= ',' . $apartment->apartment_id : $field_string .= $apartment->apartment_id;
         }
 
-        $apartments = Apartment::with([
+        /*  */
+        $query = Apartment::with([
             'images',
             'sponsorships' => function ($query) {
                 $query->where('end_date', '>', Carbon::now()->format('Y-m-d H:i:s'))->orderByDesc('end_date');
             },
             'user',
             'services'
-        ])->orderByRaw('FIELD(id, ' . $field_string . ') DESC')->paginate(20);
+        ]);
+
+        if ($field_string) {
+            $apartments = $query->orderByRaw('FIELD(id, ' . $field_string . ') DESC')->paginate(20);
+        } else {
+            $apartments = $query->paginate(20);
+        }
 
         $apartments = $apartments->toArray();
 
@@ -87,7 +94,8 @@ class ApartmentController extends Controller
 
         //$apartments = Apartment::with(['images', 'sponsorships', 'user', 'services'])->orderByRaw('FIELD(id, ' . $field_string . ') DESC')->paginate(20);
 
-        $apartments = Apartment::with([
+        /* $apartments */
+        $query = Apartment::with([
             'images',
             'sponsorships' => function ($query) {
                 $query->where('end_date', '>', Carbon::now()->format('Y-m-d H:i:s'))->orderByDesc('end_date');
@@ -96,9 +104,15 @@ class ApartmentController extends Controller
             'services'
         ])->whereRaw('st_distance_sphere(point(apartments.latitude,apartments.longitude),point(' . implode($inputAddressLat) . ',' . implode($inputAddressLong) . ')) <=' . implode($maxRadius) . '000')
             ->where('beds', '>=', $minBeds)
-            ->where('rooms', '>=', $minRooms)
-            ->orderByRaw('FIELD(id, ' . $field_string . ') DESC, st_distance_sphere(point(apartments.latitude,apartments.longitude),point(' . implode($inputAddressLat) . ',' . implode($inputAddressLong) . '))')
-            ->paginate(20);
+            ->where('rooms', '>=', $minRooms);
+
+        if ($field_string) {
+            $apartments = $query->orderByRaw('FIELD(id, ' . $field_string . ') DESC, st_distance_sphere(point(apartments.latitude,apartments.longitude),point(' . implode($inputAddressLat) . ',' . implode($inputAddressLong) . '))')
+                ->paginate(20);
+        } else {
+            $apartments = $query->orderByRaw('st_distance_sphere(point(apartments.latitude,apartments.longitude),point(' . implode($inputAddressLat) . ',' . implode($inputAddressLong) . '))')
+                ->paginate(20);
+        }
 
         $apartments = $apartments->toArray();
 
