@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\Apartment;
 use App\Models\Sponsorship;
 use App\Models\Message;
@@ -12,11 +13,20 @@ use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $seconds = 0;
         $minutes = 0;
         $hours = 0;
+
+        if ($request->input('start_date') && $request->input('end_date')) {
+            $start_date = $request->input('start_date');
+            $end_date = $request->input('end_date');
+        } else {
+            $current_year = Carbon::now()->year;
+            $start_date = $current_year . '-01-01';
+            $end_date = $current_year . '-12-31';
+        }
 
         $total_apartments = Apartment::where('user_id', Auth::id())->count();
 
@@ -31,6 +41,10 @@ class DashboardController extends Controller
             $query->where('user_id', Auth::id());
         })->selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, count(*) as messages')
             ->groupBy('year', 'month')
+            ->where('created_at', '>=', $start_date)
+            ->where('created_at', '<=', $end_date)
+            ->orderBy('year',)
+            ->orderBy('month',)
             ->get();
 
         /* Total Views */
@@ -43,6 +57,10 @@ class DashboardController extends Controller
             $query->where('user_id', Auth::id());
         })->selectRaw('YEAR(date) as year, MONTH(date) as month, count(*) as views')
             ->groupBy('year', 'month')
+            ->where('date', '>=', $start_date)
+            ->where('date', '<=', $end_date)
+            ->orderBy('year',)
+            ->orderBy('month',)
             ->get();
 
         foreach (Apartment::where('user_id', Auth::id())->get() as $apartment) {
@@ -76,7 +94,8 @@ class DashboardController extends Controller
                 ],
                 'total_month_views' => $total_month_views,
                 'total_month_messages' => $total_month_messages,
-
+                'start_date' => $start_date,
+                'end_date' => $end_date
             ],
 
         );

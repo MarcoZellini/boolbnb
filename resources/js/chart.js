@@ -1,176 +1,116 @@
 import Chart from 'chart.js/auto';
 
 let chart_views = document.getElementById('chart-views')
-let chart_message = document.getElementById('chart-message')
-
-
 
 const data_month_views = [];
-
 const data_month_messages = [];
+const labels = [];
 
-const labels_views = []
+const splitStartDate = start_date.split('-');
+const splitEndDate = end_date.split('-');
 
-const labels_messages = []
-
-
-
-
-if (total_month_messages) {
-    for (let i = 0; i < total_month_messages.length; i++) {
-
-        data_month_messages.push(total_month_messages[i]['messages'])
-        /*  console.log(data_month_messages); */
-        labels_messages.push(total_month_messages[i]['month'].toString().padStart(2, '0') + '/' + total_month_messages[i]['year'])
-    }
-    /*   console.log('mese', data_month_messages); */
-
-
-
-    new Chart(chart_message, {
-        type: 'line',
-        data: {
-            labels: labels_messages,
-            datasets: [
-                {
-                    label: 'Messaggi per mese',
-                    data: data_month_messages,
-                    borderWidth: 1,
-                    tension: 0.4,
-                    fill: false,
-                    borderColor: "#FF385C",
-                    backgroundColor: "#FF385C",
-                },
-
-            ]
-        },
-        options: {
-            scales: {
-                y: {
-                    title: {
-                        display: true,
-                        text: 'Messaggi',
-                    },
-                    beginAtZero: true,
-                    min: 0,
-                    ticks: {
-                        stepSize: 1
-                    }
-                }
-            }
-        }
-    });
+const objEndDate = {
+    year: Number(splitEndDate[0]),
+    month: Number(splitEndDate[1])
 }
 
-
-if (total_month_views) {
-    for (let i = 0; i < total_month_views.length; i++) {
-        data_month_views.push(total_month_views[i]['views'])
-        labels_views.push(total_month_views[i]['month'].toString().padStart(2, '0') + '/' + total_month_views[i]['year'])
-    }
-    /*  console.log('mese', total_month_views); */
-
-    new Chart(chart_views, {
-        type: 'line',
-        data: {
-            labels: labels_views,
-            datasets: [
-                {
-                    label: 'Visualizzazioni mensili',
-                    data: data_month_views,
-                    borderWidth: 1,
-                    tension: 0.4,
-                    fill: false,
-                    borderColor: "#FF385C",
-                    backgroundColor: "#FF385C",
-                },
-
-            ]
-        },
-        options: {
-            scales: {
-
-                y: {
-                    title: {
-                        display: true,
-                        text: 'Visualizzazioni  ',
-                    },
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-
+const tempDate = {
+    year: Number(splitStartDate[0]),
+    month: Number(splitStartDate[1])
 }
 
-if (total_month_messages) {
-    for (let i = 0; i < total_month_messages.length; i++) {
+const dataList = [];
 
-        data_month_messages.push(total_month_messages[i]['messages'])
-        /*  console.log(data_month_messages); */
-        labels_messages.push(total_month_messages[i]['month'].toString().padStart(2, '0') + '/' + total_month_messages[i]['year'])
-    }
-    /*   console.log('mese', data_month_messages); */
+while (tempDate.year <= objEndDate.year) {
+    if (tempDate.month <= objEndDate.month) {
 
+        dataList.push({
+            year: Number(tempDate.year),
+            month: Number(tempDate.month),
+            views: 0,
+            messages: 0
+        });
 
-
-    new Chart(chart_message, {
-        type: 'line',
-        data: {
-            labels: labels_messages,
-            datasets: [
-                {
-                    label: 'Messaggi per mese',
-                    data: data_month_messages,
-                    borderWidth: 1,
-                    tension: 0.4,
-                    fill: false,
-                    borderColor: "#FF385C",
-                    backgroundColor: "#FF385C",
-                },
-
-            ]
-        },
-        options: {
-            scales: {
-                y: {
-                    title: {
-                        display: true,
-                        text: 'Messaggi',
-                    },
-                    beginAtZero: true,
-                    min: 0,
-                    ticks: {
-                        stepSize: 1
-                    }
-                }
+        total_month_views.forEach(view => {
+            if ((view.year === tempDate.year) && (view.month === tempDate.month)) {
+                dataList[dataList.length - 1].views = view.views
             }
+        });
+
+        total_month_messages.forEach(message => {
+            if ((message.year === tempDate.year) && (message.month === tempDate.month)) {
+                dataList[dataList.length - 1].messages = message.messages
+            }
+        });
+
+        if (tempDate.month < 12) {
+            tempDate.month++;
+        } else {
+            tempDate.month = 1;
+            tempDate.year++;
         }
-    });
+    }
 }
 
+dataList.forEach(data => {
+    data_month_views.push(data.views)
+    data_month_messages.push(data.messages)
+    labels.push(data.month.toString().padStart(2, '0') + '/' + data.year)
+});
 
-
-
-
-
-
-
-/* const data_year_views = []; 
-
-const data_year_messages = [];*/
-/* if (total_year_views) {
-    for (let i = 0; i < total_year_views.length; i++) {
-        data_year_views.push(total_year_views[i]['views']) ['views']
-         data_year_views.push(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3) 
+new Chart(chart_views, {
+    type: 'line',
+    data: {
+        labels: labels,
+        datasets: [
+            {
+                label: 'Visualizzazioni mensili',
+                data: data_month_views,
+                borderWidth: 1,
+                tension: 0.4,
+                fill: false,
+                borderColor: "#FF385C",
+                backgroundColor: "#FF385C",
+            },
+            {
+                label: 'Messaggi mensili',
+                data: data_month_messages,
+                borderWidth: 1,
+                tension: 0.4,
+                fill: false,
+                borderColor: "#0000FF",
+                backgroundColor: "#0000FF",
+            },
+        ]
+    },
+    options: {
+        scales: {
+            y: {
+                title: {
+                    display: true,
+                    text: 'Visualizzazioni / Messaggi',
+                },
+                beginAtZero: false,
+                precision: 0,
+            }
+        }
     }
-    console.log('anno', data_year_views);
-} */
+});
 
-/* 
-if (total_year_messages) {
-    for (let i = 0; i < total_year_messages.length; i++) {
-        data_year_messages.push(total_year_messages[i])
+document.querySelector('#charts_filters').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    let error = '';
+    const form_start_date = new Date(document.querySelector('#start_date').value);
+    const form_end_date = new Date(document.querySelector('#end_date').value);
+
+    if (form_start_date > form_end_date) {
+        console.log('error');
+        error = "L'intervallo tra le date non e' corretto."
+        document.querySelector('#error').innerHTML = error;
+        return false;
     }
-    console.log('anno', data_year_messages);
-} */
+    console.log('no error');
+
+    this.submit();
+});

@@ -5,6 +5,8 @@
     <script>
         let total_month_views = @json($total_month_views);
         let total_month_messages = @json($total_month_messages);
+        let start_date = @json($start_date);
+        let end_date = @json($end_date);
     </script>
 
     <div class="container">
@@ -29,7 +31,7 @@
             </div>
         </div>
 
-        <div class="row mt-3">
+        <div class="row my-3">
             <div class="col-12 col-md-6 col-lg-4 mb-3">
                 <div class="card h-100 ">
                     <div class="card-body h-100">
@@ -89,16 +91,31 @@
 
         </div>
         <div class="row my-3">
-            <div class="col-12 col-md-6">
-
+            <div class="col-12">
+                <form id="reset-form" action="{{ route('dashboard') }}" method="get"></form>
+                <form id="charts_filters" action="{{ route('dashboard') }}" method="get">
+                    <div
+                        class="d-flex flex-column flex-md-row justify-content-center justify-content-md-start align-items-md-center my-4">
+                        <div class="mx-3">
+                            <span>Inizio:</span>
+                            <input class="form-control" type="date" id="start_date" name="start_date"
+                                value="{{ $start_date }}">
+                        </div>
+                        <div class="m-3">
+                            <span>Fine:</span>
+                            <input class="form-control" type="date" id="end_date" name="end_date"
+                                value="{{ $end_date }}">
+                        </div>
+                        <button type="submit" form="reset-form"
+                            class="rounded-pill btn btn-bnb my-2 my-md-0 mx-md-2">Reset</button>
+                        <button type="submit" class="rounded-pill btn btn-bnb my-2 my-md-0 mx-md-2">Filtra</button>
+                        <div id="error" class="text-danger text-center"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-12">
                 <canvas class="col-2" id="chart-views"></canvas>
-
             </div>
-            <div class="col-12 col-md-6">
-
-                <canvas class="col" id="chart-message"></canvas>
-            </div>
-
         </div>
     </div>
 @endsection

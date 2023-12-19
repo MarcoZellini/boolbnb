@@ -15,6 +15,7 @@ use App\Models\Service;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Image;
 use App\Models\View;
+use Carbon\Carbon;
 
 class ApartmentController extends Controller
 {
@@ -96,32 +97,31 @@ class ApartmentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Apartment $apartment)
+    public function show(Request $request, Apartment $apartment)
     {
         if ($apartment->user_id === Auth::id()) {
+
+            if ($request->input('start_date') && $request->input('end_date')) {
+                $start_date = $request->input('start_date');
+                $end_date = $request->input('end_date');
+            } else {
+                $current_year = Carbon::now()->year;
+                $start_date = $current_year . '-01-01';
+                $end_date = $current_year . '-12-31';
+            }
+
             $services = Service::all();
-
-            $total_apartments = Apartment::where('user_id', Auth::id())->count();
-
-            /* total messages */
-            $total_messages = Message::whereHas('apartment', function ($query) {
-                $query->where('user_id', Auth::id());
-            })->count();
-
             $apartment_id = $apartment->id;
-
-            /* Total Messages by year */
-            /* $total_year_messages = Message::whereHas('apartment', function ($query) use ($apartment_id) {
-                $query->where('apartment_id', $apartment_id);
-            })->selectRaw('YEAR(created_at) as year, count(*) as messages')
-                ->groupBy('year')
-                ->get(); */
 
             /* Total Messages by month  */
             $total_month_messages = Message::whereHas('apartment', function ($query) use ($apartment_id) {
                 $query->where('apartment_id', $apartment_id);
             })->selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, count(*) as messages')
                 ->groupBy('year', 'month')
+                ->where('created_at', '>=', $start_date)
+                ->where('created_at', '<=', $end_date)
+                ->orderBy('year',)
+                ->orderBy('month',)
                 ->get();
 
             /* Total Views */
@@ -129,18 +129,15 @@ class ApartmentController extends Controller
                 $query->where('apartment_id', $apartment_id);
             })->count();
 
-            /* Total Views by year */
-            /* $total_year_views = View::whereHas('apartment', function ($query) use ($apartment_id) {
-                $query->where('apartment_id', $apartment_id);
-            })->selectRaw('YEAR(date) as year, count(*) as views')
-                ->groupBy('year')
-                ->get(); */
-
             /* Total Views by month  */
             $total_month_views = View::whereHas('apartment', function ($query) use ($apartment_id) {
                 $query->where('apartment_id', $apartment_id);
             })->selectRaw('YEAR(date) as year, MONTH(date) as month, count(*) as views')
                 ->groupBy('year', 'month')
+                ->where('date', '>=', $start_date)
+                ->where('date', '<=', $end_date)
+                ->orderBy('year',)
+                ->orderBy('month',)
                 ->get();
 
             // STYLE CLASSES ARRAY
@@ -149,8 +146,20 @@ class ApartmentController extends Controller
             // STYLE CLASSES INDEX
             $styleIndex = 0;
 
-            // 'total_year_views' => $total_year_views, 'total_year_messages' => $total_year_messages,
-            return view('admin.apartments.show', ['apartment' => $apartment, 'services' => $services, 'total_views' => $total_views,  'total_month_views' => $total_month_views, 'total_month_messages' => $total_month_messages], compact('styleClasses', 'styleIndex'));
+            return view(
+                'admin.apartments.show',
+                [
+                    'apartment' => $apartment,
+                    'services' => $services,
+                    'total_views' => $total_views,
+                    'total_month_views' => $total_month_views,
+                    'total_month_messages' => $total_month_messages,
+                    'start_date' => $start_date,
+                    'end_date' => $end_date,
+                    'styleClasses' => $styleClasses,
+                    'styleIndex' => $styleIndex,
+                ],
+            );
         } else {
             abort(403);
         }
@@ -182,11 +191,10 @@ class ApartmentController extends Controller
         if ($apartment->user_id === Auth::id()) {
 
             $val_data = $request->validated();
+            $val_data['slug'] = Str::slug($val_data['title']);
             $GeocodeUrl = "https://api.tomtom.com/search/2/geocode/";
             $TomtomKey = env('TOMTOM_KEY');
             $address = str_replace(' ', '%20', $val_data['address']);
-
-            /*      dd($request->address); */
 
             if ($request->has('address') && $request->address != $apartment->address) {
                 if (isset($val_data['address']) && $val_data['address'] !== null) {
@@ -226,10 +234,6 @@ class ApartmentController extends Controller
      */
     public function destroy(Apartment $apartment)
     {
-        /*
-            - le statistiche di questo appartamento vanno eliminate?
-        */
-
         if ($apartment->user_id === Auth::id()) {
 
 
