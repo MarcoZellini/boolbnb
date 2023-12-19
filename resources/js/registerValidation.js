@@ -3,15 +3,15 @@ let submitBtn, message, message_date_of_birth;
 document.addEventListener('DOMContentLoaded', function () {
     submitBtn = document.getElementById('submitBtn');
 
-    console.log('Submit', submitBtn);
+    /* console.log('Submit', submitBtn); */
 
     message = document.getElementById('message');
 
-    console.log("message", message);
+    /* console.log("message", message); */
 
     message_date_of_birth = document.getElementById('message_date_of_birth');
 
-    console.log("message_date_of_birth", message_date_of_birth);
+    /* console.log("message_date_of_birth", message_date_of_birth); */
 
 });
 
