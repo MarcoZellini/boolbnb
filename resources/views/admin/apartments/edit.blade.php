@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+
     <div class="container my-5">
         <div class="mb-3">
             <h3>Modifica Appartamento</h3>
@@ -62,6 +63,7 @@
                     {{-- description form --}}
                     <div class="form-floating mb-3">
                         <textarea id="description" name="description" class="form-control" placeholder="" id="floatingTextarea">{{ old('description', $apartment->description) }}</textarea>
+
                         <label for="description" class="text-capitalize">Descrizione</label>
 
                         <div class="d-flex justify-content-between">
@@ -250,4 +252,6 @@
             </div>
         </form>
     </div>
+    @vite(['resources/js/script.js'])
+
 @endsection
