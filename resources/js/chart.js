@@ -20,10 +20,10 @@ if (total_month_messages) {
     for (let i = 0; i < total_month_messages.length; i++) {
 
         data_month_messages.push(total_month_messages[i]['messages'])
-        console.log(data_month_messages);
+        /*  console.log(data_month_messages); */
         labels_messages.push(total_month_messages[i]['month'].toString().padStart(2, '0') + '/' + total_month_messages[i]['year'])
     }
-    console.log('mese', data_month_messages);
+    /*   console.log('mese', data_month_messages); */
 
 
 
@@ -68,7 +68,7 @@ if (total_month_views) {
         data_month_views.push(total_month_views[i]['views'])
         labels_views.push(total_month_views[i]['month'].toString().padStart(2, '0') + '/' + total_month_views[i]['year'])
     }
-    console.log('mese', total_month_views);
+    /*  console.log('mese', total_month_views); */
 
     new Chart(chart_views, {
         type: 'line',
@@ -107,10 +107,10 @@ if (total_month_messages) {
     for (let i = 0; i < total_month_messages.length; i++) {
 
         data_month_messages.push(total_month_messages[i]['messages'])
-        console.log(data_month_messages);
+        /*  console.log(data_month_messages); */
         labels_messages.push(total_month_messages[i]['month'].toString().padStart(2, '0') + '/' + total_month_messages[i]['year'])
     }
-    console.log('mese', data_month_messages);
+    /*   console.log('mese', data_month_messages); */
 
 
 

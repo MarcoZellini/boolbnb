@@ -32,12 +32,12 @@ class ApartmentController extends Controller
             },
             'user',
             'services'
-        ]);
+        ])->where('is_visible', 1);
 
         if ($field_string) {
-            $apartments = $query->orderByRaw('FIELD(id, ' . $field_string . ') DESC')->paginate(20);
+            $apartments = $query->orderByRaw('FIELD(id, ' . $field_string . ') DESC')->paginate(16);
         } else {
-            $apartments = $query->paginate(20);
+            $apartments = $query->paginate(16);
         }
 
         $apartments = $apartments->toArray();
@@ -101,6 +101,7 @@ class ApartmentController extends Controller
             'user',
             'services'
         ])->whereRaw('st_distance_sphere(point(apartments.latitude,apartments.longitude),point(' . implode($inputAddressLat) . ',' . implode($inputAddressLong) . ')) <=' . implode($maxRadius) . '000')
+            ->where('is_visible', 1)
             ->where('beds', '>=', $minBeds)
             ->where('rooms', '>=', $minRooms);
 
@@ -114,10 +115,10 @@ class ApartmentController extends Controller
 
         if ($field_string) {
             $apartments = $query->orderByRaw('FIELD(id, ' . $field_string . ') DESC, st_distance_sphere(point(apartments.latitude,apartments.longitude),point(' . implode($inputAddressLat) . ',' . implode($inputAddressLong) . '))')
-                ->paginate(20);
+                ->paginate(16);
         } else {
             $apartments = $query->orderByRaw('st_distance_sphere(point(apartments.latitude,apartments.longitude),point(' . implode($inputAddressLat) . ',' . implode($inputAddressLong) . '))')
-                ->paginate(20);
+                ->paginate(16);
         }
 
         $apartments = $apartments->toArray();
