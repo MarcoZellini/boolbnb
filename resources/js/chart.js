@@ -6,6 +6,8 @@ const data_month_views = [];
 const data_month_messages = [];
 const labels = [];
 
+let stop = false;
+
 const splitStartDate = start_date.split('-');
 const splitEndDate = end_date.split('-');
 
@@ -21,9 +23,11 @@ const tempDate = {
 
 const dataList = [];
 
-while (tempDate.year <= objEndDate.year) {
-    if (tempDate.month <= objEndDate.month) {
+while (!stop && tempDate.year <= objEndDate.year) {
 
+    console.log(tempDate);
+
+    if (tempDate.year !== objEndDate.year) {
         dataList.push({
             year: Number(tempDate.year),
             month: Number(tempDate.month),
@@ -48,6 +52,37 @@ while (tempDate.year <= objEndDate.year) {
         } else {
             tempDate.month = 1;
             tempDate.year++;
+        }
+    } else {
+        if (tempDate.month <= objEndDate.month) {
+
+            dataList.push({
+                year: Number(tempDate.year),
+                month: Number(tempDate.month),
+                views: 0,
+                messages: 0
+            });
+
+            total_month_views.forEach(view => {
+                if ((view.year === tempDate.year) && (view.month === tempDate.month)) {
+                    dataList[dataList.length - 1].views = view.views
+                }
+            });
+
+            total_month_messages.forEach(message => {
+                if ((message.year === tempDate.year) && (message.month === tempDate.month)) {
+                    dataList[dataList.length - 1].messages = message.messages
+                }
+            });
+
+            if (tempDate.month < 12) {
+                tempDate.month++;
+            } else {
+                tempDate.month = 1;
+                tempDate.year++;
+            }
+        } else {
+            stop = true;
         }
     }
 }
