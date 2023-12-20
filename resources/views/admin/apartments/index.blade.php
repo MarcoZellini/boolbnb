@@ -90,8 +90,8 @@ use Carbon\Carbon;
                         </div>
 
                         <div class="col-12 col-lg-2 dropup-center dropup d-flex justify-content-center">
-                            <button class="btn btn-lg btn-bnb rounded-pill border-0 dropdown-toggle" type="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="btn btn-lg dropdown-bnb bnb-btn-shadow rounded-pill border-0 dropdown-toggle"
+                                type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Azioni
                             </button>
                             <ul class="dropdown-menu p-0">
