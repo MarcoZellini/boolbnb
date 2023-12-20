@@ -137,7 +137,7 @@ class ApartmentSeeder extends Seeder
                 }
             }
 
-            $number_of_services = rand(1, 5);
+            $number_of_services = rand(10, 24);
 
             $service_ids = Service::pluck('id')->all();
 

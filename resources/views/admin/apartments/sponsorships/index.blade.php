@@ -34,7 +34,7 @@
                             <div class=" align-self-start">
 
                                 <div>
-                                    <strong>Price</strong>:
+                                    <strong>Prezzo</strong>:
                                 </div>
                                 <div>
                                     {{ $sponsorship->price }}

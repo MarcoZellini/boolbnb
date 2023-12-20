@@ -233,8 +233,8 @@
                         Aggiungi
                     </button>
 
-                    <a class="btn rounded-pill btn-outline-secondary btn-bnb-secondary" href="{{ url()->previous() }}"
-                        role="button">
+                    <a class="btn rounded-pill btn-outline-secondary btn-bnb-secondary"
+                        href="{{ route('admin.apartments.index') }}" role="button">
                         Annulla
                     </a>
                 </div>

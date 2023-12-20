@@ -12,7 +12,6 @@ return [
     "Essenziali",
     "Grucce",
     "Biancheria da letto",
-    "Cuscini e coperte extra",
     "Cassaforte",
     "TV",
     "Aria condizionata",

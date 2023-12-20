@@ -116,7 +116,7 @@
                         <div class="mb-4 row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" id="submitBtn" class="btn btn-bnb rounded-pill">
-                                    {{ __('Register') }}
+                                    {{ __('Registrati') }}
                                 </button>
                             </div>
                         </div>
