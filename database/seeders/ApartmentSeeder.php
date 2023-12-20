@@ -26,26 +26,28 @@ class ApartmentSeeder extends Seeder
 
         $images = [
             "https://images.unsplash.com/photo-1505873242700-f289a29e1e0f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDMwOTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDMwNjM3NTl8&ixlib=rb-4.0.3&q=80&w=1080",
-            "https://images.unsplash.com/photo-1449247613801-ab06418e2861?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDMwOTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDMwNjM3NTF8&ixlib=rb-4.0.3&q=80&w=1080",
             "https://images.unsplash.com/photo-1623050804066-42bcedb4e81d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDMwOTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDMwNjMyNjZ8&ixlib=rb-4.0.3&q=80&w=1080",
             "https://images.unsplash.com/photo-1633119712778-30d94755de54?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDMwOTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDMwNjM4MDZ8&ixlib=rb-4.0.3&q=80&w=1080",
             "https://images.unsplash.com/photo-1650137938625-11576502aecd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDMwOTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDMwNjM3OTh8&ixlib=rb-4.0.3&q=80&w=1080",
             "https://images.unsplash.com/photo-1492138645880-160f6a5136fa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDMwOTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDMwNjM3ODl8&ixlib=rb-4.0.3&q=80&w=1080",
             "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDMwOTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDMwNjM3ODF8&ixlib=rb-4.0.3&q=80&w=1080",
             "https://images.unsplash.com/photo-1461151304267-38535e780c79?crop=entropy&cs=srgb&fm=jpg&ixid=M3w1NDMwOTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDMwNjM4NTl8&ixlib=rb-4.0.3&q=85",
-            "https://images.unsplash.com/photo-1653242370243-5f7ca54b00db?crop=entropy&cs=srgb&fm=jpg&ixid=M3w1NDMwOTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDMwNjM4NzJ8&ixlib=rb-4.0.3&q=85",
             "https://images.unsplash.com/photo-1624432077947-c1b08ab86049?crop=entropy&cs=srgb&fm=jpg&ixid=M3w1NDMwOTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDMwNjM4Nzh8&ixlib=rb-4.0.3&q=85",
-            "https://images.unsplash.com/photo-1617721595342-ab308966360c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w1NDMwOTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDMwNjM4ODN8&ixlib=rb-4.0.3&q=85",
             "https://images.unsplash.com/photo-1650137938625-11576502aecd?crop=entropy&cs=srgb&fm=jpg&ixid=M3w1NDMwOTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDMwNjM4OTB8&ixlib=rb-4.0.3&q=85",
             "https://images.unsplash.com/photo-1536376072261-38c75010e6c9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDMwOTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDMwNjQwMTN8&ixlib=rb-4.0.3&q=80&w=1080",
             "https://images.unsplash.com/photo-1632323091845-f636f89749fa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDMwOTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDMwNjQwMzJ8&ixlib=rb-4.0.3&q=80&w=1080",
-            "https://images.unsplash.com/photo-1518747993763-5c9d82d08a9e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDMwOTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDMwNjQwMzh8&ixlib=rb-4.0.3&q=80&w=1080",
             "https://images.unsplash.com/photo-1658218729615-167c32d70537?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDMwOTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDMwNjQwNDZ8&ixlib=rb-4.0.3&q=80&w=1080",
-            "https://images.unsplash.com/photo-1551806405-b76c7789f4ab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDMwOTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDMwNjQwNTN8&ixlib=rb-4.0.3&q=80&w=1080",
-            "https://images.unsplash.com/photo-1628152184821-6e09cdf0a248?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDMwOTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDMwNjQwNTl8&ixlib=rb-4.0.3&q=80&w=1080",
             "https://images.unsplash.com/photo-1521604784100-e0318b4b2bad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDMwOTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDMwNjQwNjN8&ixlib=rb-4.0.3&q=80&w=1080",
-            "https://images.unsplash.com/photo-1494512163437-5d01c88c0e5a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDMwOTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDMwNjQwNjh8&ixlib=rb-4.0.3&q=80&w=1080",
             "https://images.unsplash.com/photo-1500307353842-81f527a10685?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDMwOTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDMwNjQwNzR8&ixlib=rb-4.0.3&q=80&w=1080",
+            "https://images.unsplash.com/photo-1529408686214-b48b8532f72c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDMwOTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDMwOTM0NjJ8&ixlib=rb-4.0.3&q=80&w=1080",
+            "https://images.unsplash.com/photo-1524061614234-8449637d36ce?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDMwOTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDMwOTM1MDd8&ixlib=rb-4.0.3&q=80&w=1080",
+            "https://images.unsplash.com/photo-1501685532562-aa6846b14a0e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDMwOTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDMwOTM1Mzd8&ixlib=rb-4.0.3&q=80&w=1080",
+            "https://images.unsplash.com/photo-1654064754916-e3edeb09c042?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDMwOTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDMwOTM2MTd8&ixlib=rb-4.0.3&q=80&w=1080",
+            "https://images.unsplash.com/photo-1632323115924-666af9da3411?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDMwOTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDMwOTM1OTN8&ixlib=rb-4.0.3&q=80&w=1080",
+            "https://images.unsplash.com/photo-1529290130-4ca3753253ae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDMwOTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDMwOTM1NzJ8&ixlib=rb-4.0.3&q=80&w=1080",
+            "https://images.unsplash.com/photo-1507149833265-60c372daea22?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDMwOTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDMwOTM1NTd8&ixlib=rb-4.0.3&q=80&w=1080",
+            "https://images.unsplash.com/photo-1464890100898-a385f744067f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDMwOTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDMwOTM3MDJ8&ixlib=rb-4.0.3&q=80&w=1080",
+            "https://images.unsplash.com/photo-1520209015973-29fb52f71530?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NDMwOTd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDMwOTM2ODR8&ixlib=rb-4.0.3&q=80&w=1080",
         ];
 
         $addresses =
@@ -53,6 +55,9 @@ class ApartmentSeeder extends Seeder
 
 
         $users = User::all();
+        $filtered_users = array_filter($users->toArray(), fn ($user) => $user['name'] !== 'Admin');
+
+        $users = collect($filtered_users);
 
         $apartment_details = [
             'Stile Costiero Rilassato' => 'Questo incantevole appartamento trasuda atmosfera costiera con i suoi toni blu rilassanti, arredi in rattan e tessuti leggeri. La vista sul mare dal balcone vi catturerà all\'alba, mentre l\'interno luminoso e arioso crea un rifugio sereno per una vacanza tranquilla.',
