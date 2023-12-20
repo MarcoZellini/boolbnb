@@ -74,7 +74,7 @@
                                     {{ Auth::user()->name }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu dropend dropdown-menu-md-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ url('/') }}">{{ __('Dashboard') }}</a>
                                     {{-- <a class="dropdown-item" href="{{ url('profile') }}">{{ __('Profilo') }}</a> --}}
 

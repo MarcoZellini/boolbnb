@@ -92,9 +92,9 @@
                     <div class="card-body h-100">
                         <h5 class="bnb-color">
                             <i class="fa-solid fa-money-bills"></i>
-                            totale spesa in sponsorizzazioni
+                            Totale Spesa Sponsorizzazioni
                         </h5>
-                        <strong class="fs-2"> {{ $Total_cash }} </strong>
+                        <strong class="fs-2">€ {{ $total_cash }} </strong>
                     </div>
                     <div class="card-footer d-flex align-items-center flex-row-reverse p-0 py-2">
 
@@ -105,12 +105,8 @@
                     </div>
                 </div>
             </div>
-
-
-
-
         </div>
-        <div class="row my-3">
+        <div class="row my-3 mb-5">
             <div class="col-12">
                 <form id="reset-form" action="{{ route('dashboard') }}" method="get"></form>
                 <form id="charts_filters" action="{{ route('dashboard') }}" method="get">
