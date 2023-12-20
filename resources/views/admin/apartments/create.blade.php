@@ -59,7 +59,8 @@
                 <div class="col-12">
                     {{-- description form --}}
                     <div class="form-floating mb-3">
-                        <textarea id="description" name="description" class="form-control" placeholder="" id="floatingTextarea">{{ old('description') }}</textarea>
+                        <textarea id="description" name="description" class="form-control" placeholder="" style="min-height:50px;"
+                            id="floatingTextarea">{{ old('description') }}</textarea>
                         <label for="description" class="text-capitalize">Descrizione</label>
                         <div class="d-flex justify-content-between">
                             <small id="helpId" class="form-text text-muted">Inserisci una descrizione</small>
@@ -241,4 +242,6 @@
             </div>
         </form>
     </div>
+    @vite(['resources/js/script.js'])
+
 @endsection
