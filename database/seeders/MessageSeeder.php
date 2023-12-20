@@ -82,7 +82,11 @@ class MessageSeeder extends Seeder
                 $newmessage->phone = '+39 ' . rand(300, 399) . ' ' . rand(1000000, 9999999);
                 $newmessage->subject = $subjects[array_rand($subjects)];
                 $newmessage->message = $messages[array_rand($messages)];
-                $newmessage->created_at = Carbon::createFromTimestamp(rand(strtotime('2020-01-01'), time()));
+
+                $date_reference = $apartment->created_at;
+
+                $newmessage->created_at = Carbon::createFromTimestamp(rand($date_reference->timestamp, time()))
+                    ->toDateTimeString();
 
                 $newmessage->save();
             }
