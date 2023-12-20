@@ -92,14 +92,14 @@
                     <div class="card-body h-100">
                         <h5 class="bnb-color">
                             <i class="fa-solid fa-money-bills"></i>
-                            Totale soldi spesi
+                            totale spesa in sponsorizzazioni
                         </h5>
                         <strong class="fs-2"> {{ $Total_cash }} </strong>
                     </div>
                     <div class="card-footer d-flex align-items-center flex-row-reverse p-0 py-2">
 
                         <a href="{{ route('admin.apartments.index') }}" class="btn btn-bnb rounded-pill mx-2">
-                            soldi
+                            Sponsorizza
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </div>
