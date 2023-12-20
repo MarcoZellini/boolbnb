@@ -85,9 +85,12 @@
         </div>
 
         <div class="row row-cols-1">
-            <div class="col-12 mt-2 mb-3">
+            <h1>
+                {{ $apartment->title }}
+            </h1>
+            <div class="col-12 my-3 d-flex justify-content-around justify-content-md-start">
                 <a class="btn btn-primary rounded-circle border bnb-btn-shadow bnb-btn-actions  me-1 "
-                    href="{{ url()->previous() }}" role="button">
+                    href="{{ route('admin.apartments.index') }}" role="button">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
                         <path fill-rule="evenodd"
@@ -172,36 +175,31 @@
                 </div>
             </div>
 
-            <h1>
-                {{ $apartment->title }}
-            </h1>
+
 
             <div class="col col-md-6">
 
                 {{-- DESCRIZIONE --}}
                 <div class="mt-3">
-                    <h3>
+                    <h2 class="text-center text-md-start fw-bold">
                         Descrizione
-                    </h3>
-                    <p>
-                        @if (isset($apartment->description))
-                            <p class="text-break">{{ $apartment->description }}</p>
-                        @else
-                            <p>Caro proprietario, <br>
-                                Il tuo appartamento è un gioiello unico, e ora è il momento di farlo brillare nel miglior
-                                modo possibile! Attualmente, la tua proprietà non ha una descrizione che possa farla
-                                risplendere agli occhi degli inquilini potenziali. E chi può farlo meglio di te?
-                                <br>
+                    </h2>
+                    @if (isset($apartment->description))
+                        <p class="text-center text-md-start text-break">{{ $apartment->description }}</p>
+                    @else
+                        <p class="text-center text-md-start fw-bold">Caro proprietario, <br>
+                            Il tuo appartamento è un gioiello unico, e ora è il momento di farlo brillare nel miglior
+                            modo possibile! Attualmente, la tua proprietà non ha una descrizione che possa farla
+                            risplendere agli occhi degli inquilini potenziali. E chi può farlo meglio di te?
+                            <br>
 
-                                Dai uno sguardo attento alle caratteristiche speciali che rendono la tua casa unica. Che
-                                siano i pavimenti in legno pregiato, la vista panoramica mozzafiato o la cucina
-                                perfettamente attrezzata, ogni dettaglio conta. Metti in luce gli aspetti che rendono la tua
-                                casa non solo un luogo dove vivere, ma un luogo da chiamare "casa".
+                            Dai uno sguardo attento alle caratteristiche speciali che rendono la tua casa unica. Che
+                            siano i pavimenti in legno pregiato, la vista panoramica mozzafiato o la cucina
+                            perfettamente attrezzata, ogni dettaglio conta. Metti in luce gli aspetti che rendono la tua
+                            casa non solo un luogo dove vivere, ma un luogo da chiamare "casa".
 
-                            </p>
-                        @endif
-
-                    </p>
+                        </p>
+                    @endif
                 </div>
 
             </div>
@@ -210,51 +208,51 @@
             <div class="col col-md-6">
 
                 <div class="ms-md-4 mt-3">
-                    <h3>
+                    <h2 class="text-center text-md-start fw-bold">
                         Informazioni
-                    </h3>
-                    <ul class="list-unstyled">
-                        <li>
-                            <strong>Numero stanze</strong>: {{ $apartment->rooms }}
-                        </li>
-                        <li>
-                            <strong>Numero letti</strong>: {{ $apartment->beds }}
-                        </li>
-                        <li>
-                            <strong>Numero bagni</strong>: {{ $apartment->bathrooms }}
-                        </li>
-                        <li>
-                            <strong>Superficie</strong>: {{ $apartment->square_meters }} mq
-                        </li>
-                        <li>
-                            <strong>Indirizzo</strong>:
-                            @if ($apartment->address)
-                                {{ $apartment->address }}
-                            @else
-                                Nessun indirizzo inserito
-                            @endif
-                        </li>
-                        <li>
-                            <strong>Pubblicato su BoolBnB</strong>:
-                            @if ($apartment->is_visible)
-                                Si
-                            @else
-                                No
-                            @endif
-                        </li>
-                    </ul>
+                        </h3>
+                        <ul class="list-unstyled text-center text-md-start">
+                            <li>
+                                <strong>Numero stanze</strong>: {{ $apartment->rooms }}
+                            </li>
+                            <li>
+                                <strong>Numero letti</strong>: {{ $apartment->beds }}
+                            </li>
+                            <li>
+                                <strong>Numero bagni</strong>: {{ $apartment->bathrooms }}
+                            </li>
+                            <li>
+                                <strong>Superficie</strong>: {{ $apartment->square_meters }} mq
+                            </li>
+                            <li>
+                                <strong>Indirizzo</strong>:
+                                @if ($apartment->address)
+                                    {{ $apartment->address }}
+                                @else
+                                    Nessun indirizzo inserito
+                                @endif
+                            </li>
+                            <li>
+                                <strong>Pubblicato su BoolBnB</strong>:
+                                @if ($apartment->is_visible)
+                                    Si
+                                @else
+                                    No
+                                @endif
+                            </li>
+                        </ul>
                 </div>
             </div>
 
             {{-- SERVIZI --}}
-            <h3>
-                Servizi
-            </h3>
-            <div class="col d-flex ">
+            <div class="col">
+                <h2 class="text-center text-md-start fw-bold">
+                    Servizi
+                </h2>
 
-                <div class="mt-3">
+                <div class="mt-3 d-flex justify-content-center flex-wrap">
                     @foreach ($apartment->services as $service)
-                        <span class="badge rounded-pill m-1 border text-black">
+                        <span class="badge rounded-pill m-2 border text-black">
                             <img src="{{ asset($service->icon) }}" alt="{{ $service->name }}" style="width: 20px">
                             {{ $service->name }}
                         </span>
@@ -294,9 +292,9 @@
             {{-- MESSAGGI --}}
             <div class="col">
                 <div class="mt-3 overflow-auto px-2">
-                    <h3>
+                    <h2 class="text-center text-md-start fw-bold">
                         Messaggi
-                    </h3>
+                    </h2>
 
                     @if (session('message'))
                         <div class="alert alert-success alert-dismissible fade show my-4" role="alert">
@@ -306,7 +304,7 @@
                         </div>
                     @endif
 
-                    <div class="" style="height: 500px;">
+                    <div>
                         @forelse ($apartment->messages->sortDesc() as $message)
                             <div class="card border-0 border-top rounded-0">
                                 <div class="card-body d-flex px-0">
@@ -424,7 +422,7 @@
                                 </div>
                             </div>
                         @empty
-                            <div>
+                            <div class="text-center text-md-start">
                                 Attualmente non sono presenti messaggi!
                             </div>
                         @endforelse

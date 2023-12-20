@@ -49,7 +49,6 @@
                                                     onclick="event.preventDefault();
                                                 document.getElementById('set_main_{{ $image->id }}').submit();">Rendi
                                                     Principale</a>
-
                                             @endif
                                         </td>
                                         <td>
@@ -121,7 +120,7 @@
             <div class="col-12 mb-3">
 
                 <a class="btn btn-primary rounded-circle border bnb-btn-shadow bnb-btn-actions me-1 "
-                    href="{{ url()->previous() }}" role="button">
+                    href="{{ route('admin.apartments.index') }}" role="button">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
                         <path fill-rule="evenodd"

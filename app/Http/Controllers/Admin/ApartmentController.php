@@ -242,12 +242,16 @@ class ApartmentController extends Controller
 
             //applicazione metodo detach alla tabella apartment_service
             $apartment->services()->detach();
+            //applicazione metodo detach alla tabella apartment_sponsorship
+            $apartment->sponsorships()->detach();
 
             foreach ($apartment->images as $image) {
                 Storage::delete($image->path);
             }
             // eliminazione dei record delle immagini associate a questo appartamento
             $apartment->images()->delete();
+            // eliminazione dei record delle visualizzazioni associate a questo appartamento
+            $apartment->views()->delete();
 
             $apartment->delete();
 

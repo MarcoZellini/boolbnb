@@ -34,7 +34,7 @@
                     <label for="images" class="text-capitalize d-block">Immagini</label>
 
                     @forelse($apartment->images as $image)
-                        <img height="50px" src="{{ asset('storage/' . $image->path) }}" alt="">
+                        <img height="50px" class="me-1 mb-1" src="{{ asset('storage/' . $image->path) }}" alt="">
                     @empty
                         <h5>Non sono presenti immagini</h5>
                     @endforelse

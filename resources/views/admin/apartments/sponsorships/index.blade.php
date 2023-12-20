@@ -8,7 +8,7 @@
         <div class="col-12 mb-3">
 
             <a class="btn btn-primary rounded-circle border bnb-btn-shadow bnb-btn-actions me-1 "
-                href="{{ url()->previous() }}" role="button">
+                href="{{ route('admin.apartments.index') }}" role="button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
                     <path fill-rule="evenodd"
@@ -18,19 +18,19 @@
 
         </div>
 
-        <div class="wrapper my-2">
+        <div class="wrapper my-2 mb-4">
             @forelse ($sponsorships as $sponsorship)
-                <div class="card border-0 border-top rounded-0">
+                <div class="card border-0 border-top rounded-0 text-center">
                     <div class="card-body row row-cols-1 row-cols-md-5 justify-content-between align-items-center px-0">
 
-                        <div class="row row-cols-2 row-cols-md-1 align-items-center my-1">
+                        <div class="row row-cols-1 row-cols-md-1 align-items-center my-1">
                             <div class=" align-self-start">
-                                <h4 class="fw-bold">
+                                <h6 class="fs-4 fw-bold">
                                     {{ $sponsorship->name }}
-                                </h4>
+                                </h6>
                             </div>
                         </div>
-                        <div class="row row-cols-2 row-cols-md-1 align-items-center my-1">
+                        <div class="row row-cols-1 row-cols-md-1 align-items-center my-1">
                             <div class=" align-self-start">
 
                                 <div>
@@ -41,7 +41,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row row-cols-2 row-cols-md-1 align-items-center my-1">
+                        <div class="row row-cols-1 row-cols-md-1 align-items-center my-1">
                             <div class=" align-self-start">
 
                                 <div>
@@ -52,7 +52,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row row-cols-2 row-cols-md-1 align-items-center my-1">
+                        <div class="row row-cols-1 row-cols-md-1 align-items-center my-1">
                             <div class=" align-self-start">
                                 <a class="btn btn-bnb rounded-pill"
                                     href="{{ route('admin.apartments.sponsorships.payment.index', ['sponsorship' => $sponsorship->id, 'apartment' => $apartment->id]) }}"

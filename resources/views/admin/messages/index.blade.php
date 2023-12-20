@@ -23,7 +23,7 @@
                         <div class="card-body d-flex px-0">
                             <div class="col-9">
                                 <h5 class="card-title">
-                                    {{ $message->title }} (ID: {{ $message->apartment_id }})
+                                    {{ $message->title }}
                                     -
                                     {{ $message->subject }}
                                 </h5>
@@ -138,7 +138,7 @@
                     </div>
                 </div>
             @empty
-                <div>Non ci sono messaggi per ora!</div>
+                <div class="text-center text-md-start">Non ci sono messaggi per ora!</div>
             @endforelse
         </div>
     </div>

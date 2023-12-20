@@ -29,12 +29,12 @@ class DashboardController extends Controller
         }
         /* magari dategli un occhio \(￣︶￣*\)) */
         $apartments = Apartment::where('user_id', Auth::id())->get();
-        $Total_cash = 0;
+        $total_cash = 0;
 
         foreach ($apartments as $apartment) {
             foreach ($apartment->sponsorships as $sponsorship) {
                 $price = $sponsorship->price;
-                $Total_cash += $price;
+                $total_cash += $price;
             }
         }
 
@@ -106,7 +106,7 @@ class DashboardController extends Controller
                 'total_month_messages' => $total_month_messages,
                 'start_date' => $start_date,
                 'end_date' => $end_date,
-                'Total_cash' => $Total_cash,
+                'total_cash' => $total_cash,
             ],
 
         );
