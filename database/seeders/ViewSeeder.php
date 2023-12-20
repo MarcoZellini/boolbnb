@@ -16,16 +16,35 @@ class ViewSeeder extends Seeder
      */
     public function run(): void
     {
-        $apartments = DB::table('apartments')
+        /* $apartments = DB::table('apartments')
             ->pluck('id')
-            ->toArray();
+            ->toArray(); */
 
-        for ($i = 0; $i < 100; $i++) {
-            $new_view = new View();
-            $new_view->apartment_id = $apartments[rand(0, count($apartments) - 1)];
-            $new_view->ip_address = long2ip(mt_rand());
-            $new_view->date = Carbon::create(rand(2020, 2023), rand(1, 12), rand(1, 28), rand(0, 24), rand(0, 60), rand(0, 60));
-            $new_view->save();
+        $apartments = DB::table('apartments')
+            ->select('id', 'created_at')
+            ->get();
+
+        foreach ($apartments as $apartment) {
+
+            $apartment_created_at = Carbon::parse($apartment->created_at);
+
+            for ($i = 0; $i < 100; $i++) {
+
+                $new_view = new View();
+                $new_view->apartment_id = $apartment->id;
+                $new_view->ip_address = long2ip(mt_rand());
+
+                $random_date = Carbon::create(
+                    rand($apartment_created_at->year, Carbon::now()->year),
+                    rand(1, 12),
+                    rand(1, 28),
+                    rand(0, 24),
+                    rand(0, 60),
+                    rand(0, 60)
+                );
+                $new_view->date = $random_date->between($apartment_created_at, Carbon::now()) ? $random_date : $apartment_created_at;
+                $new_view->save();
+            }
         }
     }
 }
